@@ -1,0 +1,7 @@
+{
+  "name": "classtrack",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
