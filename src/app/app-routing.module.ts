@@ -11,6 +11,27 @@ const routes: Routes = [
     loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
   },
   {
+    path: 'lbclases',
+    loadChildren: () => import('./lbclases/lbclases.module').then( m => m.LbclasesModule)
+  },
+  {
+    path: 'anotacion',
+    loadChildren: () => import('./anotacion/anotacion.module').then( m => m.AnotacionModule)
+  },
+  {
+    path: 'asistencia',
+    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaModule)
+  },
+  {
+    path: 'observacion',
+    loadChildren: () => import('./observacion/observacion.module').then( m => m.ObservacionModule)
+  },
+  {
+    path: 'reporte',
+    loadChildren: () => import('./reporte/reporte.module').then( m => m.ReporteModule)
+  },
+  
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
