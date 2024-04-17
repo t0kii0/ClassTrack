@@ -1,0 +1,27 @@
+.large-icon {
+    font-size: 5em; // Tamaño grande para el icono
+    margin-bottom: 8px; // Espacio entre el icono y la etiqueta
+  }
+  
+  .icon-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 20px; // Espacio alrededor del contenedor
+    text-align: center;
+  }
+  
+  .icon-container:hover {
+    background-color: #f0f0f0; // Cambio de color al pasar el cursor
+  }
+  ion-list {
+    background-color: #f0f0f0; // Color de fondo de la barra lateral
+  }
+  
+  ion-item {
+    --color: black; // Color del texto del submenú
+    --ion-text-color: black; // Color del texto del submenú
+  }
+    
