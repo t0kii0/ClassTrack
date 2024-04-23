@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="login-header">
   <ion-toolbar>
     <ion-title>ClassTrack</ion-title>
   </ion-toolbar>
@@ -10,11 +10,13 @@
       <ion-title size="large">Login</ion-title>
     </ion-toolbar>
   </ion-header>
+  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
 
   <div class="login-container">
     <ion-card class="login-card">
-      <img src="ruta/a/imagen-de-fondo.jpg" class="background-image" alt="Imagen de fondo">
       <ion-card-header>
+        <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
+
         <ion-card-title>Iniciar sesión</ion-card-title>
       </ion-card-header>
 
@@ -35,7 +37,8 @@
   </div>
 
   <ion-item lines="none" class="ion-text-center">
+    <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
     <ion-label>¿Olvidaste tu contraseña?</ion-label>
-    <ion-button fill="clear" color="medium">Recuperar contraseña</ion-button>
+    <ion-button fill="solid" color="primary" shape="round">Recuperar contraseña</ion-button>
   </ion-item>
 </ion-content>

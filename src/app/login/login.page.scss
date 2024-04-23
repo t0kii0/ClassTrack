@@ -5,6 +5,9 @@
     align-items: center;
     height: 100%;
   }
+  .login-header{
+    background-color: #008cf7;
+  }
   
   .login-container {
     width: 100%;
@@ -33,7 +36,7 @@
   
   ion-card-content {
     padding: 30px;
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo semi transparente */
   }
 
   .ion-text-center {
@@ -47,6 +50,7 @@
     width: 90%;
     max-width: 400px; /* Ancho máximo del card */
     border-radius: 15px; /* Bordes redondeados */
+    background-color: rgba(255, 255, 255, 0); /* Fondo semi transparente */
   }
 
   .password{
