@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 
 interface Student {
   name: string;
   grades: number[];
+  average: number | null ; // Asegúrate de que la propiedad average pueda ser null
 }
 
 @Component({
@@ -12,20 +15,21 @@ interface Student {
 })
 export class LbclasesPage {
   students: Student[] = [
-    { name: 'Alumno 1', grades: [0, 0, 0, 0, 0] },
-    { name: 'Alumno 2', grades: [0, 0, 0, 0, 0] },
-    { name: 'Alumno 3', grades: [0, 0, 0, 0, 0] },
+    { name: 'Juanito el bandolero', grades: [0, 0, 0, 0, 0], average: null  },
+    { name: 'Angelo', grades: [0, 0, 0, 0, 0], average: null  },
+    { name: 'Manuus', grades: [0, 0, 0, 0, 0], average: null  },
     // Agrega más alumnos según sea necesario
   ];
 
-  constructor() {}
-
-  calculateAverage(grades: number[]): number {
-    const sum = grades.reduce((total, grade) => total + grade, 0);
-    return sum / grades.length;
-  }
-
-  updateGrade(studentIndex: number, gradeIndex: number, value: number) {
-    this.students[studentIndex].grades[gradeIndex] = value;
+  calculateAllAverages(): void {
+    this.students.forEach(student => {
+      const validGrades = student.grades.filter(grade => grade !== null);
+      if (validGrades.length === 0) {
+        student.average = null ; 
+      } else {
+        const sum = validGrades.reduce((total, grade) => total + grade, 0);
+        student.average = sum / validGrades.length;
+      }
+    });
   }
 }
