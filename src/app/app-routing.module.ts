@@ -42,6 +42,10 @@ const routes: Routes = [
     pathMatch: 'full'
 
   },
+  {
+    path: 'confirmacion-modal',
+    loadChildren: () => import('./confirmacion-modal/confirmacion-modal.module').then( m => m.ConfirmacionModalPageModule)
+  },
 
 ];
 

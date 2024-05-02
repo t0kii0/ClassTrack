@@ -1,3 +1,40 @@
-<p>
-  asistencia de los petes
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/inicio" routerDirection="back">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>Nombre</ion-col>
+      <ion-col>Estado</ion-col>
+      <ion-col>Observaciones</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let student of students">
+      <ion-col>{{ student.name }}</ion-col>
+      <ion-col>
+        <ion-button color="success" (click)="markAttendance(student, 'presente')">Presente</ion-button>
+        <ion-button color="danger" (click)="markAttendance(student, 'ausente')">Ausente</ion-button>
+        <ion-button color="medium" (click)="markAttendance(student, 'justificado')">Justificado</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-textarea [disabled]="student.status !== 'justificado'" [(ngModel)]="student.observation"></ion-textarea>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button size="small" class="guardar-button" (click)="guardar()">Guardar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
