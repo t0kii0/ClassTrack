@@ -1,0 +1,49 @@
+ion-grid {
+    --ion-grid-padding: 10px;
+    --ion-grid-column-padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    overflow: hidden; 
+  
+    ion-row {
+      align-items: center; 
+    }
+  
+    ion-col {
+      border-bottom: 1px solid #eee; 
+      &:last-child {
+        border-bottom: none; 
+      }
+    }
+  }
+  
+  // Estilos para los botones para darles más espacio y visualización clara
+  ion-button {
+    margin: 4px;
+    font-size: 0.8em; 
+  
+    &.selected {
+      background-color: var(--ion-color-primary); 
+      color: var(--ion-color-light); 
+    }
+  }
+  
+  // Ajustes para el área de texto
+  ion-textarea {
+    --padding-start: 8px; 
+    --padding-end: 8px; 
+    --padding-top: 8px; 
+    --padding-bottom: 8px; 
+    min-height: 50px; 
+    border: 1px solid #fff; 
+    border-radius: 8px; 
+    background-color: transparent; 
+  }
+
+  .guardar-button {
+    position:static;// Posición fija para que se mantenga en la misma posición 
+    
+  }
+
+  
+  

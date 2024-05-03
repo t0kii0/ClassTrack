@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Confirmación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let student of students">
+      <ion-label>{{ student.name }}</ion-label>
+      <ion-label>{{ student.status }}</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="cerrarModal()">Confirmar</ion-button>
+</ion-content>
