@@ -6,6 +6,7 @@ ion-header {
 /* Estilos para el contenido */
 ion-content {
   background-color: #f4f4f4; /* Color de fondo */
+  
 }
 
 /* Estilos para el sidebar */
@@ -14,6 +15,7 @@ ion-col[size="3"] ion-list {
   border-radius: 15px; /* Bordes redondeados */
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
   overflow: hidden;
+  padding: 20px; /* Espaciado interno */
 }
 
 .large-icon {
@@ -36,14 +38,14 @@ ion-col[size="3"] ion-list {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
     overflow: hidden;
     text-align: center; /* Centrar el contenido */
-    padding: 20px; /* Espaciado interno */
-    background-image: url('/assets/escuelatripulantes.jpg');
+    padding: 05px; /* Espaciado interno */
+    
   }
 
 /* Estilos para las etiquetas de los iconos */
 .icon-container ion-label {
   color: rgba(0, 0, 0, 0.8); /* Color del texto */
-  margin-top: 10px; /* Espaciado superior */
+  margin-top: 20px; /* Espaciado superior */
 }
 
 .background-container {
@@ -72,6 +74,15 @@ ion-col[size="3"] ion-list {
 }
 
 .item-bottom{
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
+  overflow: hidden;
+  text-align: center; /* Centrar el contenido */
+  padding: 20px; /* Espaciado interno */
+}
+
+.lista-menu{
   background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
   border-radius: 15px; /* Bordes redondeados */
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
