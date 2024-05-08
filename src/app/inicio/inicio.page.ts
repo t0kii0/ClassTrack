@@ -33,4 +33,8 @@ export class InicioPage  implements OnInit {
   console.log('Reportaste');
   this.router.navigate(['/reporte']);
  }
+ configuracion(){
+  console.log('Configuraste');
+  this.router.navigate(['/configuracion']);
+ }
 }
