@@ -6,7 +6,6 @@ ion-header {
 /* Estilos para el contenido */
 ion-content {
   background-color: #f4f4f4; /* Color de fondo */
-  
 }
 
 /* Estilos para el sidebar */
@@ -32,15 +31,11 @@ ion-col[size="3"] ion-list {
   text-align: center; /* Centrar el contenido */
   padding: 20px; /* Espaciado interno */
 }
-  .icono-menu{
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
-    border-radius: 15px; /* Bordes redondeados */
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
-    overflow: hidden;
-    text-align: center; /* Centrar el contenido */
-    padding: 05px; /* Espaciado interno */
-    
-  }
+
+.icon-container:hover {
+  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el cursor */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra al pasar el cursor */
+}
 
 /* Estilos para las etiquetas de los iconos */
 .icon-container ion-label {
@@ -73,7 +68,7 @@ ion-col[size="3"] ion-list {
   background-color: rgba(255, 255, 255, 0.6); /* Color de fondo semitransparente */
 }
 
-.item-bottom{
+.item-bottom {
   background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
   border-radius: 15px; /* Bordes redondeados */
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
@@ -82,7 +77,7 @@ ion-col[size="3"] ion-list {
   padding: 20px; /* Espaciado interno */
 }
 
-.lista-menu{
+.lista-menu {
   background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
   border-radius: 15px; /* Bordes redondeados */
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
@@ -90,5 +85,3 @@ ion-col[size="3"] ion-list {
   text-align: center; /* Centrar el contenido */
   padding: 20px; /* Espaciado interno */
 }
-
-
