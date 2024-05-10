@@ -1,5 +1,10 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/inicio" routerDirection="back">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Libro de Clases</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -8,7 +13,7 @@
   <div class="custom-background"></div> <!-- Aquí se colocará la imagen de fondo difuminada -->
   <ion-grid>
     <ion-row>
-      <ion-col size="3">
+      <ion-col size="2">
         <!-- Sidebar -->
         <ion-list lines="none" class="custom-sidebar">
           <ion-item class="custom-sidebar-item">
@@ -18,7 +23,7 @@
           <!-- Agrega más elementos de la barra lateral aquí -->
         </ion-list>
       </ion-col>
-      <ion-col size="9">
+      <ion-col size="10">
         <!-- Main Content -->
         <ion-list class="custom-main-content">
           <!-- Header row for grades -->
