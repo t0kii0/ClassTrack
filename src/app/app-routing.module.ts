@@ -40,6 +40,11 @@ const routes: Routes = [
     loadChildren: () => import('./configuracion/configuracion.module').then( m => m.ConfiguracionPageModule)
   },
   {
+    path: 'crear-user',
+    loadChildren: () => import('./crear-user/crear-user.module').then( m => m.CrearUserPageModule)
+  },
+
+  {
     path: '',
     redirectTo: 'inicio',
     pathMatch: 'full'
@@ -49,6 +54,7 @@ const routes: Routes = [
     path: 'confirmacion-modal',
     loadChildren: () => import('./confirmacion-modal/confirmacion-modal.module').then( m => m.ConfirmacionModalPageModule)
   },
+
 
 ];
 

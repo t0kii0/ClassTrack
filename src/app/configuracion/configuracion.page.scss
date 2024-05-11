@@ -1,33 +1,94 @@
-.config-container {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
+/* Estilos para el encabezado */
+ion-header {
+  background-color: transparent; /* Encabezado transparente */
+}
+
+/* Estilos para el contenido */
+ion-content {
+  background-color: #f4f4f4; /* Color de fondo */
   
-  .config-container h1 {
-    text-align: center;
-    margin-bottom: 20px;
+}
+
+/* Estilos para el sidebar */
+ion-col[size="3"] ion-list {
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
+  overflow: hidden;
+  padding: 20px; /* Espaciado interno */
+}
+
+.large-icon {
+  color: rgba(0, 0, 0, 0.845); /* Color semi transparente */
+  font-size: 3rem; /* Tamaño del icono, ajusta según sea necesario */
+}
+
+/* Estilos para los contenedores de iconos */
+.icon-container {
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
+  overflow: hidden;
+  text-align: center; /* Centrar el contenido */
+  padding: 20px; /* Espaciado interno */
+}
+  .icono-menu{
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
+    overflow: hidden;
+    text-align: center; /* Centrar el contenido */
+    padding: 05px; /* Espaciado interno */
+    
   }
-  
-  .config-menu {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .config-menu li {
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
-    border-bottom: 1px solid #eee;
-    cursor: pointer;
-  }
-  
-  .config-menu li:hover {
-    background-color: #f9f9f9;
-  }
-  
-  .config-menu ion-icon {
-    margin-right: 12px;
-  }
-  
+
+/* Estilos para las etiquetas de los iconos */
+.icon-container ion-label {
+  color: rgba(0, 0, 0, 0.8); /* Color del texto */
+  margin-top: 20px; /* Espaciado superior */
+}
+
+.background-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/escuelatripulantes.jpg');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden; /* Evita que el desbordamiento de los elementos hijos afecte la apariencia */
+}
+
+.background-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+.sidebar-list ion-item {
+  background-color: rgba(255, 255, 255, 0.6); /* Color de fondo semitransparente */
+}
+
+.item-bottom{
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
+  overflow: hidden;
+  text-align: center; /* Centrar el contenido */
+  padding: 20px; /* Espaciado interno */
+}
+
+.lista-menu{
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
+  overflow: hidden;
+  text-align: center; /* Centrar el contenido */
+  padding: 20px; /* Espaciado interno */
+}
+
+

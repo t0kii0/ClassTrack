@@ -13,5 +13,8 @@ export class ConfiguracionPage implements OnInit {
 
   ngOnInit() {
   }
-
+  agregar(){
+    console.log('entraste.......')
+    this.router.navigate(['/crear-user']); //
+  }
 }
