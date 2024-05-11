@@ -85,3 +85,8 @@ ion-col[size="3"] ion-list {
   text-align: center; /* Centrar el contenido */
   padding: 20px; /* Espaciado interno */
 }
+
+.custom-content {
+  position: relative;
+  border-radius: 15px; /* Bordes redondeados */
+}
