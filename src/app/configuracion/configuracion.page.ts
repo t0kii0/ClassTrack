@@ -11,10 +11,13 @@ export class ConfiguracionPage implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   agregar(){
     console.log('entraste.......')
     this.router.navigate(['/crear-user']); //
+  }
+  confiAsignatura(){
+    console.log('entraste.......')
+    this.router.navigate(['/crear-asignatura']); //
   }
 }

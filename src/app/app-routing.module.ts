@@ -53,7 +53,11 @@ const routes: Routes = [
   {
     path: 'confirmacion-modal',
     loadChildren: () => import('./confirmacion-modal/confirmacion-modal.module').then( m => m.ConfirmacionModalPageModule)
+  },  {
+    path: 'crear-asignatura',
+    loadChildren: () => import('./crear-asignatura/crear-asignatura.module').then( m => m.CrearAsignaturaPageModule)
   },
+
 
 
 ];

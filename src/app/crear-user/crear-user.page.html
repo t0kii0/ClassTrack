@@ -15,30 +15,33 @@
       <ion-card-title>Ingrese los datos del nuevo usuario</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup = "FormularioAlumno"]>
+      <form [formGroup] = "FormularioAlumno" (ngSubmit)="agregarUsuario()">
         <ion-item>
           <ion-label position="floating">RUT</ion-label>
-          <ion-input type="text" name="rut" formControlName="rut" required></ion-input><!--[(ngModel)]="nuevoUsuario.rut" required esto va dentro del input-->
+          <ion-input type="text"  formControlName="rut" required></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Nombre</ion-label>
-          <ion-input type="text" name="nombre" formControlName="nombre" required ></ion-input><!--[(ngModel)]="nuevoUsuario.nombre" required-->
+          <ion-input type="text"  formControlName="nombre" required ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Apellido Paterno</ion-label>
-          <ion-input type="text" name="apellidoPaterno" formControlName="apellido" required></ion-input><!--[(ngModel)]="nuevoUsuario.apellidoPaterno" required-->
+          <ion-input type="text"  formControlName="apellido" required></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Apellido Materno</ion-label>
-          <ion-input type="text" name="apellidoMaterno" formControlName="apmaterno" required></ion-input><!--[(ngModel)]="nuevoUsuario.apellidoMaterno" required-->
+          <ion-input type="text"  formControlName="apmaterno" required></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Fecha de Nacimiento</ion-label>
-          <ion-datetime display-format="DD/MM/YYYY" name="fechaNacimiento" formControlName="fecha_nacimiento" required></ion-datetime><!--[(ngModel)]="nuevoUsuario.fechaNacimiento" required-->
+          <ion-datetime display-format="DD/MM/YYYY"  formControlName="fecha_nacimiento" required></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Curso</ion-label>
-          <ion-input type="text" name="curso" formControlName="curso" required></ion-input><!--[(ngModel)]="nuevoUsuario.curso" required-->
+          <ion-input type="text"  formControlName="curso" required></ion-input>
+        </ion-item>        <ion-item>
+          <ion-label position="floating">Tipo de Usuario</ion-label>
+          <ion-input type="text"  formControlName="tipo_user" required></ion-input>
         </ion-item>
         <ion-button type="submit" expand="medium" color="primary" >Agregar Usuario</ion-button>
       </form>

@@ -6,4 +6,5 @@ export interface ModelAlumno{
     curso: string;
     fecha_nacimiento: Date;
     apmaterno: string;
+    tipo_user: string;
 }
