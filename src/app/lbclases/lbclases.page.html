@@ -26,7 +26,7 @@
       <ion-col size="10">
         <!-- Main Content -->
         <ion-list class="custom-main-content">
-          <!-- Header row for grades -->
+          <!-- Header row for grades 
           <ion-item class="custom-grade-header">
             <ion-label>N1</ion-label>
             <ion-label>N2</ion-label>
@@ -34,8 +34,8 @@
             <ion-label>N4</ion-label>
             <ion-label>N5</ion-label>
             <ion-label>PROM</ion-label>
-          </ion-item>
-          <!-- Alumnos y espacios para notas -->
+          </ion-item-->
+          <!-- Alumnos y espacios para notas 
           <ion-item *ngFor="let student of students" class="custom-grade-item">
             <ion-label>{{ student.name }}</ion-label>
             <ion-input type="number" [(ngModel)]="student.grades[0]"></ion-input>
@@ -44,9 +44,9 @@
             <ion-input type="number" [(ngModel)]="student.grades[3]"></ion-input>
             <ion-input type="number" [(ngModel)]="student.grades[4]"></ion-input>
             <ion-text>{{ (student.average) }}</ion-text>
-          </ion-item>
+          </ion-item-->
         </ion-list>
-        <ion-button expand="medium" class="custom-button" (click)="calculateAllAverages()">Calcular Promedios</ion-button>
+        <ion-button expand="medium" class="custom-button">Calcular Promedios</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
