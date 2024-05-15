@@ -42,8 +42,12 @@ const routes: Routes = [
   {
     path: 'crear-user',
     loadChildren: () => import('./crear-user/crear-user.module').then( m => m.CrearUserPageModule)
+  },  
+  {
+    path: 'asignatura',
+    loadChildren: () => import('./asignatura/asignatura.module').then( m => m.AsignaturaPageModule)
   },
-
+  
   {
     path: '',
     redirectTo: 'inicio',
@@ -53,7 +57,8 @@ const routes: Routes = [
   {
     path: 'confirmacion-modal',
     loadChildren: () => import('./confirmacion-modal/confirmacion-modal.module').then( m => m.ConfirmacionModalPageModule)
-  },  {
+  },
+  {
     path: 'crear-asignatura',
     loadChildren: () => import('./crear-asignatura/crear-asignatura.module').then( m => m.CrearAsignaturaPageModule)
   },
