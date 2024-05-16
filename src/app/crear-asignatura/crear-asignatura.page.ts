@@ -13,7 +13,7 @@ export class CrearAsignaturaPage implements OnInit {
 
   FormularioAsignatura : FormGroup;
 
-  constructor(private asignaturaService : AsignaturaService, private fb : FormBuilder ) {
+  constructor(private asignaturaService : AsignaturaService, private fb : FormBuilder, private alertController: AlertController) {
 
     this.FormularioAsignatura = this.fb.group({
       id: ['', Validators.required],
@@ -33,11 +33,23 @@ export class CrearAsignaturaPage implements OnInit {
     this.asignaturaService.addAsignatura(formDataAlumno).subscribe(
       (result = this.agregarAsignatura) => {
         console.log('Se guardo con exito:', result);
+        this.presentAlert('Éxito', 'La asignatura se creo satisfactoriamente.');
     },
     (error) => {
       console.error('Error al guardar el alumno: ',error);
+      this.presentAlert('Error', 'Asignatura ya inscrita.');
     }
     );
+  }
+
+  async presentAlert(title: string, message: string) {
+    const alert = await this.alertController.create({
+      header: title,
+      message: message,
+      buttons: ['OK']
+    });
+  
+    await alert.present();
   }
 
 }
