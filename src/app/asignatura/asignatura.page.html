@@ -25,9 +25,9 @@
       <ion-col size="12" *ngFor="let asignatura of asignaturas">
         <ion-card>        
           <ion-card-content>         
-            <ion-item>
+            <ion-item (click)="verDetallesAsignatura(asignatura.id)">
               <ion-label>{{asignatura.nombre_asignatura}}</ion-label>
-              <ion-button (click)="notas()">Ir</ion-button>
+              <ion-button>Ir</ion-button>
             </ion-item>
           </ion-card-content>
         </ion-card>

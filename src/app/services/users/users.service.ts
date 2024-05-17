@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { ModelAlumno } from '../../modelos/userModel';
 
 @Injectable({
@@ -14,5 +14,14 @@ export class UserService {
 )
   addUser(registrarA: ModelAlumno): Observable<string | any> {
     return this._http.post<any>(this.superbaseUrl + 'ALUMNO', registrarA,{headers: this.supabaseHeaders});
+}
+obtenerTodoAlumno(): Observable<ModelAlumno[]> {
+  return this._http.get<ModelAlumno[]>(this.superbaseUrl + 'ALUMNO', { headers: this.supabaseHeaders })
+    .pipe(
+      catchError(error => {
+        console.error('Error al obtener Alumnos:', error);
+        return of([]); // Devolver un array vacío en caso de error
+      })
+    );
 }
 }

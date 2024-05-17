@@ -29,8 +29,7 @@ export class AsignaturaPage implements OnInit {
       }
     );
   }
-  notas(){
-    console.log('llegaste a notas');
-    this.router.navigate(['/lbclases']);
+  verDetallesAsignatura(idAsignatura: number) {
+    this.router.navigate(['/lbclases'], { queryParams: { asignaturaId: idAsignatura } });
   }
 }
