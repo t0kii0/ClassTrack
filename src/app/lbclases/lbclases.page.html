@@ -9,45 +9,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="custom-content">
-  <div class="custom-background"></div> <!-- Aquí se colocará la imagen de fondo difuminada -->
-  <ion-grid>
-    <ion-row>
-      <ion-col size="2">
-        <!-- Sidebar -->
-        <ion-list lines="none" class="custom-sidebar">
-          <ion-item class="custom-sidebar-item">
-            <ion-icon name="home" slot="start"></ion-icon>
-            <ion-label>Inicio</ion-label>
-          </ion-item>
-          <!-- Agrega más elementos de la barra lateral aquí -->
-        </ion-list>
-      </ion-col>
-      <ion-col size="10">
-        <!-- Main Content -->
-        <ion-list class="custom-main-content">
-          <!-- Header row for grades 
-          <ion-item class="custom-grade-header">
-            <ion-label>N1</ion-label>
-            <ion-label>N2</ion-label>
-            <ion-label>N3</ion-label>
-            <ion-label>N4</ion-label>
-            <ion-label>N5</ion-label>
-            <ion-label>PROM</ion-label>
-          </ion-item-->
-          <!-- Alumnos y espacios para notas 
-          <ion-item *ngFor="let student of students" class="custom-grade-item">
-            <ion-label>{{ student.name }}</ion-label>
-            <ion-input type="number" [(ngModel)]="student.grades[0]"></ion-input>
-            <ion-input type="number" [(ngModel)]="student.grades[1]"></ion-input>
-            <ion-input type="number" [(ngModel)]="student.grades[2]"></ion-input>
-            <ion-input type="number" [(ngModel)]="student.grades[3]"></ion-input>
-            <ion-input type="number" [(ngModel)]="student.grades[4]"></ion-input>
-            <ion-text>{{ (student.average) }}</ion-text>
-          </ion-item-->
-        </ion-list>
-        <ion-button expand="medium" class="custom-button">Calcular Promedios</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let alumno of alumnos">
+          <ion-label>
+            {{ alumno.nombre }} {{ alumno.apellido }} {{ alumno.apmaterno }}
+          </ion-label>
+          <ion-button (click)="verDetallesAlumno(alumno)">
+            Detalles
+          </ion-button>
+          <ion-button (click)="agregarNotaAlumno(alumno.rut)">
+            Agregar Nota
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
