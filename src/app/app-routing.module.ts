@@ -61,7 +61,11 @@ const routes: Routes = [
   {
     path: 'crear-asignatura',
     loadChildren: () => import('./crear-asignatura/crear-asignatura.module').then( m => m.CrearAsignaturaPageModule)
+  },  {
+    path: 'cursos',
+    loadChildren: () => import('./cursos/cursos.module').then( m => m.CursosPageModule)
   },
+
 
 
 

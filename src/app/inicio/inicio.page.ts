@@ -15,7 +15,7 @@ export class InicioPage  implements OnInit {
 
   librodeclases(){
     console.log('entraste con exitoooooooooooooooo');
-    this.router.navigate(['/asignatura']);
+    this.router.navigate(['/cursos']);
   }
   anotaciones() {
     console.log('Anotaste a un wn');

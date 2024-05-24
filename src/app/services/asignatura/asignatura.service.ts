@@ -19,7 +19,7 @@ obtenerTodoAsignatura(): Observable<ModelAsignatura[]> {
   return this._http.get<ModelAsignatura[]>(this.superbaseUrl + 'ASIGNATURA', { headers: this.supabaseHeaders })
     .pipe(
       catchError(error => {
-        console.error('Error al obtener viajes:', error);
+        console.error('Error al obtener Asignatura:', error);
         return of([]); // Devolver un array vacío en caso de error
       })
     );
