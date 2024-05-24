@@ -20,19 +20,17 @@
 <ion-content [fullscreen]="true">
 
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" *ngFor="let asignatura of asignaturas">
-        <ion-card>        
-          <ion-card-content>         
-            <ion-item (click)="verDetallesAsignatura(asignatura.id)">
-              <ion-label>{{asignatura.nombre_asignatura}}</ion-label>
-              <ion-button>Ir</ion-button>
-            </ion-item>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-content>
+    <ion-list *ngIf="asignaturas.length > 0; else noData">
+      <ion-item *ngFor="let asignatura of asignaturas" (click)="verDetallesAsignatura(asignatura.id)">
+        {{ asignatura.nombre_asignatura }}
+      </ion-item>
+    </ion-list>
+    <ng-template #noData>
+      <ion-item>
+        <ion-label>No hay asignaturas disponibles</ion-label>
+      </ion-item>
+    </ng-template>
+  </ion-content>
 
 </ion-content>

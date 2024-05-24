@@ -13,7 +13,8 @@ import { ModelNota } from '../modelos/notamodel';
 })
 export class LbclasesPage implements OnInit {
   alumnos: ModelAlumno[] = [];
-  idAsignatura: number = 1; // Aquí puedes establecer el ID de la asignatura que corresponda
+  idAsignatura?: number;
+  idCurso?: number;
 
   constructor(
     private router: Router,
@@ -24,18 +25,24 @@ export class LbclasesPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.cargarAlumnos();
+    this.route.queryParams.subscribe(params => {
+      this.idAsignatura = +params['asignaturaId'];
+      this.idCurso = +params['cursoId'];
+      this.cargarAlumnos();
+    });
   }
 
   cargarAlumnos() {
-    this.alumnosService.obtenerTodoAlumno().subscribe(
-      (alumnos: ModelAlumno[]) => {
-        this.alumnos = alumnos;
-      },
-      (error) => {
-        console.error('Error al cargar alumnos:', error);
-      }
-    );
+    if (this.idCurso !== undefined) {
+      this.alumnosService.obtenerTodoAlumno(this.idCurso).subscribe(
+        (alumnos: ModelAlumno[]) => {
+          this.alumnos = alumnos;
+        },
+        error => {
+          console.error('Error al cargar alumnos:', error);
+        }
+      );
+    }
   }
 
   async verDetallesAlumno(alumno: ModelAlumno) {
@@ -44,7 +51,7 @@ export class LbclasesPage implements OnInit {
         const promedio = this.calcularPromedio(notas.map(n => n.nota));
         this.presentAlumnoDetailsAlert(alumno, notas, promedio);
       },
-      (error: any) => {
+      error => {
         console.error('Error al obtener notas del alumno:', error);
       }
     );
@@ -93,7 +100,7 @@ export class LbclasesPage implements OnInit {
                 () => {
                   this.cargarAlumnos();
                 },
-                (error) => {
+                error => {
                   console.error('Error al agregar nota:', error);
                 }
               );
