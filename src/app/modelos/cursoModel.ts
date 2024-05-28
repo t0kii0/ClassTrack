@@ -1,4 +1,4 @@
 export interface ModelCurso{
- id: number;
+ id_curso: number;
  curso: string;
 }

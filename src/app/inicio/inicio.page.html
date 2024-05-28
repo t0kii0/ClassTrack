@@ -62,7 +62,7 @@
       <div class="">
       <ion-grid>
         <ion-row>
-          <ion-col size="6" class="icon-container" (click)="librodeclases()" [routerLink]="['/cursos']">
+          <ion-col size="6" class="icon-container" (click)="irACurso('librodeclases')" >
             <ion-icon name="book" class="large-icon"></ion-icon>
             <ion-label>Libro de Clases</ion-label>
           </ion-col>
@@ -72,7 +72,7 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="6" class="icon-container" (click)="asistencia()" [routerLink]="['/asistencia']">
+          <ion-col size="6" class="icon-container" (click)="irACurso('asistencia')" >
             <ion-icon name="people" class="large-icon"></ion-icon>
             <ion-label>Asistencia</ion-label>
           </ion-col>

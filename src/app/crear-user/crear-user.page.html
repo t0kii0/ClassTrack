@@ -40,7 +40,7 @@
         <ion-item>
           <ion-label>Cursos</ion-label>
           <ion-select formControlName="curso" placeholder="Selecciona un curso">
-            <ion-select-option *ngFor="let curso of cursos" [value]="curso.id">
+            <ion-select-option *ngFor="let curso of cursos" [value]="curso.id_curso">
               {{ curso.curso }}
             </ion-select-option>
           </ion-select>

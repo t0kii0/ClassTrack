@@ -8,33 +8,43 @@ import { Router } from '@angular/router';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage  implements OnInit {
+  opcionSeleccionada: string = '';
 
   constructor( private router : Router) { }
 
-  ngOnInit() {}
-
-  librodeclases(){
-    console.log('entraste con exitoooooooooooooooo');
-    this.router.navigate(['/cursos']);
+  ngOnInit() {
   }
+  irACurso(opcion: string) {
+    this.opcionSeleccionada = opcion;
+    this.router.navigate(['/cursos'], { queryParams: {opcion: opcion} });
+    console.log(opcion);
+  }
+
+    // Métodos para manejar clics en los íconos
+
   anotaciones() {
-    console.log('Anotaste a un wn');
+    this.opcionSeleccionada = 'anotaciones';
     this.router.navigate(['/anotacion']);
-}
-  asistencia() {
-    console.log('El loco vino');
-    this.router.navigate(['/asistencia']);
-}
- observacion(){
-  console.log('observastee o.0?');
-  this.router.navigate(['/observacion']);
- }
- reporte(){
-  console.log('Reportaste');
-  this.router.navigate(['/reporte']);
- }
- configuracion(){
-  console.log('Configuraste');
-  this.router.navigate(['/configuracion']);
- }
+  }
+
+
+
+  observacion() {
+    this.opcionSeleccionada = 'observacion';
+    this.router.navigate(['/observacion']);
+    console.log(this.opcionSeleccionada);
+  }
+
+  reporte() {
+    this.opcionSeleccionada = 'reporte';
+    this.router.navigate(['/reporte']);
+    console.log(this.opcionSeleccionada);
+  }
+
+  configuracion() {
+    this.opcionSeleccionada = 'configuracion';
+    this.router.navigate(['/configuracion']);
+    console.log(this.opcionSeleccionada);
+  }
+  
 }

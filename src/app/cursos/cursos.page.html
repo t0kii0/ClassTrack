@@ -27,7 +27,7 @@
         <ion-card>        
           <ion-card-content>  
             <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">       
-            <ion-item (click)="verCursos(curso.id)">
+            <ion-item button (click)="verCursos(curso.id_curso)">
               <ion-label>{{curso.curso}}</ion-label>
               <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
               <ion-button>Ir</ion-button>
@@ -37,5 +37,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
 
 </ion-content>
