@@ -17,16 +17,19 @@
   </ion-header>
 </ion-content>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="cursos-page">
+  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
 
 
   <ion-grid>
     <ion-row>
       <ion-col size="12" *ngFor="let curso of curso">
         <ion-card>        
-          <ion-card-content>         
+          <ion-card-content>  
+            <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">       
             <ion-item (click)="verCursos(curso.id)">
               <ion-label>{{curso.curso}}</ion-label>
+              <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
               <ion-button>Ir</ion-button>
             </ion-item>
           </ion-card-content>
