@@ -37,6 +37,8 @@ export class LbclasesPage implements OnInit {
       this.alumnosService.obtenerTodoAlumno(this.idCurso).subscribe(
         (alumnos: ModelAlumno[]) => {
           this.alumnos = alumnos;
+          console.log(alumnos);
+          
         },
         error => {
           console.error('Error al cargar alumnos:', error);
@@ -44,6 +46,7 @@ export class LbclasesPage implements OnInit {
       );
     }
   }
+  
 
   async verDetallesAlumno(alumno: ModelAlumno) {
     this.notasService.obtenerNotasPorAlumno(alumno.rut).subscribe(

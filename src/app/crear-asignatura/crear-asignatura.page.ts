@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AsignaturaService } from '../services/asignatura/asignatura.service';
 import { FormGroup,FormBuilder,Validators,ReactiveFormsModule } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
+import { ModelCurso } from '../modelos/cursoModel';
+import { CursoService } from '../services/curso/curso.service';
 
 @Component({
   selector: 'app-crear-asignatura',
@@ -12,17 +14,23 @@ import { AlertController } from '@ionic/angular';
 export class CrearAsignaturaPage implements OnInit {
 
   FormularioAsignatura : FormGroup;
+  cursos: ModelCurso[] = [];
 
-  constructor(private asignaturaService : AsignaturaService, private fb : FormBuilder, private alertController: AlertController) {
+  constructor(private asignaturaService : AsignaturaService, 
+              private fb : FormBuilder,
+              private alertController: AlertController,
+              private cursoService: CursoService) {
 
     this.FormularioAsignatura = this.fb.group({
       id: ['', Validators.required],
       nombre_asignatura: ['', Validators.required],
+      curso: ['', Validators.required],
    });
 
    }
 
-  ngOnInit() {
+   ngOnInit() {
+    this.loadCursos();
   }
   async agregarAsignatura() {
     if (!this.FormularioAsignatura){
@@ -51,5 +59,14 @@ export class CrearAsignaturaPage implements OnInit {
   
     await alert.present();
   }
-
+  loadCursos() {
+    this.cursoService.obtenerTodoCurso().subscribe(
+      (data: ModelCurso[]) => {
+        this.cursos = data;
+      },
+      (error) => {
+        console.error('Error al cargar cursos: ', error);
+      }
+    );
+  }
 }

@@ -15,10 +15,10 @@ export class UserService {
   addUser(registrarA: ModelAlumno): Observable<string | any> {
     return this._http.post<any>(this.superbaseUrl + 'ALUMNO', registrarA,{headers: this.supabaseHeaders});
 }
-obtenerTodoAlumno(idCurso?: number): Observable<ModelAlumno[]> {
+obtenerTodoAlumno(curso?: number): Observable<ModelAlumno[]> {
   let url = this.superbaseUrl + 'ALUMNO';
-  if (idCurso !== undefined) {
-    url += `?cursoId=eq.${idCurso}`;
+  if (curso !== undefined) {
+    url += `?curso=eq.${curso}`;
   }
   return this._http.get<ModelAlumno[]>(url, { headers: this.supabaseHeaders })
     .pipe(
@@ -28,4 +28,6 @@ obtenerTodoAlumno(idCurso?: number): Observable<ModelAlumno[]> {
       })
     );
 }
+
+
 }

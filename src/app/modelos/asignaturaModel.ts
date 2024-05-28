@@ -1,6 +1,8 @@
+import { ModelCurso } from "./cursoModel";
+
 export interface ModelAsignatura {
     id: number;
     nombre_asignatura: string;
-    cursoId: number; 
+    curso: number; 
 }
   
