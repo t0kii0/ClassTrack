@@ -1,13 +1,14 @@
 <ion-app>
   <ion-menu side="start" contentId="main-content">
+    <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo"> 
     <ion-header>
       <ion-toolbar class="icono-menu">
         <ion-title>Menú</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="custom-content">
-      <div class="custom-background"></div> <!-- Aquí se colocará la imagen de fondo difuminada -->
+    <ion-content class="custom-content"> 
+      <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
       <ion-list lines="none" class="lista-menu" >
         <ion-item class="icono-menu">
           <ion-icon name="home" slot="start"></ion-icon>
@@ -52,8 +53,13 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
+    
+
+    
     <ion-content class="ion-padding">
-      <div class="background-container">
+      <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
+
+      <div class="">
       <ion-grid>
         <ion-row>
           <ion-col size="6" class="icon-container" (click)="librodeclases()" [routerLink]="['/cursos']">
