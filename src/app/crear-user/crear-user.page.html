@@ -51,6 +51,8 @@
         </ion-item>
         <ion-button type="submit" expand="medium" color="primary">Agregar Usuario</ion-button>
       </form>
+      <ion-button (click)="fileInput.click()" expand="medium" color="secondary">Cargar CSV</ion-button>
+      <input type="file" #fileInput (change)="onFileChange($event)" style="display: none;" accept=".csv"/>
     </ion-card-content>
   </ion-card>
 </ion-content>
