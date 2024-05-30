@@ -4,6 +4,17 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { CursoService } from '../services/curso/curso.service';
 import { ModelCurso } from '../modelos/cursoModel';
+import * as Papa from 'papaparse';
+
+interface CSVRow {
+  'Run': string;
+  'Nombres': string;
+  'Apellido Paterno': string;
+  'Apellido Materno': string;
+  'Fecha Nacimiento': string;
+  'Cod Grado': number
+
+}
 
 @Component({
   selector: 'app-crear-user',
@@ -29,7 +40,7 @@ export class CrearUserPage implements OnInit {
       apmaterno: ['', Validators.required],
       fecha_nacimiento: ['', Validators.required],
       curso: ['', Validators.required],
-      tipo_user: ['', Validators.required]
+      tipo_user: ['ALUMNO', Validators.required] // Set default value to 'ALUMNO'
     });
   }
 
@@ -73,5 +84,50 @@ export class CrearUserPage implements OnInit {
         console.error('Error al cargar cursos: ', error);
       }
     );
+  }
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    Papa.parse<CSVRow>(file, {
+      header: true,
+      complete: (result: Papa.ParseResult<CSVRow>) => {
+        this.saveCsvData(result.data);
+      },
+      error: (error: any) => {
+        console.error('Error al leer el archivo CSV:', error);
+      }
+    });
+  }
+
+  saveCsvData(data: CSVRow[]) {
+    for (const userData of data) {
+      const formattedData = {
+        rut: userData['Run'],
+        nombre: userData['Nombres'],
+        apellido: userData['Apellido Paterno'],
+        apmaterno: userData['Apellido Materno'],
+        fecha_nacimiento: new Date(userData['Fecha Nacimiento']),
+        curso: userData['Cod Grado'],
+        tipo_user: 'ALUMNO' // Asignar directamente el valor 'ALUMNO'
+      };
+
+      console.log('Datos formateados:', formattedData); // Imprimir los datos formateados
+
+      this.userService.addUser(formattedData).subscribe(
+        (result) => {
+          console.log('Usuario guardado con éxito:', result);
+        },
+        (error) => {
+          console.error('Error al guardar el usuario:', error);
+          if (error.status === 409) {
+            this.presentAlert('Error', `El usuario con RUT ${formattedData.rut} ya existe en la base de datos.`);
+          } else {
+            console.error('Detalles del error:', error.error);
+            this.presentAlert('Error', 'Se produjo un error al guardar el usuario.');
+          }
+        }
+      );
+    }
+    this.presentAlert('Éxito', 'Todos los usuarios se han guardado correctamente.');
   }
 }
