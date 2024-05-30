@@ -7,9 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { AnotacionModalComponent } from './anotacion-modal/anotacion-modal.component';
+
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AnotacionModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
