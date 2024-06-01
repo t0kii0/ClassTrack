@@ -54,11 +54,19 @@ ion-grid {
     object-fit: cover;
     filter: blur(10px); /* Difuminado de la imagen */
     opacity: 0.6; /* Opacidad */
+    z-index: -1;
   }
 
-  
+  .background-container {
+    background-image: url('/assets/escuelatripulantes.jpg');
+    background-repeat: repeat;
+  }
   .numero-col {
     width: 50px; /* Ajusta el valor según el ancho deseado */
     text-align: center; 
   }
 
+  .content-container {
+    position: relative;
+    z-index: 1;
+  }

@@ -2,10 +2,10 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
-        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        <ion-icon slot="icon-only" name="arrow-back" ></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Cursos</ion-title>
+    <ion-title class="font-semibold">Cursos</ion-title>
   </ion-toolbar>
   <link rel="stylesheet" href="https://horizon-tailwind-react-corporate-7s21b54hb-horizon-ui.vercel.app/static/css/main.d7f96858.css" />
 </ion-header>
@@ -14,7 +14,7 @@
 <ion-content [fullscreen]="true" class="cursos-page">
   <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
 
-  <div class="flex flex-col justify-center items-center h-[100vh] pt-4">
+  <div class="flex flex-col justify-center items-center h-[100vh] pt-20">
     <div class="min-w-[375px] md:min-w-[700px] xl:min-w-[800px] mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-3 3xl:grid-cols-6">
       <button class="relative flex flex-grow flex-col items-center rounded-[10px] border-[1px] border-black-500 bg-white bg-clip-border" *ngFor="let curso of curso" (click)="verCursos(curso.id_curso)">
         <div class="ml-[18px] flex h-[90px] w-auto flex-row items-center">
@@ -28,3 +28,8 @@
   </div>
 
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>ClassTrack V 1.0</ion-title>
+  </ion-toolbar>
+</ion-footer>

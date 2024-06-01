@@ -15,9 +15,15 @@
     object-fit: cover;
     filter: blur(10px); /* Difuminado de la imagen */
     opacity: 0.6; /* Opacidad */
+    z-index: -1;
   }
 
   ion-card-content {
     padding: 30px;
     background-color: rgba(255, 255, 255, 0.9); /* Fondo semi transparente */
+  }
+
+  .content-container {
+    position: relative;
+    z-index: 1;
   }

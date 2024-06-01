@@ -1,18 +1,17 @@
-<ion-header>
+<ion-header >
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Asignaturas</ion-title>
+    <ion-title class="font-semibold" class="header-style">Asignaturas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content [fullscreen]="true">
-
-
+  
   <div class="flex flex-col justify-center items-center h-[100vh] pt-4">
     <div class="min-w-[375px] md:min-w-[700px] xl:min-w-[800px] mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-3 3xl:grid-cols-6">
       <button class="relative flex flex-grow flex-col items-center rounded-[10px] border-[1px] border-black-500 bg-white bg-clip-border" *ngFor="let asignatura of asignaturas" (click)="verDetallesAsignatura(asignatura.id)">
@@ -25,6 +24,7 @@
       </button>
     </div>
   </div>
+  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
 
 
   <!-- <ion-content>

@@ -5,11 +5,12 @@
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Asistencia</ion-title>
+    <ion-title class="font-semibold">Asistencia</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="background-container">
+  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
   <!-- <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo"> -->
 
   <section class="container mx-auto p-6 font-mono flex-grow">
@@ -70,24 +71,7 @@
     </div>
   </section>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>Nombre</ion-col>
-      <ion-col>Estado</ion-col>
-      <ion-col>Observaciones</ion-col>
-    </ion-row>
-    <ion-row *ngFor="let student of students">
-      <ion-col>{{ student.nombre }}</ion-col>
-      <ion-col>
-        <ion-button color="success" (click)="markAttendance(student, 'presente')">Presente</ion-button>
-        <ion-button color="danger" (click)="markAttendance(student, 'ausente')">Ausente</ion-button>
-        <ion-button color="medium" (click)="markAttendance(student, 'justificado')">Justificado</ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-textarea [disabled]="student.status !== 'justificado'" [(ngModel)]="student.observation"></ion-textarea>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+
 
   <ion-grid>
     <ion-row>
