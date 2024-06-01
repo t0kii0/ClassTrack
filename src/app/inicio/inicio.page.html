@@ -1,42 +1,5 @@
 <ion-app>
-  <ion-menu side="start" contentId="main-content">
-    <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo"> 
-    <ion-header>
-      <ion-toolbar class="icono-menu">
-        <ion-title>Menú</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content class="custom-content"> 
-      <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
-      <ion-list lines="none" class="lista-menu" >
-        <ion-item class="icono-menu">
-          <ion-icon name="home" slot="start"></ion-icon>
-          <ion-label >Inicio</ion-label>
-        </ion-item>
-        <ion-item class="icono-menu">
-          <ion-icon name="book" slot="start"></ion-icon>
-          <ion-label>Libro de Clases</ion-label>
-        </ion-item>
-        <ion-item class="icono-menu">
-          <ion-icon name="create" slot="start"></ion-icon>
-          <ion-label>Anotaciones</ion-label>
-        </ion-item>
-        <ion-item class="icono-menu">
-          <ion-icon name="people" slot="start"></ion-icon>
-          <ion-label>Asistencia</ion-label>
-        </ion-item>
-        <ion-item class="icono-menu">
-          <ion-icon name="eye" slot="start"></ion-icon>
-          <ion-label>Observaciones</ion-label>
-        </ion-item>
-        <ion-item class="icono-menu">          
-          <ion-icon name="document" slot="start"></ion-icon>
-          <ion-label>Reportes</ion-label>   
-        </ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
+  
 
   <ion-router-outlet id="main-content">
     <ion-header>
@@ -44,7 +7,7 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button> <!-- Agrega el botón del menú -->
         </ion-buttons>
-        <ion-title>ClassTrack</ion-title>
+        <ion-title class="font-semibold">ClassTrack</ion-title>
         <ion-buttons slot="end">
           <ion-button >
             <ion-title>salir</ion-title>
@@ -54,46 +17,49 @@
       </ion-toolbar>
     </ion-header>
     
-
-    
     <ion-content class="ion-padding">
       <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
-
       <div class="">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="6" class="icon-container" (click)="irACurso('librodeclases')" >
-            <ion-icon name="book" class="large-icon"></ion-icon>
-            <ion-label>Libro de Clases</ion-label>
-          </ion-col>
-          <ion-col size="6" class="icon-container" (click)="anotaciones()" [routerLink]="['/anotacion']">
-            <ion-icon name="create" class="large-icon"></ion-icon>
-            <ion-label>Anotaciones</ion-label>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="6" class="icon-container" (click)="irACurso('asistencia')" >
-            <ion-icon name="people" class="large-icon"></ion-icon>
-            <ion-label>Asistencia</ion-label>
-          </ion-col>
-          <ion-col size="6" class="icon-container" (click)="observacion()" [routerLink]="['/observacion']">
-            <ion-icon name="eye" class="large-icon"></ion-icon> 
-            <ion-label>Observaciones</ion-label>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="6" class="icon-container" (click)="reporte()" [routerLink]="['/reporte']">
-            <ion-icon name="document" class="large-icon"></ion-icon>
-            <ion-label>Reportes</ion-label>
-          </ion-col>
-          <ion-col size="6" class="icon-container" (click)="configuracion()" [routerLink]="['/Configuracion']">
-            <ion-icon name="settings" class="large-icon"></ion-icon>
-            <ion-label>Configuracion</ion-label>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" class="icon-container" (click)="irACurso('librodeclases')">
+              <img src="/assets/icon/lbclases.png" class="large-icon" alt="Libro de Clases">
+              <ion-label>Libro de Clases</ion-label>
+            </ion-col>
+            <ion-col size="6" class="icon-container" (click)="anotaciones()" [routerLink]="['/anotacion']">
+              <img src="/assets/icon/Anotaciones.png" class="large-icon" alt="Anotaciones">
+              <ion-label>Anotaciones</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6" class="icon-container" (click)="irACurso('asistencia')">
+              <img src="/assets/icon/Asistencia.png" class="large-icon" alt="Asistencia">
+              <ion-label>Asistencia</ion-label>
+            </ion-col>
+            <ion-col size="6" class="icon-container" (click)="observacion()" [routerLink]="['/observacion']">
+              <img src="/assets/icon/Observaciones.png" class="large-icon" alt="Observaciones">
+              <ion-label>Observaciones</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6" class="icon-container" (click)="reporte()" [routerLink]="['/reporte']">
+              <img src="/assets/icon/reportes.png" class="large-icon" alt="Reportes">
+              <ion-label>Reportes</ion-label>
+            </ion-col>
+            <ion-col size="6" class="icon-container" (click)="configuracion()" [routerLink]="['/Configuracion']">
+              <img src="/assets/icon/configuracion.png" class="large-icon" alt="Configuracion">
+              <ion-label>Configuracion</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
     </ion-content>
+     
+    <ion-footer>
+      <ion-toolbar>
+        <ion-title>Footer Content</ion-title>
+      </ion-toolbar>
+    </ion-footer>
   </ion-router-outlet>
 </ion-app>
 
