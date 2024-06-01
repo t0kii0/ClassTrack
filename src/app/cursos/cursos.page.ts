@@ -40,6 +40,10 @@ export class CursosPage implements OnInit {
         });
   }
 
+  goBack() {
+    this.navCtrl.pop();
+  }
+
   verCursos(idCurso: number) {
     console.log(this.opcionSeleccionada);
     console.log('ID del curso:', idCurso); // Verificar el valor del ID
