@@ -10,7 +10,65 @@
 </ion-header>
 
 <ion-content>
-  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
+  <!-- <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo"> -->
+
+  <section class="container mx-auto p-6 font-mono flex-grow">
+    <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg h-full flex flex-col">
+      <div class="w-full overflow-x-auto flex-grow">
+        <div class="table-container h-full overflow-y-auto">
+          <table class="w-full h-full ">
+            <thead>
+              <tr class="grid grid-cols-4 text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b broder-gray-400">
+                <th class="px-4 py-3">Numero</th>
+                <th class="px-4 py-3">Alumno</th>
+                <th class="px-4 py-3">Estado</th>
+                <th class="px-4 py-3">Anotacion</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white">
+              <tr class="text-gray-700 grid grid-cols-4" *ngFor="let alumno of alumnos; let i = index">
+                <td class="px-4 py-3 border border-gray-400">
+                  <div class="flex items-center font-semibold text-sm text-black">
+                    <!-- contador -->
+                    {{ i + 1 }}
+                  </div>
+                </td>
+                <td class="px-4 py-3 border border-gray-400">
+                  <div class="flex items-center font-semibold text-sm text-black">
+                    {{ alumno.nombre }} {{ alumno.apellido }} {{ alumno.apmaterno }}
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-ms font-semibold border border-gray-400">
+                  <div class="flex items-center font-semibold text-sm text-black">
+                    <div class="grid w-[40rem] grid-cols-3 gap-2 rounded-xl bg-white-200 p-2">
+                      <div>
+                        <input type="radio" name="alumno{{i}}" id="presente{{i}}" value="1" class="peer hidden" checked />
+                        <label for="presente{{i}}" class="block border border-gray-600 cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Presente</label>
+                      </div>
+            
+                      <div>
+                        <input type="radio" name="alumno{{i}}" id="ausente{{i}}" value="2" class="peer hidden" />
+                        <label for="ausente{{i}}" class="block border border-gray-600 cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Ausente</label>
+                      </div>
+            
+                      <div>
+                        <input type="radio" name="alumno{{i}}" id="justificado{{i}}" value="3" class="peer hidden" />
+                        <label for="justificado{{i}}" class="block border border-gray-600 cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Justificado</label>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-ms font-semibold border border-gray-400">
+                  <ion-textarea placeholder="agregue justificacion.."></ion-textarea>
+                </td>
+              </tr>
+            </tbody>
+            
+          </table>  
+        </div>
+      </div>
+    </div>
+  </section>
 
   <ion-grid>
     <ion-row>
@@ -19,7 +77,7 @@
       <ion-col>Observaciones</ion-col>
     </ion-row>
     <ion-row *ngFor="let student of students">
-      <ion-col>{{ student.name }}</ion-col>
+      <ion-col>{{ student.nombre }}</ion-col>
       <ion-col>
         <ion-button color="success" (click)="markAttendance(student, 'presente')">Presente</ion-button>
         <ion-button color="danger" (click)="markAttendance(student, 'ausente')">Ausente</ion-button>

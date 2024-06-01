@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { ConfirmacionModalPage } from '../confirmacion-modal/confirmacion-modal.page';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModelAlumno } from '../modelos/userModel';
+// import { ModelAsistencia} from '../modelos/userModel';
+import { UserService } from '../services/users/users.service';
 
 interface Student {
-  id: number;
-  name: string;
+  rut: number;
+  nombre: string;
   status?: string;
   observation?: string;
 }
@@ -15,23 +19,29 @@ interface Student {
   styleUrls: ['./asistencia.page.scss'],
 })
 export class AsistenciaPage implements OnInit {
+  alumnos: ModelAlumno[] = [];
+  idAsignatura?: number;
+  idCurso?: number;
 
   students: Student[] = [
-    { id: 1, name: 'Hermes Peralta' },
-    { id: 2, name: 'Maria Lopez' },
-    { id: 3, name: 'Jose Garcia' },
-    { id: 4, name: 'Maria Rodriguez' },
-    { id: 5, name: 'Juan Martinez' },
-    { id: 6, name: 'Laura Hernandez' },
+    { rut: 1, nombre: 'Hermes Peralta' },
+    { rut: 2, nombre: 'Maria Lopez' },
+    { rut: 3, nombre: 'Jose Garcia' },
+    { rut: 4, nombre: 'Maria Rodriguez' },
+    { rut: 5, nombre: 'Juan Martinez' },
+    { rut: 6, nombre: 'Laura Hernandez' },
     // Agrega más estudiantes aquí
   ];
 
-  cambiosGuardados: boolean = true; // Indica si los cambios han sido guardados
+  cambiosGuardados: boolean = true; // Indica si los cambios han sruto guardados
 
   constructor(
     private modalController: ModalController,
     private alertController: AlertController,
-    private navController: NavController
+    private alumnosService: UserService,
+    private navController: NavController,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   markAttendance(student: Student, status: string) {
@@ -67,7 +77,28 @@ export class AsistenciaPage implements OnInit {
     await alert.present();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.idAsignatura = +params['asignaturaId'];
+      this.idCurso = +params['cursoId'];
+      this.cargarAlumnos();
+    });
+  }
+
+  cargarAlumnos() {
+    if (this.idCurso !== undefined) {
+      this.alumnosService.obtenerTodoAlumno(this.idCurso).subscribe(
+        (alumnos: ModelAlumno[]) => {
+          this.alumnos = alumnos;
+          console.log(alumnos);
+          
+        },
+        error => {
+          console.error('Error al cargar alumnos:', error);
+        }
+      );
+    }
+  }
 
   
   ionViewCanLeave() {

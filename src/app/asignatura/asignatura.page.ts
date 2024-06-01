@@ -35,6 +35,10 @@ export class AsignaturaPage implements OnInit {
     });
   }
 
+  goBack() {
+    this.navCtrl.pop();
+  }
+
   cargarAsignaturas() {
   this.obtenerAsignatura.obtenerTodoAsignatura().subscribe(
     (data: ModelAsignatura[]) => {
