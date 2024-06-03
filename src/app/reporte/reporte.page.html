@@ -1,3 +1,57 @@
-<p>
-  Reportese aqui
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/inicio" routerDirection="back">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="font-semibold">Buscar Alumnos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">RUT</ion-label>
+          <ion-input type="text" [(ngModel)]="searchCriteria.rut"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input type="text" [(ngModel)]="searchCriteria.nombre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Apellido Paterno</ion-label>
+          <ion-input type="text" [(ngModel)]="searchCriteria.apellidoPaterno"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Apellido Materno</ion-label>
+          <ion-input type="text" [(ngModel)]="searchCriteria.apellidoMaterno"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Curso</ion-label>
+          <ion-select [(ngModel)]="searchCriteria.curso">
+            <ion-select-option *ngFor="let curso of cursos" [value]="curso.id_curso">{{ curso.curso }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-button expand="full" (click)="buscarAlumnos()">Buscar</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="resultados.length > 0">
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let alumno of resultados">
+          <ion-label>
+            {{ alumno.nombre }} {{ alumno.apellido }} {{ alumno.apmaterno }} - {{ alumno.rut }}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

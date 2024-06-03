@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 import { ModelAlumno } from '../../modelos/userModel';
+import { ModelCurso } from 'src/app/modelos/cursoModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  apiUrl: any;
   constructor(private _http: HttpClient) {}
 
   superbaseUrl = 'https://alzycbtmqtcdkkddvxms.supabase.co/rest/v1/';
@@ -28,6 +30,8 @@ obtenerTodoAlumno(curso?: number): Observable<ModelAlumno[]> {
       })
     );
 }
-
+buscarAlumnos(criteria: any): Observable<ModelAlumno[]> {
+  return this._http.post<ModelAlumno[]>(`${this.apiUrl}/buscarAlumnos`, criteria);
+}
 
 }
