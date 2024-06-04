@@ -1,25 +1,44 @@
 /* Estilos para el encabezado */
 ion-header {
-  background-color: transparent; /* Encabezado transparente */
+  background-color: #000000; /* Fondo negro */
+  color: white; /* Color del texto en blanco */
+  border-bottom: 3px solid #ccc; /* Borde inferior */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+  opacity: 1; /* Asegurarse de que no haya transparencia */
+}
+
+ion-toolbar {
+  display: flex;
+  justify-content: center; /* Centrar el contenido horizontalmente */
+  align-items: center; /* Centrar el contenido verticalmente */
+  position: relative; /* Necesario para posicionar los botones */
+}
+
+ion-title {
+  font-weight: bold; /* Texto en negrita */
+
+  flex: 1; /* Permitir que el título ocupe el espacio disponible */
+  text-align: center; /* Centrar el texto */
+  color: white; /* Color del texto en blanco */
+}
+
+ion-buttons {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+ion-buttons[slot="start"] {
+  left: 10px;
+}
+
+ion-buttons[slot="end"] {
+  right: 10px;
 }
 
 /* Estilos para el contenido */
 ion-content {
   background-color: #f4f4f4; /* Color de fondo */
-}
-
-/* Estilos para el sidebar */
-ion-col[size="3"] ion-list {
-  background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
-  border-radius: 15px; /* Bordes redondeados */
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
-  overflow: hidden;
-  padding: 20px; /* Espaciado interno */
-}
-
-.large-icon {
-  color: rgba(0, 0, 0, 0.845); /* Color semi transparente */
-  font-size: 3rem; /* Tamaño del icono, ajusta según sea necesario */
 }
 
 /* Estilos para los contenedores de iconos */
@@ -29,7 +48,14 @@ ion-col[size="3"] ion-list {
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
   overflow: hidden;
   text-align: center; /* Centrar el contenido */
-  padding: 20px; /* Espaciado interno */
+  padding: 30px; /* Espaciado interno */
+  margin: 10px; /* Espaciado entre recuadros */
+  box-sizing: border-box; /* Asegura que el padding y margin se incluyan en el tamaño total */
+}
+
+.icon-container ion-label {
+  color: rgba(0, 0, 0, 0.8); /* Color del texto */
+  margin-top: 10px; /* Espaciado superior */
 }
 
 .icon-container:hover {
@@ -37,10 +63,11 @@ ion-col[size="3"] ion-list {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra al pasar el cursor */
 }
 
-/* Estilos para las etiquetas de los iconos */
-.icon-container ion-label {
-  color: rgba(0, 0, 0, 0.8); /* Color del texto */
-  margin-top: 20px; /* Espaciado superior */
+/* Centrar las filas */
+.centered-row {
+  display: flex;
+  justify-content: center; /* Centrar los recuadros horizontalmente */
+  flex-wrap: wrap; /* Permitir que los recuadros se ajusten y no se desborden */
 }
 
 .background-image {
@@ -53,8 +80,6 @@ ion-col[size="3"] ion-list {
   filter: blur(10px); /* Difuminado de la imagen */
   opacity: 0.6; /* Opacidad */
 }
-
-
 
 .sidebar-list ion-item {
   background-color: rgba(255, 255, 255, 0.6); /* Color de fondo semitransparente */
@@ -91,28 +116,23 @@ ion-col[size="3"] ion-list {
   vertical-align: middle;  /* Centra verticalmente el ícono con el texto */
 }
 
-.icon-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
-  border-radius: 15px; /* Bordes redondeados */
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
-  overflow: hidden;
-  text-align: center; /* Centrar el contenido */
-  padding: 20px; /* Espaciado interno */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+.logout{
+  color: white;
+  font-size: small;
+
 }
 
-.icon-container ion-label {
-  color: rgba(0, 0, 0, 0.8); /* Color del texto */
-  margin-top: 10px; /* Espaciado superior */
+.boton-logout{
+  border-radius: 50px; /* Bordes redondeados */
 }
 
-.icon-container:hover {
-  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el cursor */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra al pasar el cursor */
+.user-name {
+  position: absolute;
+  left: 10px; /* Ajusta el espacio desde el borde izquierdo */
+  color: white; /* Color del texto */
+  font-style: italic;
+  font-size: 16px; /* Tamaño del texto */
+  font-weight: normal; /* Peso del texto */
 }
 
 ion-footer {
@@ -128,4 +148,9 @@ ion-footer ion-toolbar {
 ion-footer ion-title {
   font-size: 14px;
   color: #333;
+}
+
+.font-semibold{
+  font-weight: bold;
+  font-style: inherit 
 }
