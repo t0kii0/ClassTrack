@@ -70,3 +70,11 @@
   opacity: 0.6; /* Opacidad */
   z-index: -1;
 }
+
+ion-header {
+  background-color: #000000; /* Fondo negro */
+  color: white; /* Color del texto en blanco */
+  border-bottom: 3px solid #ccc; /* Borde inferior */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+  opacity: 1; /* Asegurarse de que no haya transparencia */
+}

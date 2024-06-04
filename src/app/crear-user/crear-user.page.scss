@@ -13,3 +13,11 @@
     padding: 30px;
     background-color: rgba(255, 255, 255, 0.9); /* Fondo semi transparente */
   }
+
+  ion-header {
+    background-color: #000000; /* Fondo negro */
+    color: white; /* Color del texto en blanco */
+    border-bottom: 3px solid #ccc; /* Borde inferior */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+    opacity: 1; /* Asegurarse de que no haya transparencia */
+  }
