@@ -1,50 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController, NavController } from '@ionic/angular';
-import { ConfirmacionModalPage } from '../confirmacion-modal/confirmacion-modal.page';
-//import { ModelAlumno } from '../modelos/userModel';
+import { ActivatedRoute } from '@angular/router';
+import { ModelAlumno } from '../modelos/userModel';
 import { UserService } from '../services/users/users.service';
+import { AnotacionService } from '../services/anotacion/anotacion.service';
+import { ModelAnotacion } from '../modelos/anotacionModel';
 import { AnotacionModalComponent } from '../anotacion-modal/anotacion-modal.component';
-
-interface Student {
-  rut: string;
-  nombre: string;
-  curso?: string;
-  anotacion?: string;
-}
 
 @Component({
   selector: 'app-anotacion',
   templateUrl: './anotacion.page.html',
   styleUrls: ['./anotacion.page.scss'],
 })
-export class AnotacionPage  implements OnInit {
-  //alumnos: ModelAlumno[] = [];
-
-  students: Student[] = [
-    { rut: '1-9', nombre: 'Hermes Peralta', curso: '1-A'},
-    { rut: '2-0', nombre: 'Juan Perez', curso: '1-A'},
-    { rut: '2-1', nombre: 'Pedro Perez', curso: '2-A'},
-    { rut: '2-2', nombre: 'Maria Perez', curso: '3-A'},
-  ] 
+export class AnotacionPage implements OnInit {
+  alumnos: ModelAlumno[] = [];
+  idAsignatura?: number;
+  idCurso?: number; 
+  anotacionText: string = '';
+  anotacionTipo: boolean = true;
 
   constructor(
     private modalController: ModalController,
     private alertController: AlertController,
     private navController: NavController,
-    //private alumnosService: UserService
+    private alumnosService: UserService,
+    private route: ActivatedRoute,
+    private anotacionService: AnotacionService
   ) { }
 
   ngOnInit() {
-    //this.cargarAlumnos();
+    this.route.queryParams.subscribe(params => {  
+      this.idAsignatura = +params['asignaturaId'];
+      this.idCurso = +params['cursoId'];
+      this.cargarAlumnos();
+    });
   }
 
   goBack() {
     this.navController.pop();
   }
 
-  async presentModal() {
+  async presentModal(rut: string) {
     const modal = await this.modalController.create({
-      component: AnotacionModalComponent
+      component: AnotacionModalComponent,
+      componentProps: {
+        idAlumno: rut,
+        idAsignatura: this.idAsignatura
+      }
     });
     
     modal.onDidDismiss().then((data) => {
@@ -57,30 +59,41 @@ export class AnotacionPage  implements OnInit {
     return await modal.present();
   }
 
-  /* cargarAlumnos() {
-    this.alumnosService.obtenerTodoAlumno().subscribe(
-      (alumnos: ModelAlumno[]) => {
-        this.alumnos = alumnos;
-      },
-      error => {
-        console.error('Error al cargar alumnos:', error);
-      }
-    );
-  } */
+  cargarAlumnos() {
+    if (this.idCurso !== undefined) {
+      this.alumnosService.obtenerTodoAlumno(this.idCurso).subscribe(
+        (alumnos: ModelAlumno[]) => {
+          this.alumnos = alumnos;
+          console.log(alumnos);
+        },
+        error => {
+          console.error('Error al cargar alumnos:', error);
+        }
+      );
+    }
+  }
 
-  /* async mostrarAlumnoDetailsAlert(alumno: ModelAlumno) {
-    const alert = await this.alertController.create({
-      header: 'Detalles del alumno',
-      message: `
-        <strong>RUT:</strong> ${alumno.rut}<br>
-        <strong>Nombre:</strong> ${alumno.nombre}<br>
-        <strong>Edad:</strong> ${alumno.apellido}<br>
-        <strong>Curso:</strong> ${alumno.apmaterno}<br>
-      `,
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  } */
-
+  submitAnotacion() {
+    if (this.idAsignatura !== undefined) {
+      const fecha = new Date(); // Puedes ajustar la fecha según tus necesidades
+      this.anotacionService.agregarAnotacionAlumnoAsignatura(
+        'idAlumno', // Deberás ajustar esto según cómo obtienes el id del alumno
+        this.idAsignatura,
+        this.anotacionTipo,
+        fecha,
+        this.anotacionText
+      ).subscribe(
+        (response: any) => {
+          console.log('Anotación guardada:', response);
+          // Manejar la respuesta, por ejemplo, mostrar una notificación al usuario
+        },
+        (error: any) => {
+          console.error('Error al guardar anotación:', error);
+        }
+      );
+    } else {
+      console.error('idAsignatura no está definido');
+    }
+  }
+  
 }

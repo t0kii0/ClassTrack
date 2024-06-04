@@ -1,19 +1,16 @@
-<!-- aqui comienza componente natbar que sera header de esta pagina-->
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
+      <ion-button routerLink="/inicio" routerDirection="back">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title class="font-semibold">Libro de Clases</ion-title>
   </ion-toolbar>
 </ion-header>
-<!-- componente tabla que sera el body de la pagina -->
 
-<ion-content  class="anotacion-page flex flex-col">
+<ion-content class="anotacion-page flex flex-col">
   <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
-  <!-- <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo"> -->
 
   <section class="container mx-auto p-6 font-mono flex-grow">
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg h-full flex flex-col">
@@ -28,21 +25,22 @@
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr class="text-gray-700" *ngFor="let student of students">
+              <tr class="text-gray-700" *ngFor="let alumno of alumnos">
                 <td class="px-4 py-3 border">
-                  <div class="flex items-center font-semibold text-sm text-black">
-                    {{ student.rut }}
+                  <div class="flex items-center font-semibold text-sm text-black visible-text">
+                    {{ alumno.rut }}
                   </div>
                 </td>
                 <td class="px-4 py-3 text-ms font-semibold border">
-                  <div class="flex items-center font-semibold text-sm text-black">
-                    {{ student.nombre }}
+                  <div class="flex items-center font-semibold text-sm text-black visible-text">
+                    {{ alumno.nombre }}
                   </div>
                 </td>
+                
                 <td class="px-4 py-3 text-ms font-semibold border">
-                  <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-500 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800" (click)="presentModal()">
+                  <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-500 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800" (click)="presentModal(alumno.rut)">
                     Agregar Anotacion
-                </button>
+                  </button>
                 </td>
               </tr>
               <!-- Agrega más filas aquí -->
@@ -52,13 +50,4 @@
       </div>
     </div>
   </section>
-
-
-
-<!-- component -->
-<link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css" />
-
-<!-- This is an example component -->
-
 </ion-content>
-
