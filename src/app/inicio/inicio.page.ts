@@ -21,14 +21,6 @@ export class InicioPage  implements OnInit {
   }
 
     // Métodos para manejar clics en los íconos
-
-  anotaciones() {
-    this.opcionSeleccionada = 'anotaciones';
-    this.router.navigate(['/anotacion']);
-  }
-
-
-
   observacion() {
     this.opcionSeleccionada = 'observacion';
     this.router.navigate(['/observacion']);

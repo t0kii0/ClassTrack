@@ -63,6 +63,8 @@ export class AsignaturaPage implements OnInit {
     this.router.navigate(['/asistencia'], { queryParams: { asignaturaId: idAsignatura, cursoId: this.cursoId } });
   }else if(this.opcionSeleccionada === 'librodeclases'){
     this.router.navigate(['/lbclases'], { queryParams: { asignaturaId: idAsignatura, cursoId: this.cursoId } });
+  }else if(this.opcionSeleccionada === 'anotaciones'){
+    this.router.navigate(['/anotacion'], { queryParams: { asignaturaId: idAsignatura, cursoId: this.cursoId } });
   }
 }
 

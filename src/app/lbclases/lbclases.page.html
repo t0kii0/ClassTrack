@@ -16,7 +16,7 @@
       <ion-list>
         <ion-item *ngFor="let alumno of alumnos">
           <ion-label>
-            {{ alumno.nombre }} {{ alumno.apellido }} {{ alumno.apmaterno }}
+            {{ alumno.apellido }} {{ alumno.apmaterno }} {{ alumno.nombre }}
           </ion-label>
           <ion-button (click)="verDetallesAlumno(alumno)">
             Detalles
