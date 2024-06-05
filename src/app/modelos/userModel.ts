@@ -1,7 +1,7 @@
 import { ModelCurso } from "./cursoModel";
 
 export interface ModelAlumno{
-
+    
     rut: string;
     nombre: string;
     apellido: string;
@@ -9,4 +9,5 @@ export interface ModelAlumno{
     apmaterno: string;
     tipo_user: string;
     idCurso?: Number;
+    curso: any;
 }
