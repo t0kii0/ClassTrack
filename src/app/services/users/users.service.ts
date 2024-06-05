@@ -33,5 +33,13 @@ obtenerTodoAlumno(curso?: number): Observable<ModelAlumno[]> {
 buscarAlumnos(criteria: any): Observable<ModelAlumno[]> {
   return this._http.post<ModelAlumno[]>(`${this.apiUrl}/buscarAlumnos`, criteria);
 }
-
+obtenerAlumnosConCurso(): Observable<(ModelAlumno & { curso?: ModelCurso })[]> {
+  return this._http.get<(ModelAlumno & { curso?: ModelCurso })[]>(this.superbaseUrl + 'ALUMNO?select=*,curso:CURSO(*)', { headers: this.supabaseHeaders })
+    .pipe(
+      catchError(error => {
+        console.error('Error al obtener alumnos con curso:', error);
+        return of([]); // Retorna un arreglo vacío en caso de error
+      })
+    );
+}
 }
