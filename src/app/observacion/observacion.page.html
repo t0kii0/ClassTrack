@@ -1,3 +1,25 @@
-<p>
-  Aqui se hacen observaciones
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Observaciones de Alumnos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterAlumnos()"></ion-searchbar>
+  <ion-select placeholder="Seleccionar Curso" [(ngModel)]="selectedCurso" (ionChange)="filterAlumnos()">
+    <ion-select-option value="">Todos los Cursos</ion-select-option> <!-- Opción para deseleccionar -->
+    <ion-select-option *ngFor="let curso of cursos" [value]="curso.curso">
+      {{ curso.curso }}
+    </ion-select-option>
+  </ion-select>
+  <ion-list>
+    <ion-item *ngFor="let alumno of filteredAlumnos">
+      <ion-label>
+        <h2>{{ alumno.nombre }} {{ alumno.apellido }} {{ alumno.apmaterno }}</h2>
+        <p>RUT: {{ alumno.rut }}</p>
+        <p>Curso: {{ alumno.curso?.curso || 'Sin curso' }}</p>
+      </ion-label>
+      <ion-button (click)="presentModal(alumno.rut)">Agregar Observación</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
