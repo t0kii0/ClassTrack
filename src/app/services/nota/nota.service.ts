@@ -33,7 +33,7 @@ export class NotasService {
       );
   }
   obtenerNotasPorAlumno(idAlumno: string): Observable<ModelNota[]> {
-    return this._http.get<ModelNota[]>(`${this.superbaseUrl}nota?select=*&id_alumno=eq.${idAlumno}`, { headers: this.supabaseHeaders })
+    return this._http.get<ModelNota[]>(`${this.superbaseUrl}NOTA?select=*&id_alumno=eq.${idAlumno}`, { headers: this.supabaseHeaders })
       .pipe(
         catchError(error => {
           console.error('Error al obtener notas:', error);
