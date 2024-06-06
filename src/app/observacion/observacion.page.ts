@@ -3,6 +3,8 @@ import { UserService } from '../services/users/users.service';
 import { CursoService } from '../services/curso/curso.service';
 import { ModelAlumno } from '../modelos/userModel';
 import { ModelCurso } from '../modelos/cursoModel';
+import { ModalController } from '@ionic/angular';
+import { ObservacionModalComponent } from '../observacion-modal/observacion-modal.component';
 
 @Component({
   selector: 'app-observacion',
@@ -16,7 +18,11 @@ export class ObservacionPage implements OnInit {
   searchTerm: string = '';
   selectedCurso: string = '';
 
-  constructor(private userService: UserService, private courseService: CursoService) { }
+  constructor(
+    private userService: UserService, 
+    private courseService: CursoService,
+    private modalController: ModalController
+  ) { }
 
   ngOnInit() {
     this.loadAlumnos();
@@ -83,7 +89,11 @@ export class ObservacionPage implements OnInit {
     console.log('Alumnos filtrados:', this.filteredAlumnos);
   }
 
-  presentModal(rut: string) {
-    // Lógica para presentar un modal para agregar observaciones
+  async presentModal(rut: string) {
+    const modal = await this.modalController.create({
+      component: ObservacionModalComponent,
+      componentProps: { rut },
+    });
+    return await modal.present();
   }
 }
