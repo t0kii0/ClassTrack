@@ -1,8 +1,13 @@
 
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import authRoutes from './auth/features/auth-shell/auth-routing';
 
 const routes: Routes = [
+  {
+    path: 'auth',
+    children: authRoutes
+  },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
@@ -61,7 +66,8 @@ const routes: Routes = [
   {
     path: 'crear-asignatura',
     loadChildren: () => import('./crear-asignatura/crear-asignatura.module').then( m => m.CrearAsignaturaPageModule)
-  },  {
+  },
+  {
     path: 'cursos',
     loadChildren: () => import('./cursos/cursos.module').then( m => m.CursosPageModule)
   },
