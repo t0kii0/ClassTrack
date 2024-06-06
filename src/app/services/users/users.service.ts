@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 import { ModelAlumno } from '../../modelos/userModel';
 import { ModelCurso } from 'src/app/modelos/cursoModel';
+import { map, filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,25 @@ obtenerTodoAlumno(curso?: number): Observable<ModelAlumno[]> {
 buscarAlumnos(criteria: any): Observable<ModelAlumno[]> {
   return this._http.post<ModelAlumno[]>(`${this.apiUrl}/buscarAlumnos`, criteria);
 }
+obtenerAlumnosConCurso(): Observable<(ModelAlumno & { curso?: ModelCurso })[]> {
+  return this._http.get<(ModelAlumno & { curso?: ModelCurso })[]>(this.superbaseUrl + 'ALUMNO?select=*,curso:CURSO(*)', { headers: this.supabaseHeaders })
+    .pipe(
+      catchError(error => {
+        console.error('Error al obtener alumnos con curso:', error);
+        return of([]); // Retorna un arreglo vacío en caso de error
+      })
+    );
+}
 
+obtenerAlumnoPorRut(rut: string): Observable<ModelAlumno> {
+  return this._http.get<ModelAlumno[]>(`${this.superbaseUrl}ALUMNO?rut=eq.${rut}`, { headers: this.supabaseHeaders })
+    .pipe(
+      map(alumnos => alumnos.length > 0 ? alumnos[0] : null),
+      catchError(error => {
+        console.error('Error al obtener alumno por RUT:', error);
+        return of(null);
+      }),
+      filter((alumno): alumno is ModelAlumno => alumno !== null)
+    );
+}
 }
