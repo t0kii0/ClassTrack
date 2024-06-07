@@ -2,9 +2,9 @@
 ion-header {
   background-color: #000000; /* Fondo negro */
   color: white; /* Color del texto en blanco */
-  border-bottom: 3px solid #ccc; /* Borde inferior */
+  border-bottom: 4px solid #ccc; /* Borde inferior */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
-  opacity: 1; /* Asegurarse de que no haya transparencia */
+  opacity: 2; /* Asegurarse de que no haya transparencia */
 }
 
 ion-toolbar {
@@ -14,9 +14,21 @@ ion-toolbar {
   position: relative; /* Necesario para posicionar los botones */
 }
 
+.header-left {
+  display: flex;
+  align-items: center; /* Alinear verticalmente el logo y el nombre de usuario */
+  position: absolute; /* Posicionar el contenedor a la izquierda */
+  left: 10px; /* Espacio desde el borde izquierdo */
+}
+
+.header-logo {
+  height: 50px; /* Ajusta la altura del logo según sea necesario */
+  margin-right: 10px; /* Espacio a la derecha del logo */
+  border: 2px solid rgba(0, 237, 237, 0.826); /* Borde temporal para verificar la carga de la imagen */
+}
+
 ion-title {
   font-weight: bold; /* Texto en negrita */
-
   flex: 1; /* Permitir que el título ocupe el espacio disponible */
   text-align: center; /* Centrar el texto */
   color: white; /* Color del texto en blanco */
@@ -116,19 +128,16 @@ ion-content {
   vertical-align: middle;  /* Centra verticalmente el ícono con el texto */
 }
 
-.logout{
+.logout {
   color: white;
   font-size: small;
-
 }
 
-.boton-logout{
+.boton-logout {
   border-radius: 50px; /* Bordes redondeados */
 }
 
 .user-name {
-  position: absolute;
-  left: 10px; /* Ajusta el espacio desde el borde izquierdo */
   color: white; /* Color del texto */
   font-style: italic;
   font-size: 16px; /* Tamaño del texto */
@@ -150,7 +159,7 @@ ion-footer ion-title {
   color: #333;
 }
 
-.font-semibold{
+.font-semibold {
   font-weight: bold;
-  font-style: inherit 
+  font-style: inherit;
 }

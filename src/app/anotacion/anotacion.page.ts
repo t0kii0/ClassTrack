@@ -40,6 +40,11 @@ export class AnotacionPage implements OnInit {
     this.navController.pop();
   }
 
+  irAInicio() {
+    // Redirige a la página de inicio
+    this.navController.navigateForward('/inicio');
+  }
+
   async presentModal(rut: string) {
     const modal = await this.modalController.create({
       component: AnotacionModalComponent,

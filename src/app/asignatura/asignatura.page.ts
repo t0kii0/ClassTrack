@@ -39,6 +39,14 @@ export class AsignaturaPage implements OnInit {
     this.navCtrl.pop();
   }
 
+  
+irAInicio() {
+  // Redirige a la página de inicio
+  this.router.navigate(['/inicio']);
+}
+
+
+
   cargarAsignaturas() {
   this.obtenerAsignatura.obtenerTodoAsignatura().subscribe(
     (data: ModelAsignatura[]) => {

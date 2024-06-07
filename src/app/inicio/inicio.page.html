@@ -5,17 +5,22 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button> <!-- Agrega el botón del menú -->
         </ion-buttons>
-        <div class="user-name">Juan Figueroa Cid - Informatico</div>
+        <div class="header-left">
+          
+            <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo" (click)="irAInicio()">
+          
+          <div class="user-name">Juan Figueroa Cid - Informatico</div>
+        </div>
         <ion-title class="font-semibold">ClassTrack</ion-title>
         <ion-buttons class="boton-logout" slot="end">
-          <ion-button >
-            <ion-title class="logout">Cerrar sesion </ion-title>
-            <ion-icon name="log-out"></ion-icon> 
+          <ion-button>
+            <ion-title class="logout">Cerrar sesión</ion-title>
+            <ion-icon name="log-out"></ion-icon>
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    
+
     <ion-content class="ion-padding">
       <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
       <div class="">
@@ -61,9 +66,3 @@
     </ion-footer>
   </ion-router-outlet>
 </ion-app>
-
-
-
-
-
-

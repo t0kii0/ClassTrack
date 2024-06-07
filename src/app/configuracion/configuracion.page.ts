@@ -20,4 +20,11 @@ export class ConfiguracionPage implements OnInit {
     console.log('entraste.......')
     this.router.navigate(['/crear-asignatura']); //
   }
+
+  irAInicio() {
+    // Redirige a la página de inicio
+    this.router.navigate(['/inicio']);
+  }
+
+
 }

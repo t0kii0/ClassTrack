@@ -29,6 +29,8 @@ export class ObservacionPage implements OnInit {
     this.loadCursos();
   }
 
+  
+
   loadAlumnos() {
     this.userService.obtenerAlumnosConCurso().subscribe(
       alumnos => {
