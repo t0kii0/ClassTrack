@@ -44,6 +44,11 @@ export class CursosPage implements OnInit {
     this.navCtrl.pop();
   }
 
+  irAInicio() {
+    // Redirige a la página de inicio
+    this.router.navigate(['/inicio']);
+  }
+
   verCursos(idCurso: number) {
     console.log(this.opcionSeleccionada);
     console.log('ID del curso:', idCurso); // Verificar el valor del ID

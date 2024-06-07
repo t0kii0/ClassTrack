@@ -14,6 +14,11 @@ export class InicioPage  implements OnInit {
 
   ngOnInit() {
   }
+
+  irAInicio() {
+    // Redirige a la página de inicio
+    this.router.navigate(['/inicio']);
+  }
   irACurso(opcion: string) {
     this.opcionSeleccionada = opcion;
     this.router.navigate(['/cursos'], { queryParams: {opcion: opcion} });

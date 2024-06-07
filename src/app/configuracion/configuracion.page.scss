@@ -117,3 +117,13 @@ ion-header {
   opacity: 1; /* Asegurarse de que no haya transparencia */
 }
 
+.title-container {
+  display: flex;
+  align-items: center; /* Alinear elementos verticalmente */
+}
+.header-logo {
+  height: 50px; /* Ajusta la altura del logo según sea necesario */
+  margin-right: 10px; /* Espacio a la derecha del logo */
+  border: 2px solid rgba(0, 237, 237, 0.826); /* Borde temporal para verificar la carga de la imagen */
+}
+

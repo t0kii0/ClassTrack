@@ -85,6 +85,13 @@ export class AsistenciaPage implements OnInit {
     });
   }
 
+  irAInicio() {
+    // Redirige a la página de inicio
+    this.router.navigate(['/inicio']);
+  }
+
+
+
   cargarAlumnos() {
     if (this.idCurso !== undefined) {
       this.alumnosService.obtenerTodoAlumno(this.idCurso).subscribe(
