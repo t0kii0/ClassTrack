@@ -1,19 +1,20 @@
-<div class="flex flex-col">
-  <form (ngSubmit)="submitAnotacion()">
-    <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-      <div class="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800">
-        <textarea id="editor" rows="8" [(ngModel)]="anotacionText" name="anotacionText" class="block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Escriba anotación..." required></textarea>
+<div class="form-container">
+  <form class="custom-form" (ngSubmit)="submitAnotacion()">
+    <div class="textBox-container">
+      <div class="textBox">
+        <textarea id="editor" rows="12" [(ngModel)]="anotacionText" name="anotacionText" 
+        class="textBox-content" placeholder="Escriba anotación..." required></textarea>
       </div>
     </div>
-    <div>
+    <div class="opciones">
       <input type="radio" name="anotacionTipo" id="positiva" [(ngModel)]="anotacionTipo" [value]="true" />
       <label for="positiva">Positiva</label>
       <input type="radio" name="anotacionTipo" id="negativa" [(ngModel)]="anotacionTipo" [value]="false" />
       <label for="negativa">Negativa</label>
     </div>
-    <div>
-      <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">Guardar Anotación</button>
-      <button type="button" (click)="closeModal()" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-gray-700 rounded-lg focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-900 hover:bg-gray-800">Cancelar</button>
+    <div class="boton-container">
+      <button type="submit" class="boton boton-submit">Guardar Anotación</button>
+      <button type="button" (click)="closeModal()" class="boton boton-cancel">Cancelar</button>
     </div>
   </form>
 </div>
