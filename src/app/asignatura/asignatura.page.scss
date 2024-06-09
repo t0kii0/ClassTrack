@@ -10,6 +10,22 @@
     z-index: -1;
   }
 
+  button {
+    background: linear-gradient(to bottom, #ffffffa0, #e4fbffdd); /* Degradado de gris oscuro a negro */
+    color: rgb(0, 0, 0); /* Color del texto */
+    border: 1px solid #000; /* Borde negro */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    margin: 10px; /* Espaciado externo */
+    display: flex;
+    align-items: center; /* Centrar verticalmente el contenido */
+    justify-content: center; /* Centrar horizontalmente el contenido */
+    transition: background 0.3s ease; /* Transición suave para el fondo */
+    &:hover {
+      background: linear-gradient(to bottom, #444444ac, #111111af); /* Degradado más claro en el hover */
+    }
+  }
+
   ion-card-content {
     padding: 30px;
     background-color: rgba(255, 255, 255, 0.9); /* Fondo semi transparente */
