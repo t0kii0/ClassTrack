@@ -22,6 +22,24 @@
   opacity: 0.6; /* Opacidad */
 }
 
+button {
+  background: linear-gradient(to bottom, #ffffffa0, #e4fbffdd); /* Degradado de gris oscuro a negro */
+  color: rgb(0, 0, 0); /* Color del texto */
+  border: 1px solid #000; /* Borde negro */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 10px; /* Espaciado interno */
+  margin: 10px; /* Espaciado externo */
+  display: flex;
+  align-items: center; /* Centrar verticalmente el contenido */
+  justify-content: center; /* Centrar horizontalmente el contenido */
+  transition: background 0.3s ease; /* Transición suave para el fondo */
+
+  &:hover {
+    background: linear-gradient(to bottom, #444444ac, #111111af); /* Degradado más claro en el hover */
+  }
+}
+
+
 .cursos-container {
   width: 90%; /* Ajustar el ancho del contenedor de cursos */
   max-width: 1200px; /* Ancho máximo del contenedor */
@@ -41,16 +59,18 @@
   font-weight: bold; /* Hacer el texto en negrita */
 }
 ion-header {
-  background-color: #000000; /* Fondo negro */
-  color: white; /* Color del texto en blanco */
+  background-color: #00000092; /* Fondo negro */
+  color: rgb(125, 2, 2); /* Color del texto en blanco */
   border-bottom: 3px solid #ccc; /* Borde inferior */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
   opacity: 1; /* Asegurarse de que no haya transparencia */
 }
 .title-container {
+  background-color: #00000092; /* Fondo negro */
   display: flex;
   align-items: center; /* Alinear elementos verticalmente */
 }
+
 .header-logo {
   height: 50px; /* Ajusta la altura del logo según sea necesario */
   margin-right: 10px; /* Espacio a la derecha del logo */
