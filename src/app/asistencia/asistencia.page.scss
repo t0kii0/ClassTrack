@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Kaushan';
+  src: url('/assets/fuentes/KaushanScript-Regular.otf') format('opentype');
+}
+.otf-font {
+  font-family: 'Kaushan', sans-serif;
+}
 ion-grid {
     --ion-grid-padding: 10px;
     --ion-grid-column-padding: 10px;
@@ -72,13 +79,15 @@ ion-grid {
   }
 
   ion-header {
-    background-color: #000000; /* Fondo negro */
-    color: white; /* Color del texto en blanco */
-    border-bottom: 3px solid #ccc; /* Borde inferior */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
-    opacity: 1; /* Asegurarse de que no haya transparencia */
+    background-color: #000 !important; /* Asegúrate de usar negro sólido */
+    color: #fff !important; /* Asegúrate de que el texto sea blanco */
+    border-bottom: 3px solid #ccc; /* Mantén el borde inferior si lo deseas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Mantén la sombra para profundidad */
   }
-
+  
+  ion-toolbar {
+    --background: transparent !important; /* Evita que el ion-toolbar sobrescriba el color de fondo */
+  }
   .title-container {
     display: flex;
     align-items: center; /* Alinear elementos verticalmente */
@@ -86,6 +95,6 @@ ion-grid {
   .header-logo {
     height: 50px; /* Ajusta la altura del logo según sea necesario */
     margin-right: 10px; /* Espacio a la derecha del logo */
-    border: 2px solid rgba(0, 237, 237, 0.826); /* Borde temporal para verificar la carga de la imagen */
+    
   }
   
