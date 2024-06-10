@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Kaushan';
+  src: url('/assets/fuentes/KaushanScript-Regular.otf') format('opentype');
+}
+.otf-font {
+  font-family: 'Kaushan', sans-serif;
+}
 /* Estilos para el encabezado */
 ion-header {
   background-color: transparent; /* Encabezado transparente */
@@ -6,17 +13,16 @@ ion-header {
 /* Estilos para el contenido */
 ion-content {
   background-color: #f4f4f4; /* Color de fondo */
-  
 }
 
 /* Contenedor para los recuadros */
 .background-container {
   display: flex;
-  flex-wrap: wrap; /* Permitir que los recuadros se envuelvan si no caben en una fila */
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
-  max-width: 800px; /* Ancho máximo del contenedor */
+  flex-direction: column; /* Asegura que los elementos hijos se apilen verticalmente */
+  align-items: center; /* Centrar horizontalmente */
+  justify-content: center; /* Centrar verticalmente */
   width: 100%; /* Garantizar que el contenedor ocupe todo el ancho disponible */
+  height: 100%; /* Garantizar que el contenedor ocupe toda la altura disponible */
 }
 
 /* Estilos para los recuadros de iconos */
@@ -26,11 +32,9 @@ ion-content {
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
   overflow: hidden;
   text-align: center; /* Centrar el contenido */
-  padding: 20px; /* Espaciado interno */
+  padding: 30px; /* Aumentar el espaciado interno */
   margin: 10px; /* Espaciado entre recuadros */
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  margin: 10px auto; /* Centrar horizontalmente y agregar margen entre los contenedores */
-  box-sizing: border-box; /* Asegura que el padding y margin se incluyan en el tamaño total */
 }
 
 .icon-container:hover {
@@ -38,10 +42,19 @@ ion-content {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra al pasar el cursor */
 }
 
+/* Estilos para las filas centradas */
 .centered-row {
   display: flex;
   justify-content: center; /* Centrar los recuadros horizontalmente */
   flex-wrap: wrap; /* Permitir que los recuadros se ajusten y no se desborden */
+  width: 100%; /* Asegura que las filas ocupen todo el ancho del contenedor */
+}
+
+/* Estilos para las columnas */
+ion-col {
+  display: flex;
+  justify-content: center; /* Centrar el contenido de las columnas horizontalmente */
+  align-items: center; /* Centrar el contenido de las columnas verticalmente */
 }
 
 /* Ajustes para pantallas más pequeñas */
@@ -62,18 +75,19 @@ ion-col[size="3"] ion-list {
 
 .large-icon {
   color: rgba(0, 0, 0, 0.845); /* Color semi transparente */
-  font-size: 3rem; /* Tamaño del icono, ajusta según sea necesario */
+  font-size: 4rem; /* Aumenta el tamaño del icono */
 }
 
 .icon-container ion-icon {
   color: rgba(0, 0, 0, 0.845); /* Color semi transparente */
-  font-size: 3rem; /* Tamaño del icono, ajusta según sea necesario */
+  font-size: 4rem; /* Aumenta el tamaño del icono */
 }
 
 /* Estilos para las etiquetas de los iconos */
 .icon-container ion-label {
   color: rgba(0, 0, 0, 0.8); /* Color del texto */
   margin-top: 20px; /* Espaciado superior */
+  font-size: 1.2rem; /* Aumenta el tamaño de la fuente */
 }
 
 .background-image {
@@ -110,20 +124,23 @@ ion-col[size="3"] ion-list {
 }
 
 ion-header {
-  background-color: #000000; /* Fondo negro */
-  color: white; /* Color del texto en blanco */
-  border-bottom: 3px solid #ccc; /* Borde inferior */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
-  opacity: 1; /* Asegurarse de que no haya transparencia */
+  background-color: #000 !important; /* Asegúrate de usar negro sólido */
+  color: #fff !important; /* Asegúrate de que el texto sea blanco */
+  border-bottom: 3px solid #ccc; /* Mantén el borde inferior si lo deseas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Mantén la sombra para profundidad */
+}
+
+ion-toolbar {
+  --background: transparent !important; /* Evita que el ion-toolbar sobrescriba el color de fondo */
 }
 
 .title-container {
   display: flex;
   align-items: center; /* Alinear elementos verticalmente */
 }
+
 .header-logo {
   height: 50px; /* Ajusta la altura del logo según sea necesario */
   margin-right: 10px; /* Espacio a la derecha del logo */
-  border: 2px solid rgba(0, 237, 237, 0.826); /* Borde temporal para verificar la carga de la imagen */
+  
 }
-

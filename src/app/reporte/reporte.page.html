@@ -1,10 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Reportes</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/inicio" routerDirection="back">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button> 
+    </ion-buttons>
+    <div class="title-container">
+      <ion-title class="otf-font">Reportes</ion-title>
+      <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo" >
+    </div>
+    
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
+
   <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterAlumnos()"></ion-searchbar>
   <ion-select placeholder="Seleccionar Curso" [(ngModel)]="selectedCurso" (ionChange)="filterAlumnos()">
     <ion-select-option value="">Todos los Cursos</ion-select-option> <!-- Opción para deseleccionar -->

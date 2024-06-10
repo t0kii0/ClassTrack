@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Kaushan';
+  src: url('/assets/fuentes/KaushanScript-Regular.otf') format('opentype');
+}
+.otf-font {
+  font-family: 'Kaushan', sans-serif;
+}
 .cursos-page {
   background-color: #f4f4f4; /* Color de fondo */
   position: relative; /* Para que los elementos absolutos se posicionen correctamente */
@@ -32,6 +39,7 @@ button {
   display: flex;
   align-items: center; /* Centrar verticalmente el contenido */
   justify-content: center; /* Centrar horizontalmente el contenido */
+  flex-direction: column; /* Asegura que los elementos hijos se apilen verticalmente */
   transition: background 0.3s ease; /* Transición suave para el fondo */
 
   &:hover {
@@ -39,32 +47,34 @@ button {
   }
 }
 
-
 .cursos-container {
   width: 90%; /* Ajustar el ancho del contenedor de cursos */
   max-width: 1200px; /* Ancho máximo del contenedor */
   margin: 0 auto; /* Centrar horizontalmente */
 }
 
+ion-card-content {
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo semi transparente */
+}
 
-
-  ion-card-content {
-    padding: 30px;
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo semi transparente */
-  }
-
-  /* Ajustes para el texto de los cursos */
+/* Ajustes para el texto de los cursos */
 .cursos-container .flex .rounded-full .text-brand-500 {
   font-size: 1.2em; /* Ajustar el tamaño del texto */
   font-weight: bold; /* Hacer el texto en negrita */
 }
+
 ion-header {
-  background-color: #00000092; /* Fondo negro */
-  color: rgb(125, 2, 2); /* Color del texto en blanco */
-  border-bottom: 3px solid #ccc; /* Borde inferior */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
-  opacity: 1; /* Asegurarse de que no haya transparencia */
+  background-color: #000 !important; /* Asegúrate de usar negro sólido */
+  color: #fff !important; /* Asegúrate de que el texto sea blanco */
+  border-bottom: 3px solid #ccc; /* Mantén el borde inferior si lo deseas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Mantén la sombra para profundidad */
 }
+
+ion-toolbar {
+  --background: transparent !important; /* Evita que el ion-toolbar sobrescriba el color de fondo */
+}
+
 .title-container {
   background-color: #00000092; /* Fondo negro */
   display: flex;
@@ -74,7 +84,17 @@ ion-header {
 .header-logo {
   height: 50px; /* Ajusta la altura del logo según sea necesario */
   margin-right: 10px; /* Espacio a la derecha del logo */
-  border: 2px solid rgba(0, 237, 237, 0.826); /* Borde temporal para verificar la carga de la imagen */
+  
 }
 
-  
+.relative {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Asegura que el contenedor ocupe toda la altura del botón */
+}
+
+.relative .flex {
+  margin-left: 0; /* Elimina el margen izquierdo */
+}

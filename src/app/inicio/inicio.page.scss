@@ -1,18 +1,29 @@
 /* Estilos para el encabezado */
+@font-face {
+  font-family: 'Kaushan';
+  src: url('/assets/fuentes/KaushanScript-Regular.otf') format('opentype');
+}
+.otf-font {
+  font-family: 'Kaushan', sans-serif;
+}
+@font-face {
+  font-family: 'Exo';
+  src: url('/assets/fuentes/Exo-SemiBoldItalic.otf') format('opentype');
+}
+.otf-font2 {
+  font-family: 'Exo', sans-serif;
+}
 ion-header {
-  background-color: #000000; /* Fondo negro */
-  color: white; /* Color del texto en blanco */
-  border-bottom: 4px solid #ccc; /* Borde inferior */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
-  opacity: 2; /* Asegurarse de que no haya transparencia */
+  background-color: #000 !important; /* Asegúrate de usar negro sólido */
+  color: #fff !important; /* Asegúrate de que el texto sea blanco */
+  border-bottom: 3px solid #ccc; /* Mantén el borde inferior si lo deseas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Mantén la sombra para profundidad */
 }
 
 ion-toolbar {
-  display: flex;
-  justify-content: center; /* Centrar el contenido horizontalmente */
-  align-items: center; /* Centrar el contenido verticalmente */
-  position: relative; /* Necesario para posicionar los botones */
+  --background: transparent !important; /* Evita que el ion-toolbar sobrescriba el color de fondo */
 }
+
 
 .header-left {
   display: flex;
@@ -20,12 +31,17 @@ ion-toolbar {
   position: absolute; /* Posicionar el contenedor a la izquierda */
   left: 10px; /* Espacio desde el borde izquierdo */
 }
+.header-container {
+  background-color: #00000092; /* Fondo negro */
+  display: flex;
+  align-items: center; /* Alinear elementos verticalmente */
+}
 
 .header-logo {
   height: 50px; /* Ajusta la altura del logo según sea necesario */
   margin-right: 10px; /* Espacio a la derecha del logo */
-  border: 2px solid rgba(0, 237, 237, 0.826); /* Borde temporal para verificar la carga de la imagen */
-}
+  
+} 
 
 ion-title {
   font-weight: bold; /* Texto en negrita */
