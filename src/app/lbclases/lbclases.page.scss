@@ -97,3 +97,40 @@ ion-toolbar {
   margin-right: 10px; /* Espacio a la derecha del logo */
  
 }
+
+
+
+.barraNotas {
+  background-color: #333; /* Fondo del toolbar */
+  color: whitesmoke;
+  padding: 10px; /* Espaciado dentro del toolbar */
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.input-nota {
+  width: 40px; /* Ajuste del ancho del input */
+  text-align: center;
+  margin: 2px;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+th, td {
+  text-align: center;
+}
+
+th:nth-child(2), td:nth-child(2) {
+  width: 60%; /* Fija el ancho de la columna de notas */
+}
+
+th, td {
+  padding: 8px; /* Añade padding para la legibilidad */
+}

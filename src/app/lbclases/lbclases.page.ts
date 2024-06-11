@@ -6,6 +6,12 @@ import { UserService } from '../services/users/users.service';
 import { NotasService } from '../services/nota/nota.service';
 import { ModelNota } from '../modelos/notamodel';
 
+interface AlumnoNotas {
+  alumno: ModelAlumno;
+  notas: number[];
+  promedio: number;
+}
+
 @Component({
   selector: 'app-lbclases',
   templateUrl: './lbclases.page.html',
@@ -13,8 +19,10 @@ import { ModelNota } from '../modelos/notamodel';
 })
 export class LbclasesPage implements OnInit {
   alumnos: ModelAlumno[] = [];
+  alumnosConNotas: AlumnoNotas[] = [];
   idAsignatura?: number;
   idCurso?: number;
+  numeroDeNotas: number = 12;
 
   constructor(
     private router: Router,
@@ -42,8 +50,12 @@ export class LbclasesPage implements OnInit {
       this.alumnosService.obtenerTodoAlumno(this.idCurso).subscribe(
         (alumnos: ModelAlumno[]) => {
           this.alumnos = alumnos;
-          console.log(alumnos);
-          
+          this.alumnosConNotas = alumnos.map(alumno => ({
+            alumno: alumno,
+            notas: new Array(this.numeroDeNotas).fill(0),
+            promedio: 0
+          }));
+          this.updateNumeroDeNotas(this.numeroDeNotas);
         },
         error => {
           console.error('Error al cargar alumnos:', error);
@@ -51,13 +63,16 @@ export class LbclasesPage implements OnInit {
       );
     }
   }
-  
 
   async verDetallesAlumno(alumno: ModelAlumno) {
     this.notasService.obtenerNotasPorAlumno(alumno.rut).subscribe(
-      (notas: any[]) => {
-        const promedio = this.calcularPromedio(notas.map(n => n.nota));
-        this.presentAlumnoDetailsAlert(alumno, notas, promedio);
+      (notas: ModelNota[]) => {
+        const alumnoConNotas = this.alumnosConNotas.find(an => an.alumno.rut === alumno.rut);
+        if (alumnoConNotas) {
+          alumnoConNotas.notas = notas.map(n => n.nota);
+          alumnoConNotas.promedio = this.calcularPromedio(alumnoConNotas);
+        }
+        this.presentAlumnoDetailsAlert(alumno, notas, alumnoConNotas?.promedio ?? 0);
       },
       error => {
         console.error('Error al obtener notas del alumno:', error);
@@ -123,11 +138,26 @@ export class LbclasesPage implements OnInit {
     await alert.present();
   }
 
-  calcularPromedio(notas: number[]): number {
-    if (!notas || notas.length === 0) return 0;
-    const sumaNotas = notas.reduce((total, nota) => total + nota, 0);
-    return sumaNotas / notas.length;
+  updateNumeroDeNotas(count: number) {
+    this.numeroDeNotas = count;
+    this.alumnosConNotas.forEach((an) => {
+      an.notas = new Array(count).fill(0);
+      this.calcularPromedio(an);
+    });
+  }
+
+  updateNota(alumnoConNotas: AlumnoNotas, index: number, event: Event) {
+    const input = event.target as HTMLInputElement;
+    const nota = parseInt(input.value, 10);
+    if (nota < 10 || nota > 70) return;
+    alumnoConNotas.notas[index] = nota;
+    this.calcularPromedio(alumnoConNotas);
+  }
+
+  calcularPromedio(alumnoConNotas: AlumnoNotas) {
+    const notaValida = alumnoConNotas.notas.filter((g) => g >= 10 && g <= 70);
+    const sum = notaValida.reduce((a, b) => a + b, 0);
+    alumnoConNotas.promedio = notaValida.length > 0 ? Math.round(sum / notaValida.length) : 0;
+    return alumnoConNotas.promedio;
   }
 }
-
-

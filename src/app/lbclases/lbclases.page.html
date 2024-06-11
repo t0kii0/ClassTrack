@@ -13,22 +13,63 @@
 </ion-header>
 
 <ion-content>
-  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
-  <ion-card>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let alumno of alumnos">
-          <ion-label>
-            {{ alumno.apellido }} {{ alumno.apmaterno }} {{ alumno.nombre }}
-          </ion-label>
-          <ion-button (click)="verDetallesAlumno(alumno)">
-            Detalles
-          </ion-button>
-          <ion-button (click)="agregarNotaAlumno(alumno.rut)">
-            Agregar Nota
-          </ion-button>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  <div class="barraNotas">
+    <label for="numeroDeNotas">Numero de Notas: </label>
+    <input
+      type="number"
+      id="numeroDeNotas"
+      [(ngModel)]="numeroDeNotas"
+      (change)="updateNumeroDeNotas(numeroDeNotas)"
+      min="1"
+      max="12"
+    />
+  </div>
+
+  <section class="container mx-auto p-6 font-mono flex-grow">
+    <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg h-full flex flex-col">
+      <div class="w-full overflow-x-auto flex-grow">
+        <div class="table-container h-full overflow-y-auto">
+          <table border="1">
+            <thead>
+              <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                <th>Estudiante</th>
+                <th>Notas</th>
+                <th>Promedio</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white">
+              <tr class="text-gray-700" *ngFor="let alumnoConNotas of alumnosConNotas">
+                <td class="px-4 py-3 border">
+                  <div class="flex items-center font-semibold text-sm text-black visible-text">
+                    {{ alumnoConNotas.alumno.nombre }}
+                  </div>
+                </td>
+                <td class="px-4 py-3 border">
+                  <div class="flex items-center">
+                    <ng-container class="bg-white text-black" *ngFor="let nota of alumnoConNotas.notas; let i = index">
+                      N{{ i + 1 }}:
+                      <input
+                        type="number"
+                        [value]="nota"
+                        (input)="updateNota(alumnoConNotas, i, $event)"
+                        min="10"
+                        max="70"
+                        class="input-nota"
+                      />
+                    </ng-container>
+                  </div>
+                </td>
+                <td class="px-4 py-3 border">
+                  <div class="flex items-center font-semibold text-sm text-black visible-text">
+                    {{ alumnoConNotas.promedio }}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
 </ion-content>
+
