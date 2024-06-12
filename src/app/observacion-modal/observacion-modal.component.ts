@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+// src/app/observacion-modal/observacion-modal.component.ts
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { ObservacionService } from '../services/Observacion/observacion.service';
 
 @Component({
   selector: 'app-observacion-modal',
@@ -7,18 +9,41 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./observacion-modal.component.scss'],
 })
 export class ObservacionModalComponent implements OnInit {
+  @Input() idAlumno!: string;
   observacionText: string = '';
-  observacionTipo: boolean = true; // true para positiva, false para negativa
+  autor: string = 'rol';
 
-  constructor(private modalController: ModalController) {}
+  constructor(
+    private modalController: ModalController,
+    private observacionService: ObservacionService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit(
+  ) {}
 
   submitObservacion() {
-    // Aquí puedes manejar el envío de la observación, por ejemplo, enviarla a un servicio
-    console.log('Observación:', this.observacionText);
-    console.log('Tipo:', this.observacionTipo ? 'Positiva' : 'Negativa');
-    this.closeModal();
+    const fecha = new Date();
+    const observacion = this.observacionText;
+    console.log(this.idAlumno);
+    console.log(this.autor);
+    console.log(fecha)
+    console.log(observacion)
+    
+
+    this.observacionService.agregarObservacionAlumno(
+      this.idAlumno,
+      fecha,
+      observacion,
+      this.autor)
+      .subscribe(
+        (response: any) => {
+          console.log('Observación guardada:', response);
+          this.closeModal();
+        },
+        (error: any) => {
+          console.error('Error al guardar la observación:', error);
+        }
+      );
   }
 
   closeModal() {

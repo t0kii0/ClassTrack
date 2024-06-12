@@ -19,17 +19,15 @@ export class ObservacionPage implements OnInit {
   selectedCurso: string = '';
 
   constructor(
-    private userService: UserService, 
+    private userService: UserService,
     private courseService: CursoService,
     private modalController: ModalController
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.loadAlumnos();
     this.loadCursos();
   }
-
-  
 
   loadAlumnos() {
     this.userService.obtenerAlumnosConCurso().subscribe(
@@ -91,10 +89,10 @@ export class ObservacionPage implements OnInit {
     console.log('Alumnos filtrados:', this.filteredAlumnos);
   }
 
-  async presentModal(rut: string) {
+  async presentModal(idAlumno: string) {
     const modal = await this.modalController.create({
       component: ObservacionModalComponent,
-      componentProps: { rut },
+      componentProps: { idAlumno },
     });
     return await modal.present();
   }
