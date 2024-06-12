@@ -15,7 +15,6 @@
 <ion-content class="background-container">
   <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
   <!-- <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo"> -->
-
   <section class="container mx-auto p-6 font-mono flex-grow">
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg h-full flex flex-col">
       <div class="w-full overflow-x-auto flex-grow">
@@ -33,7 +32,6 @@
               <tr class="text-gray-700 grid grid-cols-4" *ngFor="let alumno of alumnos; let i = index">
                 <td class="px-4 py-3 border border-gray-400">
                   <div class="flex items-center font-semibold text-sm text-black">
-                    <!-- contador -->
                     {{ i + 1 }}
                   </div>
                 </td>
@@ -46,28 +44,25 @@
                   <div class="flex items-center font-semibold text-sm text-black">
                     <div class="grid w-[40rem] grid-cols-3 gap-2 rounded-xl bg-white-200 p-2">
                       <div>
-                        <input type="radio" name="alumno{{i}}" id="presente{{i}}" value="1" class="peer hidden" checked />
+                        <input type="radio" name="alumno{{i}}" id="presente{{i}}" value="1" class="peer hidden" (change)="markAttendance(alumno, '1')" [checked]="alumno.status === '1'" />
                         <label for="presente{{i}}" class="block border border-gray-600 cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Presente</label>
                       </div>
-            
                       <div>
-                        <input type="radio" name="alumno{{i}}" id="ausente{{i}}" value="2" class="peer hidden" />
+                        <input type="radio" name="alumno{{i}}" id="ausente{{i}}" value="2" class="peer hidden" (change)="markAttendance(alumno, '2')" />
                         <label for="ausente{{i}}" class="block border border-gray-600 cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Ausente</label>
                       </div>
-            
                       <div>
-                        <input type="radio" name="alumno{{i}}" id="justificado{{i}}" value="3" class="peer hidden" />
+                        <input type="radio" name="alumno{{i}}" id="justificado{{i}}" value="3" class="peer hidden" (change)="markAttendance(alumno, '3')" />
                         <label for="justificado{{i}}" class="block border border-gray-600 cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Justificado</label>
                       </div>
                     </div>
                   </div>
                 </td>
                 <td class="px-4 py-3 text-ms font-semibold border border-gray-400">
-                  <ion-textarea placeholder="agregue justificacion.."></ion-textarea>
+                  <ion-textarea placeholder="agregue justificacion.." [(ngModel)]="alumno.observation"></ion-textarea>
                 </td>
-              </tr>
-            </tbody>
-            
+              </tr>                                       
+            </tbody>    
           </table>  
         </div>
       </div>

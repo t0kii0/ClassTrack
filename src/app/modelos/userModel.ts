@@ -1,13 +1,13 @@
-import { ModelCurso } from "./cursoModel";
-
-export interface ModelAlumno{
-    
+export interface ModelAlumno {
     rut: string;
     nombre: string;
     apellido: string;
     fecha_nacimiento: Date;
     apmaterno: string;
     tipo_user: string;
-    idCurso?: Number;
+    idCurso?: number;
     curso: any;
-}
+    status?: string;
+    observation?: string; 
+  }
+  
