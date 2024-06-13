@@ -13,19 +13,21 @@
 </ion-header>
 
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true"> 
   
+  <div class="asignaturas-container">
   <div class="flex flex-col justify-center items-center h-[100vh] pt-4">
     <div class="min-w-[375px] md:min-w-[700px] xl:min-w-[800px] mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-3 3xl:grid-cols-6">
-      <button class="relative flex flex-grow flex-col items-center rounded-[10px] border-[1px] border-black-500 bg-white bg-clip-border" *ngFor="let asignatura of asignaturas" (click)="verDetallesAsignatura(asignatura.id)">
-        <div class="ml-[18px] flex h-[90px] w-auto flex-row items-center">
+      <button class="boton" class="relative flex flex-grow flex-col items-center rounded-[10px] border-[1px] border-black-500 bg-white bg-clip-border" *ngFor="let asignatura of asignaturas" (click)="verDetallesAsignatura(asignatura.id)">
+        <div class="  flex h-[90px] w-auto flex-row items-center">
           <!-- <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">  -->
-          <div class="rounded-full bg-lightPrimary p-3 dark:bg-navy-700">
-            <span class="flex items-center text-brand-500 dark:text-white">{{ asignatura.nombre_asignatura }}</span>
+          <div class="rounded-full bg-lightPrimary p-1 dark:bg-dark-700">
+            <span class="otf-font2">{{ asignatura.nombre_asignatura }}</span>
           </div>
         </div>
       </button>
     </div>
+  </div>
   </div>
   <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
 
