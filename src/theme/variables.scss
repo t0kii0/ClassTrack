@@ -145,6 +145,15 @@
     --ion-color-light-contrast-rgb: 255,255,255;
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
+
+    background-image: url('/assets/escuelatripulantes.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    font-family: 'Kaushan', sans-serif;
   }
 
   /*
@@ -182,6 +191,14 @@
     --ion-item-background: #000000;
 
     --ion-card-background: #1c1c1d;
+    background-image: url('/assets/escuelatripulantes.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    font-family: 'Kaushan', sans-serif;
   }
 
   .ios ion-modal {

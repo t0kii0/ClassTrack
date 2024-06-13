@@ -16,8 +16,8 @@
 ion-header {
   background-color: #000 !important; /* Asegúrate de usar negro sólido */
   color: #fff !important; /* Asegúrate de que el texto sea blanco */
-  border-bottom: 3px solid #ccc; /* Mantén el borde inferior si lo deseas */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Mantén la sombra para profundidad */
+  border-bottom: 3px solid #ea00f6; /* Mantén el borde inferior si lo deseas */
+  box-shadow: 0 4px 8px rgba(144, 29, 29, 0.2); /* Mantén la sombra para profundidad */
 }
 
 ion-toolbar {
@@ -99,14 +99,17 @@ ion-content {
 }
 
 .background-image {
-  position: absolute;
+  position: fixed; /* Fijar el fondo en la pantalla */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  filter: blur(10px); /* Difuminado de la imagen */
-  opacity: 0.6; /* Opacidad */
+  background-image: url('/assets/escuelatripulantes.jpg');
+  background-size: cover;
+  background-repeat: no-repeat; 
+  filter: blur(10px);
+  opacity: 0.6;
+  z-index: -1; /* Colocar detrás del contenido */
 }
 
 .sidebar-list ion-item {
@@ -147,8 +150,15 @@ ion-content {
 .logout {
   color: white;
   font-size: small;
-}
 
+}
+.cerrar-sesion{
+  vertical-align: middle  ;
+}
+ion-icon {
+  color: white;
+  font-size: big;
+}
 .boton-logout {
   border-radius: 50px; /* Bordes redondeados */
 }

@@ -8,14 +8,15 @@
     <div class="title-container">
       <ion-title class="otf-font">Libro de clases</ion-title>
       <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo" (click)="irAInicio()">
-    </div>
+    </div> 
   </ion-toolbar>
-</ion-header>
+</ion-header> 
 
 <ion-content>
+  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
   <div class="barraNotas">
     <label for="numeroDeNotas">Numero de Notas: </label>
-    <input
+    <input class="numeroDeNotas"
       type="number"
       id="numeroDeNotas"
       [(ngModel)]="numeroDeNotas"
