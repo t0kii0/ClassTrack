@@ -70,7 +70,31 @@ const routes: Routes = [
   {
     path: 'cursos',
     loadChildren: () => import('./cursos/cursos.module').then( m => m.CursosPageModule)
+  },  {
+    path: 'informe-nota',
+    loadChildren: () => import('./informe-nota/informe-nota.module').then( m => m.InformeNotaPageModule)
   },
+  {
+    path: 'informe-observacion',
+    loadChildren: () => import('./informe-observacion/informe-observacion.module').then( m => m.InformeObservacionPageModule)
+  },
+  {
+    path: 'nota-alumno',
+    loadChildren: () => import('./nota-alumno/nota-alumno.module').then( m => m.NotaAlumnoPageModule)
+  },
+  {
+    path: 'informe-asistencia',
+    loadChildren: () => import('./informe-asistencia/informe-asistencia.module').then( m => m.InformeAsistenciaPageModule)
+  },
+  {
+    path: 'crear-asistente',
+    loadChildren: () => import('./crear-asistente/crear-asistente.module').then( m => m.CrearAsistentePageModule)
+  },
+  {
+    path: 'crear-docente',
+    loadChildren: () => import('./crear-docente/crear-docente.module').then( m => m.CrearDocentePageModule)
+  },
+
 
 
 
