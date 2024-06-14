@@ -1,20 +1,16 @@
-<div class="form-container">
-  <form class="custom-form" (ngSubmit)="submitObservacion()">
-    <div class="textBox-container">
-      <div class="textBox">
-        <textarea id="editor" rows="12" [(ngModel)]="observacionText" name="observacionText" 
-        class="textBox-content" placeholder="Escriba observación..." required></textarea>
-      </div>
-    </div>
-    <div class="opciones">
-      <input type="radio" name="observacionTipo" id="positiva" [(ngModel)]="observacionTipo" [value]="true" />
-      <label for="positiva">Positiva</label>
-      <input type="radio" name="observacionTipo" id="negativa" [(ngModel)]="observacionTipo" [value]="false" />
-      <label for="negativa">Negativa</label>
-    </div>
-    <div class="boton-container">
-      <button type="submit" class="boton boton-submit">Guardar Observación</button>
-      <button type="button" (click)="closeModal()" class="boton boton-cancel">Cancelar</button>
-    </div>
-  </form>
-</div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Observación</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="stacked">Observación</ion-label>
+    <ion-textarea [(ngModel)]="observacionText"></ion-textarea>
+  </ion-item>
+  <ion-button expand="full" (click)="submitObservacion()">Guardar Observación</ion-button>
+</ion-content>
