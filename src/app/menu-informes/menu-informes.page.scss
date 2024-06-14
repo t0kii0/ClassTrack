@@ -1,0 +1,192 @@
+/* Estilos para el encabezado */
+@font-face {
+    font-family: 'Kaushan';
+    src: url('/assets/fuentes/KaushanScript-Regular.otf') format('opentype');
+  }
+  .otf-font {
+    font-family: 'Kaushan', sans-serif;
+  }
+  @font-face {
+    font-family: 'Exo';
+    src: url('/assets/fuentes/Exo-SemiBoldItalic.otf') format('opentype');
+  }
+  .otf-font2 {
+    font-family: 'Exo', sans-serif;
+  }
+  ion-header {
+    background-color: #000 !important; /* Asegúrate de usar negro sólido */
+    color: #fff !important; /* Asegúrate de que el texto sea blanco */
+    border-bottom: 3px solid #ea00f6; /* Mantén el borde inferior si lo deseas */
+    box-shadow: 0 4px 8px rgba(144, 29, 29, 0.2); /* Mantén la sombra para profundidad */
+  }
+  
+  ion-toolbar {
+    --background: transparent !important; /* Evita que el ion-toolbar sobrescriba el color de fondo */
+  }
+  
+  
+  .header-left {
+    display: flex;
+    align-items: center; /* Alinear verticalmente el logo y el nombre de usuario */
+    position: absolute; /* Posicionar el contenedor a la izquierda */
+    left: 10px; /* Espacio desde el borde izquierdo */
+  }
+  .header-container {
+    background-color: #00000092; /* Fondo negro */
+    display: flex;
+    align-items: center; /* Alinear elementos verticalmente */
+  }
+  
+  .header-logo {
+    height: 50px; /* Ajusta la altura del logo según sea necesario */
+    margin-right: 10px; /* Espacio a la derecha del logo */
+    
+  } 
+  
+  ion-title {
+    font-weight: bold; /* Texto en negrita */
+    flex: 1; /* Permitir que el título ocupe el espacio disponible */
+    text-align: center; /* Centrar el texto */
+    color: white; /* Color del texto en blanco */
+  }
+  
+  ion-buttons {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  ion-buttons[slot="start"] {
+    left: 10px;
+  }
+  
+  ion-buttons[slot="end"] {
+    right: 10px;
+  }
+  
+  /* Estilos para el contenido */
+  ion-content {
+    background-color: #f4f4f4; /* Color de fondo */
+  }
+  
+  /* Estilos para los contenedores de iconos */
+  .icon-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
+    overflow: hidden;
+    text-align: center; /* Centrar el contenido */
+    padding: 30px; /* Espaciado interno */
+    margin: 10px; /* Espaciado entre recuadros */
+    box-sizing: border-box; /* Asegura que el padding y margin se incluyan en el tamaño total */
+  }
+  
+  .icon-container ion-label {
+    color: rgba(0, 0, 0, 0.8); /* Color del texto */
+    margin-top: 10px; /* Espaciado superior */
+  }
+  
+  .icon-container:hover {
+    background-color: #f0f0f0; /* Cambia el color de fondo al pasar el cursor */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra al pasar el cursor */
+  }
+  
+  /* Centrar las filas */
+  .centered-row {
+    display: flex;
+    justify-content: center; /* Centrar los recuadros horizontalmente */
+    flex-wrap: wrap; /* Permitir que los recuadros se ajusten y no se desborden */
+  }
+  
+  .background-image {
+    position: fixed; /* Fijar el fondo en la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/escuelatripulantes.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    filter: blur(10px);
+    opacity: 0.6;
+    z-index: -1; /* Colocar detrás del contenido */
+  }
+  
+  .sidebar-list ion-item {
+    background-color: rgba(255, 255, 255, 0.6); /* Color de fondo semitransparente */
+  }
+  
+  .item-bottom {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
+    overflow: hidden;
+    text-align: center; /* Centrar el contenido */
+    padding: 20px; /* Espaciado interno */
+  }
+  
+  .lista-menu {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi transparente */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Profundidad */
+    overflow: hidden;
+    text-align: center; /* Centrar el contenido */
+    padding: 20px; /* Espaciado interno */
+  }
+  
+  .custom-content {
+    position: relative;
+    border-radius: 15px; /* Bordes redondeados */
+  }
+  
+  .large-icon {
+    width: 50px;  /* Ajusta el tamaño del ícono según sea necesario */
+    height: 50px;
+    margin-bottom: 10px;  /* Espacio entre el ícono y la etiqueta */
+    display: inline-block;  /* Asegura que los íconos se alineen correctamente con el texto */
+    vertical-align: middle;  /* Centra verticalmente el ícono con el texto */
+  }
+  
+  .logout {
+    color: white;
+    font-size: small;
+  
+  }
+  .cerrar-sesion{
+    vertical-align: middle  ;
+  }
+  ion-icon {
+    color: white;
+    font-size: big;
+  }
+  .boton-logout {
+    border-radius: 50px; /* Bordes redondeados */
+  }
+  
+  .user-name {
+    color: white; /* Color del texto */
+    font-style: italic;
+    font-size: 16px; /* Tamaño del texto */
+    font-weight: normal; /* Peso del texto */
+  }
+  
+  ion-footer {
+    background-color: #f8f8f8;
+    border-top: 1px solid #ccc;
+  }
+  
+  ion-footer ion-toolbar {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  ion-footer ion-title {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .font-semibold {
+    font-weight: bold;
+    font-style: inherit;
+  }
+  
