@@ -32,9 +32,9 @@ export class InicioPage  implements OnInit {
     console.log(this.opcionSeleccionada);
   }
 
-  reporte() {
-    this.opcionSeleccionada = 'reporte';
-    this.router.navigate(['/reporte']);
+  informes() {
+    this.opcionSeleccionada = 'menu-informe';
+    this.router.navigate(['/menu-informes']);
     console.log(this.opcionSeleccionada);
   }
 

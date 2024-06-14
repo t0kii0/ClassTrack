@@ -8,7 +8,7 @@
           <ion-menu-button></ion-menu-button> <!-- Agrega el botón del menú -->
         </ion-buttons>
         <div class="header-left">
-          <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo" (click)="irAInicio()">
+          
           <div class="user-name">Juan El bandolero - Informatico</div>
         </div> 
         <ion-title class="otf-font">ClassTrack</ion-title>
@@ -26,33 +26,33 @@
       <div class="">
         <ion-grid>
           <ion-row class="centered-row">
-            <ion-col size="4" class="icon-container" (click)="irACurso('librodeclases')">
-              <img src="/assets/icon/lbclases.png" class="large-icon" alt="Libro de Clases">
-              <ion-label class="otf-font2">Libro de Clases</ion-label>
+            <ion-col size="4" class="icon-container" >
+              <img src="/assets/icon/lbclases.png" class="large-icon" alt="Reporte de Notas "(click)="reporte()" [routerLink]="['/reporte']">
+              <ion-label class="otf-font2">Notas</ion-label>
             </ion-col>
-            <ion-col size="4" class="icon-container" (click)="irACurso('anotaciones')" [routerLink]="['/anotacion']">
+            <ion-col size="4" class="icon-container" >
               <img src="/assets/icon/Anotaciones.png" class="large-icon" alt="Anotaciones">
               <ion-label class="otf-font2">Anotaciones</ion-label>
             </ion-col>
           </ion-row>
           <ion-row class="centered-row">
-            <ion-col size="4" class="icon-container" (click)="irACurso('asistencia')">
+            <ion-col size="4" class="icon-container" >
               <img src="/assets/icon/Asistencia.png" class="large-icon" alt="Asistencia">
               <ion-label class="otf-font2">Asistencia</ion-label>
             </ion-col>
-            <ion-col size="4" class="icon-container" (click)="observacion()" [routerLink]="['/observacion']">
+            <ion-col size="4" class="icon-container" >
               <img src="/assets/icon/Observaciones.png" class="large-icon" alt="Observaciones">
               <ion-label class="otf-font2">Observaciones</ion-label>
             </ion-col>
           </ion-row>
           <ion-row class="centered-row">
-            <ion-col size="4" class="icon-container" (click)="informes()" [routerLink]="['/menu-informes']">
+            <ion-col size="4" class="icon-container" >
               <img src="/assets/icon/reportes.png" class="large-icon" alt="Reportes">
-              <ion-label class="otf-font2">Informes</ion-label>
+              <ion-label class="otf-font2"></ion-label>
             </ion-col> 
-            <ion-col size="4" class="icon-container" (click)="configuracion()" [routerLink]="['/Configuracion']">
+            <ion-col size="4" class="icon-container" >
               <img src="/assets/icon/configuracion.png" class="large-icon" alt="Configuracion">
-              <ion-label class="otf-font2">Configuracion</ion-label>
+              <ion-label class="otf-font2"></ion-label>
             </ion-col>
           </ion-row>
         </ion-grid>

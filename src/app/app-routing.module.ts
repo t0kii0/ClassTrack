@@ -94,6 +94,10 @@ const routes: Routes = [
     path: 'crear-docente',
     loadChildren: () => import('./crear-docente/crear-docente.module').then( m => m.CrearDocentePageModule)
   },
+  {
+    path: 'menu-informes',
+    loadChildren: () => import('./menu-informes/menu-informes.module').then( m => m.MenuInformesPageModule)
+  },
 
 
 
