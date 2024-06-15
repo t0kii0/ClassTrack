@@ -3,7 +3,7 @@ import { CrearUserPage } from './crear-user.page';
 
 describe('CrearUserPage', () => {
   let component: CrearUserPage;
-  let fixture: ComponentFixture<CrearUserPage>;
+  let fixture: ComponentFixture<CrearUserPage>; 
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CrearUserPage);

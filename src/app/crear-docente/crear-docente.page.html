@@ -1,13 +1,58 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Crear-docente</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/configuracion" routerDirection="back">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="otf-font">Agregar Docente</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Crear-docente</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ingrese los datos del nuevo docente</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="FormularioDocente" (ngSubmit)="agregarDocente()">
+        <ion-item>
+          <ion-label position="floating">RUT</ion-label>
+          <ion-input type="text" formControlName="rut" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input type="text" formControlName="nombre" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Apellido Paterno</ion-label>
+          <ion-input type="text" formControlName="apellido" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Apellido Materno</ion-label>
+          <ion-input type="text" formControlName="apmaterno" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Fecha de Nacimiento</ion-label>
+          <ion-datetime display-format="DD/MM/YYYY" formControlName="fecha_nacimiento" required></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>Cursos</ion-label>
+          <ion-select formControlName="curso" placeholder="Selecciona un curso">
+            <ion-select-option *ngFor="let curso of cursos" [value]="curso.id_curso">
+              {{ curso.curso }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Tipo de Usuario</ion-label>
+          <ion-input type="text" formControlName="tipo_user" required></ion-input>
+        </ion-item>
+        <ion-button type="submit" expand="medium" color="primary">Agregar Docente</ion-button>
+      </form>
+      <ion-button (click)="fileInput.click()" expand="medium" color="secondary">Cargar CSV</ion-button>
+      <input type="file" #fileInput (change)="onFileChange($event)" style="display: none;" accept=".csv"/>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
