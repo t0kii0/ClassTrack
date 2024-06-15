@@ -24,6 +24,10 @@ export class ConfiguracionPage implements OnInit {
     console.log('entraste.......')
     this.router.navigate(['/crear-docente']); //
   }
+  crearAsistente(){
+    console.log('entraste.......')
+    this.router.navigate(['/crear-asistente']); //
+  }
 
   irAInicio() {
     // Redirige a la página de inicio
