@@ -12,7 +12,7 @@ interface CSVRow {
   'Apellido Paterno': string;
   'Apellido Materno': string;
   'Fecha Nacimiento': string;
-  'Cod Grado': number;
+  'rol': string;
 }
 
 @Component({
@@ -38,8 +38,7 @@ export class CrearDocentePage implements OnInit {
       apellido: ['', Validators.required],
       apmaterno: ['', Validators.required],
       fecha_nacimiento: ['', Validators.required],
-      curso: ['', Validators.required],
-      tipo_user: ['DOCENTE', Validators.required] // Set default value to 'DOCENTE'
+      rol: ['',] // Set default value to 'DOCENTE'
     });
   }
 
@@ -106,8 +105,8 @@ export class CrearDocentePage implements OnInit {
         apellido: docenteData['Apellido Paterno'],
         apmaterno: docenteData['Apellido Materno'],
         fecha_nacimiento: new Date(docenteData['Fecha Nacimiento']),
-        curso: docenteData['Cod Grado'],
-        tipo_user: 'DOCENTE' // Asignar directamente el valor 'DOCENTE'
+        rol: docenteData['rol']
+        
       };
 
       console.log('Datos formateados:', formattedData);

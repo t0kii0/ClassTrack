@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -8,12 +8,14 @@ import { CrearAsistentePageRoutingModule } from './crear-asistente-routing.modul
 
 import { CrearAsistentePage } from './crear-asistente.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CrearAsistentePageRoutingModule
+    CrearAsistentePageRoutingModule,
+    ReactiveFormsModule,
   ],
   declarations: [CrearAsistentePage]
 })

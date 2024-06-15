@@ -1,10 +1,9 @@
-export interface ModelDocente {
+export interface ModelAsistente {
     rut: string;
     nombre: string;
     apellido: string;
     apmaterno: string;
     fecha_nacimiento: Date;
     rol: string;
-
+    
   }
-  
