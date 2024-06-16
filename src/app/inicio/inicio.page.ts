@@ -33,7 +33,7 @@ export class InicioPage  implements OnInit {
   }
 
   informes() {
-    this.opcionSeleccionada = 'menu-informe';
+    this.opcionSeleccionada = 'menu-informes';
     this.router.navigate(['/menu-informes']);
     console.log(this.opcionSeleccionada);
   }

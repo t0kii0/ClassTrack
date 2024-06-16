@@ -16,4 +16,8 @@ export class MenuInformesPage implements OnInit {
     this.router.navigate(['/reporte']);
     console.log();
   }
+  observaciones() {
+    this.router.navigate(['/informe-observacion']);
+    console.log(onclick);
+  }
 }
