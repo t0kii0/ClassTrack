@@ -32,6 +32,7 @@
         <p>Curso: {{ alumno.curso?.curso || 'Sin curso' }}</p>
       </ion-label>
       <ion-button (click)="presentModal(alumno.rut)">generar reporte</ion-button>
+      <ion-button (click)="vernotas(alumno.rut)">Ver Notas</ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

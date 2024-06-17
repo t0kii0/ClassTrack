@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>verNotas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="container">
+  <h2>Información del Alumno</h2>
+  <p><strong>Nombre:</strong> {{ nombre }}</p>
+  <p><strong>RUT:</strong> {{ rut }}</p>
+  <p><strong>Curso:</strong> {{ curso }}</p>
+  
+  <div class="notas-container">
+    <h3>Notas</h3>
+    <ul class="notas-list">
+      <li *ngFor="let nota of notas" class="nota-item">
+        <strong>Asignatura:</strong> {{ nota.id_asignatura }} - <strong>Nota:</strong> {{ nota.nota }}
+      </li>
+    </ul>
+  </div>
+</div>
