@@ -70,7 +70,8 @@ const routes: Routes = [
   {
     path: 'cursos',
     loadChildren: () => import('./cursos/cursos.module').then( m => m.CursosPageModule)
-  },  {
+  },
+  {
     path: 'informe-nota',
     loadChildren: () => import('./informe-nota/informe-nota.module').then( m => m.InformeNotaPageModule)
   },
@@ -108,6 +109,7 @@ const routes: Routes = [
 
 
 ];
+
 
 @NgModule({
   imports: [

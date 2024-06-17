@@ -24,11 +24,20 @@ export class ObservacionService {
     return this._http.post<any>(this.superbaseUrl + 'OBSERVACION', nuevaObservacion, { headers: this.supabaseHeaders });
   }
 
-  obtenerTodaAnotacion(): Observable<ModelObservacion[]> {
+  obtenerTodaObservacion(): Observable<ModelObservacion[]> {
     return this._http.get<ModelObservacion[]>(this.superbaseUrl + 'OBSERVACION', { headers: this.supabaseHeaders })
       .pipe(
         catchError(error => {
           console.error('Error al obtener notas:', error);
+          return of([]); // Devolver un array vacío en caso de error
+        })
+      );
+  }
+  obtenerObservacionesPorRut(rut: string): Observable<ModelObservacion[]> {
+    return this._http.get<ModelObservacion[]>(`${this.superbaseUrl}OBSERVACION?id_alumno=eq.${rut}`, { headers: this.supabaseHeaders })
+      .pipe(
+        catchError(error => {
+          console.error(`Error al obtener observaciones para el rut ${rut}:`, error);
           return of([]); // Devolver un array vacío en caso de error
         })
       );
