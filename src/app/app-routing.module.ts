@@ -103,11 +103,10 @@ const routes: Routes = [
     path: 'nota-config',
     loadChildren: () => import('./nota-config/nota-config.module').then( m => m.NotaConfigPageModule)
   },
-
-
-
-
-
+  {
+    path: 'ver-notas',
+    loadChildren: () => import('./ver-notas/ver-notas.module').then( m => m.VerNotasPageModule)
+  },
 ];
 
 

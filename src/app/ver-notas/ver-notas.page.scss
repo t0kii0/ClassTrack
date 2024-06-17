@@ -1,0 +1,29 @@
+.container {
+    max-width: 600px; /* Ajusta el ancho máximo del contenedor según tus necesidades */
+    margin: 0 auto; /* Centra el contenedor en la página */
+    padding: 20px; /* Añade espaciado interno al contenedor */
+    border: 1px solid #ccc; /* Añade borde al contenedor */
+    border-radius: 10px; /* Aplica bordes redondeados */
+    background-color: #f9f9f9; /* Color de fondo */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra ligera */
+    color: #333; /* Cambia el color del texto dentro del contenedor */
+  }
+  
+  .notas-container {
+    margin-top: 20px; /* Espacio superior entre la información del alumno y las notas */
+  }
+  
+  .notas-list {
+    list-style-type: none; /* Quita los puntos de la lista */
+    padding: 0;
+  }
+  
+  .nota-item {
+    padding: 10px;
+    border: 1px solid #ddd; /* Borde del elemento de nota */
+    margin-bottom: 10px; /* Espacio inferior entre elementos de nota */
+    border-radius: 5px; /* Bordes redondeados para cada elemento de nota */
+    background-color: #fff; /* Color de fondo del elemento de nota */
+    color: #666; /* Cambia el color del texto dentro de cada elemento de nota */
+  }
+  

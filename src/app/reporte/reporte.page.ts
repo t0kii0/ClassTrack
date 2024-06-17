@@ -9,6 +9,7 @@ import { ModelNota } from '../modelos/notamodel';
 import { ModelAsignatura } from '../modelos/asignaturaModel';
 import jsPDF from 'jspdf';
 import { map, filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reporte',
@@ -26,7 +27,8 @@ export class ReportePage implements OnInit {
     private userService: UserService,
     private cursoService: CursoService,
     private notasService: NotasService,
-    private asignaturaService: AsignaturaService
+    private asignaturaService: AsignaturaService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -107,5 +109,11 @@ export class ReportePage implements OnInit {
     });
 
     doc.save(`reporte_${alumno.rut}.pdf`);
+  }
+  vernotas(rut: string){
+    console.log(rut);
+    this.router.navigate(['/ver-notas', rut]);
+
+
   }
 }
