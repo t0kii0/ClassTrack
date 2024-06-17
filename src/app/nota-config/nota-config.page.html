@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Configurar Notas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label>Curso</ion-label>
+      <ion-select [(ngModel)]="selectedCurso" name="curso" (ionChange)="onCursoChange()">
+        <ion-select-option *ngFor="let curso of cursos" [value]="curso.id_curso">{{ curso.curso }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Asignatura</ion-label>
+      <ion-select [(ngModel)]="selectedAsignatura" name="asignatura">
+        <ion-select-option *ngFor="let asignatura of asignaturasFiltradas" [value]="asignatura.id">{{ asignatura.nombre_asignatura }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Número de Notas</ion-label>
+      <ion-input type="number" [(ngModel)]="numeroDeNotas" name="numeroDeNotas"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit">Guardar Cambios</ion-button>
+  </form>
+</ion-content>

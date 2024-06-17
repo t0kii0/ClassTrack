@@ -1,3 +1,4 @@
+<!-- lbclases.page.html -->
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -8,28 +9,17 @@
     <div class="title-container">
       <ion-title class="otf-font">Libro de clases</ion-title>
       <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo" (click)="irAInicio()">
-    </div> 
+    </div>
   </ion-toolbar>
-</ion-header> 
+</ion-header>
 
 <ion-content>
   <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
-  <div class="barraNotas">
-    <label for="numeroDeNotas">Numero de Notas: </label>
-    <input class="numeroDeNotas"
-      type="number"
-      id="numeroDeNotas"
-      [(ngModel)]="numeroDeNotas"
-      (change)="updateNumeroDeNotas(numeroDeNotas)"
-      min="1"
-      max="12"
-    />
-  </div>
-
+  
   <section class="container mx-auto p-6 font-mono flex-grow">
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg h-full flex flex-col">
       <div class="w-full overflow-x-auto flex-grow">
-        <div class="table-container h-full overflow-y-auto">
+        <div class="table-container h-full overflow-y-auto flex flex-grow">
           <table border="1">
             <thead>
               <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
@@ -42,7 +32,7 @@
               <tr class="text-gray-700" *ngFor="let alumnoConNotas of alumnosConNotas">
                 <td class="px-4 py-3 border">
                   <div class="flex items-center font-semibold text-sm text-black visible-text">
-                    {{ alumnoConNotas.alumno.nombre }}
+                    {{ alumnoConNotas.alumno.apellido }} {{ alumnoConNotas.alumno.apmaterno }} {{ alumnoConNotas.alumno.nombre }}
                   </div>
                 </td>
                 <td class="px-4 py-3 border">
@@ -55,7 +45,7 @@
                         (input)="updateNota(alumnoConNotas, i, $event)"
                         min="10"
                         max="70"
-                        class="input-nota"
+                        class="input-nota border-b border-gray-600"
                       />
                     </ng-container>
                   </div>
@@ -67,10 +57,18 @@
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="text-center">
+                  <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-500 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
+                    Guardar Cambios
+                  </button>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
     </div>
   </section>
 </ion-content>
-

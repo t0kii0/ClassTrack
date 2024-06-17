@@ -28,6 +28,10 @@ export class ConfiguracionPage implements OnInit {
     console.log('entraste.......')
     this.router.navigate(['/crear-asistente']); //
   }
+  configNotas(){
+    console.log('entraste.......')
+    this.router.navigate(['/nota-config']); //
+  }
 
   irAInicio() {
     // Redirige a la página de inicio

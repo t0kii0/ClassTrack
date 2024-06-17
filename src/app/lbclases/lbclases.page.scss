@@ -114,6 +114,12 @@ ion-icon{
   display: flex;
   justify-content: center;
 }
+
+.input-barraNotas{
+  background: #fff;
+  color: #000;
+}
+
 .numeroDeNotas{
   color: #000;
 }
@@ -124,6 +130,7 @@ ion-icon{
 
 .input-nota {
   width: 40px; /* Ajuste del ancho del input */
+  background: #fff;
   text-align: center;
   margin: 2px;
 }
@@ -143,4 +150,32 @@ th:nth-child(2), td:nth-child(2) {
 
 th, td {
   padding: 8px; /* Añade padding para la legibilidad */
+}
+
+
+/* Estilo para asegurar que el botón en el pie de la tabla esté centrado */
+tfoot td {
+  padding: 16px; /* Añade padding para espaciado */
+  text-align: center; /* Centra el contenido */
+  background-color: #f9f9f9; /* Color de fondo opcional para diferenciar el pie */
+}
+
+/* Estilo para el botón */
+tfoot button {
+  margin-top: 20px;
+  border-radius: 15px; /* Bordes redondeados */
+}
+
+
+/* Agrega esto a tu archivo CSS o dentro de una etiqueta <style> en tu componente */
+input[type="number"] {
+  -webkit-appearance: none; /* Para navegadores basados en WebKit */
+  -moz-appearance: textfield; /* Para navegadores basados en Mozilla */
+  appearance: textfield; /* Propiedad estándar */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

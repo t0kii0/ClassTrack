@@ -98,6 +98,10 @@ const routes: Routes = [
     path: 'menu-informes',
     loadChildren: () => import('./menu-informes/menu-informes.module').then( m => m.MenuInformesPageModule)
   },
+  {
+    path: 'nota-config',
+    loadChildren: () => import('./nota-config/nota-config.module').then( m => m.NotaConfigPageModule)
+  },
 
 
 
