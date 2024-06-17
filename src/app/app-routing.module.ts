@@ -100,16 +100,16 @@ const routes: Routes = [
     loadChildren: () => import('./menu-informes/menu-informes.module').then( m => m.MenuInformesPageModule)
   },
   {
-    path: 'ver-observaciones',
-    loadChildren: () => import('./ver-observaciones/ver-observaciones.module').then( m => m.VerObservacionesPageModule)
+    path: 'nota-config',
+    loadChildren: () => import('./nota-config/nota-config.module').then( m => m.NotaConfigPageModule)
   },
 
 
 
 
 
-
 ];
+
 
 @NgModule({
   imports: [

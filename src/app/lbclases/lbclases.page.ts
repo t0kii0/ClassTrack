@@ -1,3 +1,4 @@
+// lbclases.page.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -22,7 +23,6 @@ export class LbclasesPage implements OnInit {
   alumnosConNotas: AlumnoNotas[] = [];
   idAsignatura?: number;
   idCurso?: number;
-  numeroDeNotas: number = 12;
 
   constructor(
     private router: Router,
@@ -52,10 +52,10 @@ export class LbclasesPage implements OnInit {
           this.alumnos = alumnos;
           this.alumnosConNotas = alumnos.map(alumno => ({
             alumno: alumno,
-            notas: new Array(this.numeroDeNotas).fill(0),
+            notas: [],
             promedio: 0
           }));
-          this.updateNumeroDeNotas(this.numeroDeNotas);
+          this.cargarNotas();
         },
         error => {
           console.error('Error al cargar alumnos:', error);
@@ -64,98 +64,39 @@ export class LbclasesPage implements OnInit {
     }
   }
 
-  async verDetallesAlumno(alumno: ModelAlumno) {
-    this.notasService.obtenerNotasPorAlumno(alumno.rut).subscribe(
-      (notas: ModelNota[]) => {
-        const alumnoConNotas = this.alumnosConNotas.find(an => an.alumno.rut === alumno.rut);
-        if (alumnoConNotas) {
-          alumnoConNotas.notas = notas.map(n => n.nota);
-          alumnoConNotas.promedio = this.calcularPromedio(alumnoConNotas);
-        }
-        this.presentAlumnoDetailsAlert(alumno, notas, alumnoConNotas?.promedio ?? 0);
-      },
-      error => {
-        console.error('Error al obtener notas del alumno:', error);
-      }
-    );
-  }
-
-  async presentAlumnoDetailsAlert(alumno: ModelAlumno, notas: ModelNota[], promedio: number) {
-    const alert = await this.alertController.create({
-      header: 'Detalles del Alumno',
-      message: `
-        <strong>Nombre:</strong> ${alumno.nombre}<br>
-        <strong>Apellido Paterno:</strong> ${alumno.apellido}<br>
-        <strong>Apellido Materno:</strong> ${alumno.apmaterno}<br>
-        <strong>Notas:</strong> ${notas.length ? notas.map(n => n.nota).join(', ') : 'N/A'}<br>
-        <strong>Promedio:</strong> ${promedio}
-      `,
-      buttons: ['Cerrar']
-    });
-
-    await alert.present();
-  }
-
-  async agregarNotaAlumno(rutAlumno: string) {
-    const alert = await this.alertController.create({
-      header: 'Agregar Nota',
-      inputs: [
-        {
-          name: 'nota',
-          type: 'number',
-          placeholder: 'Ingrese la nota',
-          min: 1,
-          max: 70
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
-        {
-          text: 'Guardar',
-          handler: async (data) => {
-            const nota = parseInt(data.nota, 10);
-            if (!isNaN(nota) && nota >= 1 && nota <= 70) {
-              const idAsignatura = this.route.snapshot.queryParams['asignaturaId']; // Obtener el ID de la asignatura de los parámetros de consulta
-              this.notasService.agregarNotaAlumnoAsignatura(rutAlumno, idAsignatura, nota).subscribe(
-                () => {
-                  this.cargarAlumnos();
-                },
-                error => {
-                  console.error('Error al agregar nota:', error);
-                }
-              );
-            } else {
-              console.error('Nota inválida:', nota);
-            }
+  cargarNotas() {
+    if (this.idAsignatura !== undefined) {
+      this.alumnosConNotas.forEach(alumnoConNotas => {
+        this.notasService.obtenerNotasPorAlumnoYAsignatura(alumnoConNotas.alumno.rut, this.idAsignatura!).subscribe(
+          (notas: ModelNota[]) => {
+            alumnoConNotas.notas = notas.map(nota => nota.nota);
+            alumnoConNotas.promedio = this.calcularPromedio(alumnoConNotas);
+          },
+          error => {
+            console.error('Error al cargar notas:', error);
           }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
-  updateNumeroDeNotas(count: number) {
-    this.numeroDeNotas = count;
-    this.alumnosConNotas.forEach((an) => {
-      an.notas = new Array(count).fill(0);
-      this.calcularPromedio(an);
-    });
+        );
+      });
+    }
   }
 
   updateNota(alumnoConNotas: AlumnoNotas, index: number, event: Event) {
     const input = event.target as HTMLInputElement;
     const nota = parseInt(input.value, 10);
-    if (nota < 10 || nota > 70) return;
-    alumnoConNotas.notas[index] = nota;
-    this.calcularPromedio(alumnoConNotas);
+  
+    // Validar que el valor es un número dentro del rango permitido
+    if (!isNaN(nota) && nota >= 10 && nota <= 70) {
+      alumnoConNotas.notas[index] = nota;
+      this.calcularPromedio(alumnoConNotas);
+    } else {
+      // Si el valor no es válido, resetear el campo al valor anterior
+      input.value = alumnoConNotas.notas[index].toString();
+      alert('La nota debe estar entre 10 y 70');
+    }
   }
 
   calcularPromedio(alumnoConNotas: AlumnoNotas) {
-    const notaValida = alumnoConNotas.notas.filter((g) => g >= 10 && g <= 70);
+    const notaValida = alumnoConNotas.notas.filter(nota => nota >= 10 && nota <= 70);
     const sum = notaValida.reduce((a, b) => a + b, 0);
     alumnoConNotas.promedio = notaValida.length > 0 ? Math.round(sum / notaValida.length) : 0;
     return alumnoConNotas.promedio;
