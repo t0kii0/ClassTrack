@@ -5,10 +5,9 @@ import { NotasService } from '../services/nota/nota.service';
 import { ModelAlumno } from '../modelos/userModel';
 import { ModelNota } from '../modelos/notamodel';
 import { ModelAsignatura } from '../modelos/asignaturaModel';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AsignaturaService } from '../services/asignatura/asignatura.service';
 import { ModelCurso } from '../modelos/cursoModel';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ver-notas',
@@ -24,6 +23,7 @@ export class VerNotasPage implements OnInit {
   selectedCurso: string = '';
   nombre: string = ''; // Assuming you have a way to get the student's name
   curso: string = ''; // Assuming you have a way to get the student's course
+  asignaturas: ModelAsignatura[] = []; // Array para almacenar las asignaturas
 
   constructor(
     private userService: UserService,
@@ -31,7 +31,7 @@ export class VerNotasPage implements OnInit {
     private notasService: NotasService,
     private asignaturaService: AsignaturaService,
     private router: Router,
-    private route : ActivatedRoute,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -39,10 +39,17 @@ export class VerNotasPage implements OnInit {
       this.rut = params.get('rut');
       if (this.rut) {
         console.log(this.rut);
-        this.cargarNotas(this.rut);
+        this.cargarAsignaturasYNotas(this.rut);
       } else {
         console.error('RUT no encontrado en la URL');
       }
+    });
+  }
+
+  cargarAsignaturasYNotas(rut: string) {
+    this.asignaturaService.obtenerTodoAsignatura().subscribe(asignaturas => {
+      this.asignaturas = asignaturas;
+      this.cargarNotas(rut);
     });
   }
 
@@ -62,12 +69,19 @@ export class VerNotasPage implements OnInit {
     const notasAgrupadas: { [key: string]: ModelNota[] } = {};
 
     notas.forEach((nota) => {
-      if (!notasAgrupadas[nota.id_asignatura]) {
-        notasAgrupadas[nota.id_asignatura] = [];
+      const asignatura = this.asignaturas.find(a => a.id === nota.id_asignatura);
+      const nombreAsignatura = asignatura ? asignatura.nombre_asignatura : 'Desconocida';
+
+      if (!notasAgrupadas[nombreAsignatura]) {
+        notasAgrupadas[nombreAsignatura] = [];
       }
-      notasAgrupadas[nota.id_asignatura].push(nota);
+      notasAgrupadas[nombreAsignatura].push(nota);
     });
 
     return notasAgrupadas;
+  }
+
+  getKeys(obj: any): string[] {
+    return Object.keys(obj);
   }
 }

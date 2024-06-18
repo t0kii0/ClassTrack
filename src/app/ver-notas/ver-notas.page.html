@@ -1,25 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>verNotas</ion-title>
+    <ion-title>Ver Notas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<div class="container">
-  <h2>Información del Alumno</h2>
-  <p><strong>Nombre:</strong> {{ nombre }}</p>
-  <p><strong>RUT:</strong> {{ rut }}</p>
-  <p><strong>Curso:</strong> {{ curso }}</p>
-  
-  <div class="notas-container">
-    <h3>Notas</h3>
-    <ul class="notas-list">
-      <li *ngFor="let asignatura of notasAgrupadas | keyvalue" class="nota-item">
-        <strong>Asignatura:</strong> {{ asignatura.key }} - 
-        <strong>Notas:</strong> 
-        <span *ngFor="let nota of asignatura.value; let i = index">
-          {{ nota.nota }}<span *ngIf="i < asignatura.value.length - 1">, </span>
-        </span>
-      </li>
-    </ul>
-  </div>
-</div>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Ver Notas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ng-container *ngIf="getKeys(notasAgrupadas).length > 0; else noNotas">
+      <ion-list *ngFor="let asignatura of getKeys(notasAgrupadas)">
+        <ion-item>
+          <ion-label>
+            <h2>{{ asignatura }}</h2>
+            <ion-list>
+              <ion-item *ngFor="let nota of notasAgrupadas[asignatura]">
+                <ion-label>
+                  <h3>Nota: {{ nota.nota }}</h3>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+    <ng-template #noNotas>
+      <ion-item>
+        <ion-label>
+          <h2>No hay notas disponibles</h2>
+        </ion-label>
+      </ion-item>
+    </ng-template>
+  </ion-content>
+</ion-content>
