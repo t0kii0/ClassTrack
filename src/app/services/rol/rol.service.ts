@@ -24,4 +24,5 @@ obtenerTodoRol(): Observable<ModelRol[]> {
       })
     );
 }
+
 }
