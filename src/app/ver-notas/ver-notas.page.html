@@ -13,8 +13,12 @@
   <div class="notas-container">
     <h3>Notas</h3>
     <ul class="notas-list">
-      <li *ngFor="let nota of notas" class="nota-item">
-        <strong>Asignatura:</strong> {{ nota.id_asignatura }} - <strong>Nota:</strong> {{ nota.nota }}
+      <li *ngFor="let asignatura of notasAgrupadas | keyvalue" class="nota-item">
+        <strong>Asignatura:</strong> {{ asignatura.key }} - 
+        <strong>Notas:</strong> 
+        <span *ngFor="let nota of asignatura.value; let i = index">
+          {{ nota.nota }}<span *ngIf="i < asignatura.value.length - 1">, </span>
+        </span>
       </li>
     </ul>
   </div>

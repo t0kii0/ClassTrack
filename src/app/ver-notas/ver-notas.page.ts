@@ -18,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 export class VerNotasPage implements OnInit {
   rut: string | null = null;
   cursos: ModelCurso[] = [];
-  notas: ModelNota[] = [];
+  notasAgrupadas: { [key: string]: ModelNota[] } = {};
   filteredAlumnos: (ModelAlumno & { curso?: ModelCurso })[] = [];
   searchTerm: string = '';
   selectedCurso: string = '';
@@ -49,12 +49,25 @@ export class VerNotasPage implements OnInit {
   cargarNotas(rut: string) {
     this.notasService.obtenerNotasPorAlumno(rut).subscribe(
       (notas: ModelNota[]) => {
-        this.notas = notas; // Asignar las notas a la variable `notas`
+        this.notasAgrupadas = this.agruparNotasPorAsignatura(notas);
         console.log('Notas obtenidas:', notas);
       },
       (error) => {
         console.error('Error al obtener las notas:', error);
       }
     );
+  }
+
+  agruparNotasPorAsignatura(notas: ModelNota[]): { [key: string]: ModelNota[] } {
+    const notasAgrupadas: { [key: string]: ModelNota[] } = {};
+
+    notas.forEach((nota) => {
+      if (!notasAgrupadas[nota.id_asignatura]) {
+        notasAgrupadas[nota.id_asignatura] = [];
+      }
+      notasAgrupadas[nota.id_asignatura].push(nota);
+    });
+
+    return notasAgrupadas;
   }
 }
