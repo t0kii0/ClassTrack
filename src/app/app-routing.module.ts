@@ -107,6 +107,18 @@ const routes: Routes = [
     path: 'ver-notas',
     loadChildren: () => import('./ver-notas/ver-notas.module').then( m => m.VerNotasPageModule)
   },
+  {
+    path: 'informe-anotacion',
+    loadChildren: () => import('./informe-anotacion/informe-anotacion.module').then( m => m.InformeAnotacionPageModule)
+  },
+  {
+    path: 'ver-anotacion',
+    loadChildren: () => import('./ver-anotacion/ver-anotacion.module').then( m => m.VerAnotacionPageModule)
+  },
+  {
+    path: 'ver-observacion',
+    loadChildren: () => import('./ver-observaciones/ver-observaciones.module').then( m => m.VerObservacionesPageModule)
+  },
 ];
 
 
