@@ -17,6 +17,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./reporte.page.scss'],
 })
 export class ReportePage implements OnInit {
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
   alumnos: (ModelAlumno & { curso?: ModelCurso })[] = [];
   cursos: ModelCurso[] = [];
   filteredAlumnos: (ModelAlumno & { curso?: ModelCurso })[] = [];
@@ -34,6 +36,9 @@ export class ReportePage implements OnInit {
   ngOnInit() {
     this.loadAlumnos();
     this.loadCursos();
+  }
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
   }
 
   loadAlumnos() {

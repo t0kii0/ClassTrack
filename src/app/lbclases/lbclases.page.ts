@@ -19,6 +19,8 @@ interface AlumnoNotas {
   styleUrls: ['./lbclases.page.scss'],
 })
 export class LbclasesPage implements OnInit {
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
   alumnos: ModelAlumno[] = [];
   alumnosConNotas: AlumnoNotas[] = [];
   idAsignatura?: number;
@@ -38,6 +40,9 @@ export class LbclasesPage implements OnInit {
       this.idCurso = +params['cursoId'];
       this.cargarAlumnos();
     });
+  }
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
   }
 
   irAInicio() {

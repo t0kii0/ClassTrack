@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage  implements OnInit {
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
   opcionSeleccionada: string = '';
 
   constructor( private router : Router) { }
@@ -18,6 +20,9 @@ export class InicioPage  implements OnInit {
   irAInicio() {
     // Redirige a la página de inicio
     this.router.navigate(['/inicio']);
+  }
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
   }
   irACurso(opcion: string) {
     this.opcionSeleccionada = opcion;

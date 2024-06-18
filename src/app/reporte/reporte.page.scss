@@ -8,8 +8,8 @@
 ion-header {
   background-color: #000 !important; /* Asegúrate de usar negro sólido */
   color: #fff !important; /* Asegúrate de que el texto sea blanco */
-  border-bottom: 3px solid #ea00f6; /* Mantén el borde inferior si lo deseas */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Mantén la sombra para profundidad */
+  position: relative; /* Asegura que el position relative está presente */
 }
 
 ion-toolbar {
@@ -43,6 +43,47 @@ ion-toolbar {
     margin-right: 10px; /* Espacio a la derecha del logo */
     
   } 
+  .notification-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .notifications-menu {
+    position: absolute;
+    top: 50px; /* Ajusta según tu diseño */
+    right: 10px; /* Ajusta según tu diseño */
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1; /* Asegura que el menú esté sobre otros elementos */
+    display: none;
+  }
+  
+  .notifications-menu.show {
+    display: block;
+  }
+   /* Animación de border-bottom */
+ ion-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px; /* Grosor del border-bottom */
+  background-color: #3498db; /* Color inicial del border-bottom */
+  animation: changeBorderColor 5s linear infinite alternate;
+}
+
+@keyframes changeBorderColor {
+  0% { background-color: #1078ef; } /* Azul */
+  20% { background-color: #24c8ff; } /* Turquesa */
+  40% { background-color: #14e4ef; } /* Blanco */
+  60% { background-color: #2e44e7; } /* Azul */
+  80% { background-color: #3d1abc; } /* Turquesa */
+  100% { background-color: #9410ec; } /* Blanco */
+}
 
   
     

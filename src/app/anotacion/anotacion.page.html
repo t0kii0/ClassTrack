@@ -8,9 +8,17 @@
     <div class="title-container">
       <ion-title class="otf-font">Anotaciones</ion-title>
       <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo" (click)="irAInicio()">
+      <ion-icon name="notifications-outline" class="notification-icon" (click)="toggleNotificationsMenu()"></ion-icon>
     </div>
   </ion-toolbar>
 </ion-header>
+<div class="notifications-menu" [class.show]="showNotificationsMenu">
+  <ion-list>
+    <ion-item *ngFor="let notification of notifications">
+      {{ notification }}
+    </ion-item>
+  </ion-list>
+</div>
 
 <ion-content class="anotacion-page flex flex-col">
   <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
