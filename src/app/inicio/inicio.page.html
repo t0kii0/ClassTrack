@@ -1,16 +1,16 @@
-
 <ion-app>
   <ion-router-outlet id="main-content">
     <ion-header>
-      
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button> <!-- Agrega el botón del menú -->
-        </ion-buttons>
+        </ion-buttons> 
         <div class="header-left">
           <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo" (click)="irAInicio()">
+          <ion-icon name="notifications-outline" class="notification-icon" (click)="toggleNotificationsMenu()"></ion-icon>
           <div class="user-name">Juan El bandolero - Informatico</div>
         </div> 
+        <div class="background-animation"></div>
         <ion-title class="otf-font">ClassTrack</ion-title>
         <ion-buttons class="boton-logout" slot="end">
           <ion-button class="cerrar-sesion"> 
@@ -18,8 +18,17 @@
             <ion-icon name="log-out"></ion-icon>
           </ion-button>
         </ion-buttons>
+        
       </ion-toolbar>
     </ion-header>
+    
+    <div class="notifications-menu" [class.show]="showNotificationsMenu">
+      <ion-list>
+        <ion-item *ngFor="let notification of notifications">
+          {{ notification }}
+        </ion-item>
+      </ion-list>
+    </div>
 
     <ion-content class="ion-padding">
       <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">

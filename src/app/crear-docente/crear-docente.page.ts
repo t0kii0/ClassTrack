@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { CursoService } from '../services/curso/curso.service';
 import { ModelCurso } from '../modelos/cursoModel';
+import { Router } from '@angular/router';
 import * as Papa from 'papaparse';
 
 interface CSVRow {
@@ -22,11 +23,13 @@ interface CSVRow {
   providers: [DocenteService]
 })
 export class CrearDocentePage implements OnInit {
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
 
   FormularioDocente: FormGroup;
   cursos: ModelCurso[] = [];
 
-  constructor(
+  constructor(private router: Router,
     private docenteService: DocenteService,
     private fb: FormBuilder,
     private alertController: AlertController,
@@ -44,6 +47,12 @@ export class CrearDocentePage implements OnInit {
 
   ngOnInit() {
     this.loadCursos();
+  }
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
+  }
+  irAInicio() {
+    this.router.navigate(['/inicio']);
   }
 
   async agregarDocente() {

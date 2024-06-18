@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,35 +7,43 @@ import { Router } from '@angular/router';
   styleUrls: ['./configuracion.page.scss'],
 })
 export class ConfiguracionPage implements OnInit {
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
 
   constructor(private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() {} 
+
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
+  }
+
   agregar(){
-    console.log('entraste.......')
-    this.router.navigate(['/crear-user']); //
+    console.log('entraste.......');
+    this.router.navigate(['/crear-user']);
   }
+
   confiAsignatura(){
-    console.log('entraste.......')
-    this.router.navigate(['/crear-asignatura']); //
+    console.log('entraste.......');
+    this.router.navigate(['/crear-asignatura']);
   }
+
   crearDocente(){
-    console.log('entraste.......')
-    this.router.navigate(['/crear-docente']); //
+    console.log('entraste.......');
+    this.router.navigate(['/crear-docente']);
   }
+
   crearAsistente(){
-    console.log('entraste.......')
-    this.router.navigate(['/crear-asistente']); //
+    console.log('entraste.......');
+    this.router.navigate(['/crear-asistente']);
   }
+
   configNotas(){
-    console.log('entraste.......')
-    this.router.navigate(['/nota-config']); //
+    console.log('entraste.......');
+    this.router.navigate(['/nota-config']);
   }
 
   irAInicio() {
-    // Redirige a la página de inicio
     this.router.navigate(['/inicio']);
   }
-
-
 }

@@ -4,6 +4,7 @@ import { FormGroup,FormBuilder,Validators,ReactiveFormsModule } from '@angular/f
 import { AlertController } from '@ionic/angular';
 import { ModelCurso } from '../modelos/cursoModel';
 import { CursoService } from '../services/curso/curso.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-asignatura',
@@ -15,8 +16,10 @@ export class CrearAsignaturaPage implements OnInit {
 
   FormularioAsignatura : FormGroup;
   cursos: ModelCurso[] = [];
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
 
-  constructor(private asignaturaService : AsignaturaService, 
+  constructor(private router: Router, private asignaturaService : AsignaturaService, 
               private fb : FormBuilder,
               private alertController: AlertController,
               private cursoService: CursoService) {
@@ -31,6 +34,9 @@ export class CrearAsignaturaPage implements OnInit {
 
    ngOnInit() {
     this.loadCursos();
+  }
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
   }
   async agregarAsignatura() {
     if (!this.FormularioAsignatura){
@@ -68,5 +74,8 @@ export class CrearAsignaturaPage implements OnInit {
         console.error('Error al cargar cursos: ', error);
       }
     );
+  }
+  irAInicio() {
+    this.router.navigate(['/inicio']);
   }
 }

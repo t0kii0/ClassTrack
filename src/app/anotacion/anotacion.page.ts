@@ -18,6 +18,8 @@ export class AnotacionPage implements OnInit {
   idCurso?: number; 
   anotacionText: string = '';
   anotacionTipo: boolean = true;
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
 
   constructor(
     private modalController: ModalController,
@@ -35,6 +37,10 @@ export class AnotacionPage implements OnInit {
       this.cargarAlumnos();
     });
   }
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
+  }
+
 
   goBack() {
     this.navController.pop();

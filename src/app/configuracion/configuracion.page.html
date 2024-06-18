@@ -6,45 +6,55 @@
           <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
         </ion-button>
       </ion-buttons>
+      
       <div class="title-container">
         <ion-title class="otf-font">Configuraciones</ion-title>
         <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo" (click)="irAInicio()">
+        <ion-icon name="notifications-outline" class="notification-icon" (click)="toggleNotificationsMenu()"></ion-icon>
       </div>
+      
     </ion-toolbar>
   </ion-header>
+  <div class="notifications-menu" [class.show]="showNotificationsMenu">
+    <ion-list>
+      <ion-item *ngFor="let notification of notifications">
+        {{ notification }}
+      </ion-item>
+    </ion-list>
+  </div>
 
   <ion-content class="ion-padding">
     <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
     <div class="background-container">
       <ion-grid>
         <ion-row class="centered-row">
-          <ion-col size="5" class="icon-container" (click)="crearDocente()" [routerLink]="['/crear-docente']">
+          <ion-col size="4" class="icon-container" (click)="crearDocente()" [routerLink]="['/crear-docente']">
             <ion-icon name="book" class="large-icon"></ion-icon>
-            <ion-label>Crear Docente</ion-label>
+            <ion-label class="otf-font2">Crear Docente</ion-label>
           </ion-col>
-          <ion-col size="5" class="icon-container" (click)="configNotas()" [routerLink]="['/nota-config']">
+          <ion-col size="4" class="icon-container" (click)="configNotas()" [routerLink]="['/nota-config']">
             <ion-icon name="book" class="large-icon"></ion-icon>
-            <ion-label>Configurar Notas</ion-label>
+            <ion-label class="otf-font2">Configurar Notas</ion-label>
           </ion-col>
         </ion-row>
         <ion-row class="centered-row">
-          <ion-col size="5" class="icon-container" (click)="confiAsignatura()" [routerLink]="['/crear-asignatura']">
+          <ion-col size="4" class="icon-container" (click)="confiAsignatura()" [routerLink]="['/crear-asignatura']">
             <ion-icon name="book" class="large-icon"></ion-icon>
-            <ion-label>Configurar Asignatura</ion-label>
+            <ion-label class="otf-font2">Configurar Asignatura</ion-label>
           </ion-col>
-          <ion-col size="5" class="icon-container" (click)="agregar()" [routerLink]="['/crear-user']">
+          <ion-col size="4" class="icon-container" (click)="agregar()" [routerLink]="['/crear-user']">
             <ion-icon name="people" class="large-icon"></ion-icon>
-            <ion-label>Agregar Usuario</ion-label>
+            <ion-label class="otf-font2">Agregar Usuario</ion-label>
           </ion-col>
-        </ion-row>
+        </ion-row> 
         <ion-row class="centered-row">
-          <ion-col size="5" class="icon-container">
+          <ion-col size="4" class="icon-container">
             <ion-icon name="people" class="large-icon"></ion-icon>
-            <ion-label>Permisos</ion-label>
+            <ion-label class="otf-font2">Permisos</ion-label>
           </ion-col>
-          <ion-col size="5" class="icon-container" (click)="crearAsistente()" [routerLink]="['/crear-asistente  ']">
+          <ion-col size="4" class="icon-container" (click)="crearAsistente()" [routerLink]="['/crear-asistente']">
             <ion-icon name="help-outline" class="large-icon"></ion-icon>
-            <ion-label>Asistencia Técnica</ion-label>
+            <ion-label class="otf-font2">Asistencia Técnica</ion-label>
           </ion-col>
         </ion-row>
       </ion-grid>

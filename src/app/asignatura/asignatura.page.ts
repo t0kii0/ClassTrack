@@ -14,6 +14,8 @@ export class AsignaturaPage implements OnInit {
   opcionSeleccionada: string = '';
   asignaturas: ModelAsignatura[] = [];
   cursoId?: number;
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
 
   constructor(
     private obtenerAsignatura: AsignaturaService,
@@ -33,6 +35,9 @@ export class AsignaturaPage implements OnInit {
       console.log('Opción seleccionada:', this.opcionSeleccionada);
       this.cargarAsignaturas();
     });
+  }
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
   }
 
   goBack() {

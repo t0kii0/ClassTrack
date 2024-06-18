@@ -15,6 +15,8 @@ export class AsistenciaPage implements OnInit {
   idAsignatura?: number;
   idCurso?: number;
   cambiosGuardados: boolean = true;
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
 
   constructor(
     private alertController: AlertController,
@@ -30,6 +32,9 @@ export class AsistenciaPage implements OnInit {
       this.idCurso = +params['cursoId'];
       this.cargarAlumnos();
     });
+  }
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
   }
 
   cargarAlumnos() {
