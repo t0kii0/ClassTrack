@@ -11,3 +11,16 @@
     </ion-toolbar>
   </ion-header>
 </ion-content>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let motivo of motivo">
+      <ion-label>
+        <h2>{{ motivo.motivo }}</h2>
+        <p>{{ motivo.id_alumno }} </p>
+        <p>Asignatura: {{ motivo.id_asignatura }}</p>
+        <p>Fecha: {{ motivo.fecha }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -90,7 +90,6 @@ export class InformeObservacionPage implements OnInit {
 
   verObservaciones(rut: string) {
     console.log(rut);
-    
     this.router.navigate(['/ver-observaciones', rut]); 
   }
 

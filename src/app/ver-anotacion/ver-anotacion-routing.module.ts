@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: VerAnotacionPage
+  },
+  {
+    path: ':rut',
+    component: VerAnotacionPage
   }
 ];
 
