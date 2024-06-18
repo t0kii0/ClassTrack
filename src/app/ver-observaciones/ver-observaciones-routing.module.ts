@@ -8,11 +8,10 @@ const routes: Routes = [
     component: VerObservacionesPage
   },
   {
-  path: ':rut',
-  component: VerObservacionesPage
-}
+    path: ':rut',
+    component: VerObservacionesPage
+  }
 ];
-
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -34,4 +34,13 @@ export class AnotacionService {
         })
       );
   }
+  obtenerAnotacionesPorRut(rut: string): Observable<ModelAnotacion[]> {
+    return this._http.get<ModelAnotacion[]>(`${this.superbaseUrl}ANOTACIONES?id_alumno=eq.${rut}`, { headers: this.supabaseHeaders })
+      .pipe(
+        catchError(error => {
+          console.error(`Error al obtener anotaciones para el rut ${rut}:`, error);
+          return of([]); // Devolver un array vacío en caso de error
+        })
+      );
+  }
 }
