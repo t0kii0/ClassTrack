@@ -25,4 +25,9 @@ export class MenuInformesPage implements OnInit {
     console.log("entroo");
     
 }
+asistencia(){
+  this.router.navigate(['/informe-asistencia']);
+  console.log("entramoos");
+  
+}
 }

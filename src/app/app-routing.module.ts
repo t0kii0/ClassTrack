@@ -115,7 +115,11 @@ const routes: Routes = [
     path: 'ver-anotacion',
     loadChildren: () => import('./ver-anotacion/ver-anotacion.module').then( m => m.VerAnotacionPageModule)
   },
-  { path: 'ver-observaciones', loadChildren: () => import('./ver-observaciones/ver-observaciones.module').then(m => m.VerObservacionesPageModule) },
+  { path: 'ver-observaciones', loadChildren: () => import('./ver-observaciones/ver-observaciones.module').then(m => m.VerObservacionesPageModule) },  {
+    path: 'ver-asistencia',
+    loadChildren: () => import('./ver-asistencia/ver-asistencia.module').then( m => m.VerAsistenciaPageModule)
+  },
+
   
 ];
 
