@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AsistenteService } from '../services/asistente/asistente.service'; // Cambia a DocenteService
+import { AsistenteService } from '../services/asistente/asistente.service'; 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { CursoService } from '../services/curso/curso.service';
-import { ModelCurso } from '../modelos/cursoModel';
+import { RolService } from '../services/rol/rol.service';
 import { Router } from '@angular/router';
 import * as Papa from 'papaparse';
+import { ModelRol } from '../modelos/rolModel';
 
 interface CSVRow {
   'Run': string;
@@ -25,16 +26,15 @@ interface CSVRow {
 export class CrearAsistentePage implements OnInit {
 
   FormularioAsistente: FormGroup;
-  cursos: ModelCurso[] = [];
   showNotificationsMenu = false;
-  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3'];
+  rol: ModelRol [] = [];
 
   constructor(private router: Router,
     private asistenteService: AsistenteService,
     private fb: FormBuilder,
     private alertController: AlertController,
-    
-    private cursoService: CursoService
+    private rolService: RolService,
   ) {
     this.FormularioAsistente = this.fb.group({
       rut: ['', Validators.required],
@@ -42,19 +42,32 @@ export class CrearAsistentePage implements OnInit {
       apellido: ['', Validators.required],
       apmaterno: ['', Validators.required],
       fecha_nacimiento: ['', Validators.required],
-      curso: ['', Validators.required],
-      rol: ['', Validators.required] // Set default value to 'DOCENTE'
+      rol: ['', Validators.required] 
     });
   }
 
   ngOnInit() {
-    this.loadCursos();
+    this.loadRol();
   }
+
   toggleNotificationsMenu() {
     this.showNotificationsMenu = !this.showNotificationsMenu;
   }
+
   irAInicio() {
     this.router.navigate(['/inicio']);
+  }
+
+  loadRol() {
+    this.rolService.obtenerTodoRol().subscribe(
+      (data: ModelRol[]) => {
+        this.rol = data;
+        console.log(this.rol);
+      },
+      (error) => {
+        console.error('Error al cargar roles: ', error);
+      }
+    );
   }
 
   async agregarAsistente() {
@@ -66,11 +79,11 @@ export class CrearAsistentePage implements OnInit {
     this.asistenteService.addAsistente(formDataAsistente).subscribe(
       (result) => {
         console.log('Se guardó con éxito:', result);
-        this.presentAlert('Éxito', 'El docente se ha guardado correctamente.');
+        this.presentAlert('Éxito', 'El asistente se ha guardado correctamente.');
       },
       (error) => {
-        console.error('Error al guardar el docente: ', error);
-        this.presentAlert('Error', 'El docente ya existe.');
+        console.error('Error al guardar el asistente: ', error);
+        this.presentAlert('Error', 'El asistente ya existe.');
       }
     );
   }
@@ -82,17 +95,6 @@ export class CrearAsistentePage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
-  }
-
-  loadCursos() {
-    this.cursoService.obtenerTodoCurso().subscribe(
-      (data: ModelCurso[]) => {
-        this.cursos = data;
-      },
-      (error) => {
-        console.error('Error al cargar cursos: ', error);
-      }
-    );
   }
 
   onFileChange(event: any) {
@@ -117,26 +119,25 @@ export class CrearAsistentePage implements OnInit {
         apmaterno: asistenteData['Apellido Materno'],
         fecha_nacimiento: new Date(asistenteData['Fecha Nacimiento']),
         rol: asistenteData['rol']
-        
       };
 
       console.log('Datos formateados:', formattedData);
 
       this.asistenteService.addAsistente(formattedData).subscribe(
         (result) => {
-          console.log('Docente guardado con éxito:', result);
+          console.log('Asistente guardado con éxito:', result);
         },
         (error) => {
-          console.error('Error al guardar el docente:', error);
+          console.error('Error al guardar el asistente:', error);
           if (error.status === 409) {
-            this.presentAlert('Error', `El docente con RUT ${formattedData.rut} ya existe en la base de datos.`);
+            this.presentAlert('Error', `El asistente con RUT ${formattedData.rut} ya existe en la base de datos.`);
           } else {
             console.error('Detalles del error:', error.error);
-            this.presentAlert('Error', 'Se produjo un error al guardar el docente.');
+            this.presentAlert('Error', 'Se produjo un error al guardar el asistente.');
           }
         }
       );
     }
-    this.presentAlert('Éxito', 'Todos los docentes se han guardado correctamente.');
+    this.presentAlert('Éxito', 'Todos los asistentes se han guardado correctamente.');
   }
 }
