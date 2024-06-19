@@ -17,6 +17,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./reporte.page.scss'],
 })
 export class ReportePage implements OnInit {
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
   alumnos: (ModelAlumno & { curso?: ModelCurso })[] = [];
   cursos: ModelCurso[] = [];
   filteredAlumnos: (ModelAlumno & { curso?: ModelCurso })[] = [];
@@ -34,6 +36,9 @@ export class ReportePage implements OnInit {
   ngOnInit() {
     this.loadAlumnos();
     this.loadCursos();
+  }
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
   }
 
   loadAlumnos() {
@@ -92,7 +97,7 @@ export class ReportePage implements OnInit {
     });
   }
 
-  generarPDF(alumno: ModelAlumno, notas: ModelNota[], asignaturas: ModelAsignatura[],) {
+  generarPDF(alumno: ModelAlumno, notas: ModelNota[], asignaturas: ModelAsignatura[]) {
     const doc = new jsPDF();
     doc.setFontSize(16);
     doc.text('Reporte de Notas', 10, 10);
@@ -100,14 +105,27 @@ export class ReportePage implements OnInit {
     doc.text(`Alumno: ${alumno.nombre} ${alumno.apellido} ${alumno.apmaterno}`, 10, 20);
     doc.text(`RUT: ${alumno.rut}`, 10, 30);
     doc.text(`Curso: ${alumno.curso}`, 10, 40);
-
+  
     let yPosition = 50;
+  
+    // Agrupar notas por asignatura
+    const notasPorAsignatura: { [key: string]: number[] } = {};
     notas.forEach(nota => {
       const asignatura = asignaturas.find(a => a.id === nota.id_asignatura);
-      doc.text(`Asignatura: ${asignatura?.nombre_asignatura || 'Desconocida'} - Nota: ${nota.nota}`, 10, yPosition);
+      const asignaturaNombre = asignatura?.nombre_asignatura || 'Desconocida';
+      if (!notasPorAsignatura[asignaturaNombre]) {
+        notasPorAsignatura[asignaturaNombre] = [];
+      }
+      notasPorAsignatura[asignaturaNombre].push(nota.nota);
+    });
+  
+    // Generar PDF con notas agrupadas
+    Object.keys(notasPorAsignatura).forEach(asignaturaNombre => {
+      const notasStr = notasPorAsignatura[asignaturaNombre].join(', ');
+      doc.text(`Asignatura: ${asignaturaNombre} - Notas: ${notasStr}`, 10, yPosition);
       yPosition += 10;
     });
-
+  
     doc.save(`reporte_${alumno.rut}.pdf`);
   }
   vernotas(rut: string){

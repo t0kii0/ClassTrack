@@ -10,6 +10,8 @@ import { CursoService } from '../services/curso/curso.service';
   styleUrls: ['./cursos.page.scss'],
 })
 export class CursosPage implements OnInit {
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
 
   curso: ModelCurso[] = [];
   opcionSeleccionada: string = '';
@@ -47,6 +49,9 @@ export class CursosPage implements OnInit {
   irAInicio() {
     // Redirige a la página de inicio
     this.router.navigate(['/inicio']);
+  }
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
   }
 
   verCursos(idCurso: number) {

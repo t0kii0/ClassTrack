@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ObservacionService } from '../services/Observacion/observacion.service'; // Asegúrate de tener el servicio de observaciones
+import { ObservacionService } from '../services/Observacion/observacion.service';
 
 @Component({
   selector: 'app-ver-observaciones',
@@ -13,7 +13,7 @@ export class VerObservacionesPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private observacionService: ObservacionService // Inyecta el servicio de observaciones
+    private observacionService: ObservacionService
   ) {}
 
   ngOnInit() {

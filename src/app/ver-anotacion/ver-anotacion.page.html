@@ -1,13 +1,34 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>VerAnotacion</ion-title>
+    <ion-title>Ver Anotación</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">VerAnotacion</ion-title>
+      <ion-title size="large">Ver Anotación</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-list *ngIf="motivo.length > 0; else noAnotaciones">
+      <ion-item *ngFor="let anotacion of motivo">
+        <ion-label>
+          <h1>Anotación: {{ anotacion.tipo_anotacion ? 'Positiva' : 'Negativa' }}</h1>
+          <h2>Motivo: {{ anotacion.motivo }}</h2>
+          <p>RUT: {{ anotacion.id_alumno }}</p>
+          <p>Asignatura: {{ anotacion.nombre_asignatura }}</p>
+          <p>Fecha: {{ anotacion.fecha | date }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ng-template #noAnotaciones>
+      <ion-item>
+        <ion-label>
+          <h2>No hay anotaciones disponibles</h2>
+        </ion-label>
+      </ion-item>
+    </ng-template>
+  </ion-content>
 </ion-content>

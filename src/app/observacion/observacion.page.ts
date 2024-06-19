@@ -12,6 +12,8 @@ import { ObservacionModalComponent } from '../observacion-modal/observacion-moda
   styleUrls: ['./observacion.page.scss'],
 })
 export class ObservacionPage implements OnInit {
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
   alumnos: (ModelAlumno & { curso?: ModelCurso })[] = [];
   cursos: ModelCurso[] = [];
   filteredAlumnos: (ModelAlumno & { curso?: ModelCurso })[] = [];
@@ -27,6 +29,9 @@ export class ObservacionPage implements OnInit {
   ngOnInit() {
     this.loadAlumnos();
     this.loadCursos();
+  }
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
   }
 
   loadAlumnos() {

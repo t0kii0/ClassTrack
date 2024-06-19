@@ -115,10 +115,8 @@ const routes: Routes = [
     path: 'ver-anotacion',
     loadChildren: () => import('./ver-anotacion/ver-anotacion.module').then( m => m.VerAnotacionPageModule)
   },
-  {
-    path: 'ver-observacion',
-    loadChildren: () => import('./ver-observaciones/ver-observaciones.module').then( m => m.VerObservacionesPageModule)
-  },
+  { path: 'ver-observaciones', loadChildren: () => import('./ver-observaciones/ver-observaciones.module').then(m => m.VerObservacionesPageModule) },
+  
 ];
 
 

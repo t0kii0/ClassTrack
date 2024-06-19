@@ -4,6 +4,7 @@
   import { AlertController } from '@ionic/angular';
   import { CursoService } from '../services/curso/curso.service';
   import { ModelCurso } from '../modelos/cursoModel';
+  import { Router } from '@angular/router';
   import * as Papa from 'papaparse';
 
   interface CSVRow {
@@ -23,11 +24,13 @@
     providers: [UserService]
   })
   export class CrearUserPage implements OnInit {
+    showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
 
     FormularioAlumno: FormGroup;
     cursos: ModelCurso[] = [];
 
-    constructor(
+    constructor(private router: Router,
       private userService: UserService,
       private fb: FormBuilder, 
       private alertController: AlertController,
@@ -47,6 +50,9 @@
     ngOnInit() {
       this.loadCursos();
     }
+    toggleNotificationsMenu() {
+      this.showNotificationsMenu = !this.showNotificationsMenu;
+    }
 
     async agregarUsuario() {
       if (!this.FormularioAlumno.valid) {
@@ -65,6 +71,10 @@
         }
       );
     }
+    irAInicio() {
+      this.router.navigate(['/inicio']);
+    }
+  
 
     async presentAlert(title: string, message: string) {
       const alert = await this.alertController.create({

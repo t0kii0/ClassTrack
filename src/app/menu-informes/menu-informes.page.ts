@@ -14,10 +14,15 @@ export class MenuInformesPage implements OnInit {
 
   reporte() {
     this.router.navigate(['/reporte']);
-    console.log();
+    console.log("entrooo");
   }
   observaciones() {
     this.router.navigate(['/informe-observacion']);
     console.log(onclick);
   }
+  anotacion() {
+    this.router.navigate(['/informe-anotacion']);
+    console.log("entroo");
+    
+}
 }
