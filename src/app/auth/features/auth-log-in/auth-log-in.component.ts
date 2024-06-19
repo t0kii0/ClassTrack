@@ -4,8 +4,8 @@ import { AuthService } from '../../data-access/auth.service';
 import { Router, RouterModule } from '@angular/router';
 
 interface LogInForm {
-  email: FormControl<null | string>;
-  password: FormControl<null | string>;
+  email: FormControl<string | null>;
+  password: FormControl<string | null>;
 }
 
 @Component({
