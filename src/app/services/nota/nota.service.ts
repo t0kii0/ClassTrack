@@ -23,6 +23,10 @@ export class NotasService {
     return this._http.post<any>(this.superbaseUrl + 'NOTA', nuevaNota, { headers: this.supabaseHeaders });
   }
 
+  actualizarNotaAlumnoAsignatura(idNota: number, nota: number): Observable<any> {
+    return this._http.patch<any>(`${this.superbaseUrl}NOTA?id=eq.${idNota}`, { nota: nota }, { headers: this.supabaseHeaders });
+  }
+
   obtenerTodaNota(): Observable<ModelNota[]> {
     return this._http.get<ModelNota[]>(this.superbaseUrl + 'NOTA', { headers: this.supabaseHeaders })
       .pipe(

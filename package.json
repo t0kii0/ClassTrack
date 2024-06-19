@@ -30,6 +30,7 @@
     "@supabase/supabase-js": "^2.43.1",
     "ionicons": "^7.0.0",
     "jspdf": "^2.5.1",
+    "lodash": "^4.17.21",
     "papaparse": "^5.4.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -48,6 +49,7 @@
     "@capacitor/cli": "5.7.4",
     "@ionic/angular-toolkit": "^11.0.1",
     "@types/jasmine": "~5.1.0",
+    "@types/lodash": "^4.17.5",
     "@types/papaparse": "^5.3.14",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
@@ -62,9 +64,9 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "supabase": "^1.167.1",
     "tailwindcss": "^3.4.3",
-    "typescript": "~5.2.2",
-    "supabase": "^1.167.1"
+    "typescript": "~5.2.2"
   },
   "overrides": {
     "@supabase/supabase-js": {
