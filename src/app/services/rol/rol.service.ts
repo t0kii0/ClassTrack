@@ -6,7 +6,7 @@ import { ModelRol } from 'src/app/modelos/rolModel';
 @Injectable({
   providedIn: 'root'
 })
-export class ObservacionService {
+export class RolService {
   constructor(private _http: HttpClient) {}
 
   superbaseUrl = 'https://alzycbtmqtcdkkddvxms.supabase.co/rest/v1/';

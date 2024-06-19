@@ -48,12 +48,15 @@
           <ion-label position="floating">Fecha de Nacimiento</ion-label>
           <ion-datetime display-format="DD/MM/YYYY" formControlName="fecha_nacimiento" required></ion-datetime>
         </ion-item>
-        
         <ion-item>
-          <ion-label position="floating">rol</ion-label>
-          <ion-input type="text" formControlName="rol" required></ion-input>
+          <ion-label position="floating">Rol</ion-label>
+          <ion-select formControlName="rol" placeholder="Selecciona un Rol">
+            <ion-select-option *ngFor="let rol of rol" [value]="rol.rol">
+              {{ rol.rol }}
+            </ion-select-option>
+          </ion-select>
         </ion-item>
-        <ion-button type="submit" expand="medium" color="primary">Agregar Docente</ion-button>
+        <ion-button type="submit" expand="medium" color="primary">Agregar Asistente</ion-button>
       </form>
       <ion-button (click)="fileInput.click()" expand="medium" color="secondary">Cargar CSV</ion-button>
       <input type="file" #fileInput (change)="onFileChange($event)" style="display: none;" accept=".csv"/>
