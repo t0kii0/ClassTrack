@@ -112,6 +112,7 @@
     saveCsvData(data: CSVRow[]) {
       for (const userData of data) {
         const formattedData = {
+          id: null, // Asigna null o un valor temporal si es necesario
           rut: userData['Run'],
           nombre: userData['Nombres'],
           apellido: userData['Apellido Paterno'],
