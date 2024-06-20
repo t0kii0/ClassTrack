@@ -23,27 +23,27 @@
     </ion-list>
   </div>
 
-  <ion-content class="ion-padding">
+  <ion-content class="ion-padding"> 
     <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
     <div class="background-container">
       <ion-grid>
         <ion-row class="centered-row">
           <ion-col size="4" class="icon-container" (click)="crearDocente()" [routerLink]="['/crear-docente']">
-            <ion-icon name="people" class="large-icon"></ion-icon>
+            <img src="/assets/icon/crear-docente.png" class="large-icon" alt="Crear Docente">
             <ion-label class="otf-font2">Crear Docente</ion-label>
           </ion-col>
           <ion-col size="4" class="icon-container" (click)="configNotas()" [routerLink]="['/nota-config']">
-            <ion-icon name="book" class="large-icon"></ion-icon>
+            <img src="/assets/icon/nota.png" class="large-icon" alt="Configurar Notas">
             <ion-label class="otf-font2">Configurar Notas</ion-label>
           </ion-col>
         </ion-row>
         <ion-row class="centered-row">
           <ion-col size="4" class="icon-container" (click)="confiAsignatura()" [routerLink]="['/crear-asignatura']">
-            <ion-icon name="book" class="large-icon"></ion-icon>
+            <img src="/assets/icon/crear-asignatura.png" class="large-icon" alt="crear asignatura">
             <ion-label class="otf-font2">Configurar Asignatura</ion-label>
           </ion-col>
           <ion-col size="4" class="icon-container" (click)="agregar()" [routerLink]="['/crear-user']">
-            <ion-icon name="people" class="large-icon"></ion-icon>
+            <img src="/assets/icon/crear-alumno.png" class="large-icon" alt="Agregar alumno">
             <ion-label class="otf-font2">Agregar Alumno</ion-label>
           </ion-col>
         </ion-row> 
@@ -53,7 +53,7 @@
             <ion-label class="otf-font2">Permisos</ion-label>
           </ion-col>
           <ion-col size="4" class="icon-container" (click)="crearAsistente()" [routerLink]="['/crear-asistente']">
-            <ion-icon name="help-outline" class="large-icon"></ion-icon>
+            <img src="/assets/icon/asistente.png" class="large-icon" alt="Crear asistente">
             <ion-label class="otf-font2">Agregar Asistente</ion-label>
           </ion-col>
         </ion-row>

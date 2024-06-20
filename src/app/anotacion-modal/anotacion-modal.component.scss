@@ -1,99 +1,152 @@
-/* Estilos generales para el contenedor del formulario */
-.form-container {
+@font-face {
+    font-family: 'Kaushan';
+    src: url('/assets/fuentes/KaushanScript-Regular.otf') format('opentype');
+  }
+  
+  .otf-font {
+    font-family: 'Kaushan', sans-serif;
+  }
+  
+  /* Estilos generales para el contenedor del formulario */
+  .form-container {
     display: flex;
     flex-direction: column;
     padding: 25px;
     border-radius: 15px;
-    background-color: var(--ion-background-color); /* Color de fondo */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para efecto elevado */
-}
-
-/* Estilos para el formulario */
-.custom-form {
-    margin-bottom: 1rem; /* Margen inferior */
-    width: 100%; /* Ancho completo */
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco con 90% de opacidad */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    
+    
+  }
+  .background-image {
+    position: fixed; /* Fijar el fondo en la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/escuelatripulantes.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(10px);
+    opacity: 0.6;
+    z-index: -1; /* Colocar detrás del contenido */
+  }
+  /* Estilos para el formulario */
+  .custom-form { 
+    margin-bottom: 1rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* Espaciado entre elementos del formulario */
-}
-
-/* Estilos para el contenedor del textBox */
-.textBox-container {
-    background-color: #f9fafb; /* Fondo gris claro */
-    border-radius: 0.375rem; /* Bordes redondeados */
-    border: 1px solid #e5e7eb; /* Borde gris claro */
-}
-
-/* Estilos para el textBox */
-.textBox {
-    padding: 0.5rem 1rem; /* Padding */
-    background-color: white; /* Fondo blanco */
-    border-bottom-left-radius: 0.375rem; /* Esquinas redondeadas inferiores */
+    gap: 1rem;
+    opacity: 90%;
+  }
+  
+  /* Estilos para el contenedor del textBox */
+  .textBox-container {
+    background-color: #f9fafb;
+    border-radius: 10px; /* Bordes redondeados */
+    border: 1px solid #e5e7eb;
+  }
+  
+  /* Estilos para el textBox */
+  .textBox {
+    padding: 0.5rem 1rem;
+    background-color: white;
+    border-bottom-left-radius: 0.375rem;
     border-bottom-right-radius: 0.375rem;
-}
-
-/* Estilos para el contenido del textBox */
-.textBox-content {
+  } 
+  
+  /* Estilos para el contenido del textBox */
+  .textBox-content {
     display: block;
     padding: 0;
-    width: 100%; /* Ancho completo */
-    font-size: 0.875rem; /* Tamaño de fuente */
-    color: #2d3748; /* Color de texto */
-    background-color: white; /* Fondo blanco */
-    border: none; /* Sin borde */
-}
-
-/* Estilos para las opciones */
-.opciones {
+    width: 100%;
+    font-size: 0.875rem;
+    color: #2d3748;
+    background-color: white;
+    border: none;
+  }
+  
+  /* Estilos para las opciones */
+  .opciones {
     padding: 10px;
     display: flex;
-    gap: 0.5rem; /* Espaciado entre opciones */
-}
-
-/* Estilos para el contenedor de botones */
-.boton-container {
+    gap: 0.5rem;
+  }
+  
+  /* Estilos para el contenedor de botones */
+  .boton-container {
     padding: 0 10px;
     display: flex;
-    gap: 0.5rem; /* Espaciado entre botones */
-}
-
-/* Estilos para los botones */
-.boton {
+    gap: 0.5rem;
+  }
+  ion-header {
+    background-color: #000 !important; /* Asegúrate de usar negro sólido */
+    color: #fff !important; /* Asegúrate de que el texto sea blanco */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Mantén la sombra para profundidad */
+    position: relative; /* Asegura que el position relative está presente */
+    
+  }
+  
+  ion-toolbar {
+    --background: transparent !important; /* Evita que el ion-toolbar sobrescriba el color de fondo */
+  }
+  ion-toolbar {
+    --background: transparent !important; /* Evita que el ion-toolbar sobrescriba el color de fondo */
+  }
+  .title-container {
+    display: flex;
+    align-items: center; /* Alinear elementos verticalmente */
+    color: white;
+  
+  }
+  ion-icon{
+    color: white;
+  }
+  .header-logo {
+    height: 50px; /* Ajusta la altura del logo según sea necesario */
+    margin-right: 10px; /* Espacio a la derecha del logo */
+    
+  }
+  
+  /* Estilos para los botones */
+  .boton {
     display: inline-flex;
     align-items: center;
-    padding: 0.625rem 1.25rem; /* Padding */
-    font-size: 0.875rem; /* Tamaño de fuente */
-    font-weight: 500; /* Grosor de fuente */
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
     text-align: center;
-    color: white; /* Color de texto blanco */
-    border-radius: 0.375rem; /* Bordes redondeados */
+    color: white;
+    border-radius: 0.375rem;
     cursor: pointer;
-}
-
-/* Estilos para el botón de submit */
-.boton-submit {
-    background-color: #1d4ed8; /* Fondo azul */
-}
-
-.boton-submit:focus {
+  }
+  
+  /* Estilos para el botón de submit */
+  .boton-submit {
+    background-color: #1d4ed8;
+  }
+  
+  .boton-submit:focus {
     outline: none;
-    box-shadow: 0 0 0 0.25rem #93c5fd; /* Sombra de enfoque */
-}
-
-.boton-submit:hover {
-    background-color: #1e40af; /* Fondo azul oscuro al pasar el ratón */
-}
-
-/* Estilos para el botón de cancelar */
-.boton-cancel {
-    background-color: #4b5563; /* Fondo gris */
-}
-
-.boton-cancel:focus {
+    box-shadow: 0 0 0 0.25rem #93c5fd;
+  }
+  
+  .boton-submit:hover {
+    background-color: #1e40af;
+  }
+  
+  /* Estilos para el botón de cancelar */
+  .boton-cancel {
+    background-color: #4b5563;
+  }
+  
+  .boton-cancel:focus {
     outline: none;
-    box-shadow: 0 0 0 0.25rem #cbd5e1; /* Sombra de enfoque */
-}
-
-.boton-cancel:hover {
-    background-color: #374151; /* Fondo gris oscuro al pasar el ratón */
-}
+    box-shadow: 0 0 0 0.25rem #cbd5e1;
+  }
+  
+  .boton-cancel:hover {
+    background-color: #374151;
+  }
+  
