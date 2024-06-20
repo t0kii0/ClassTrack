@@ -5,16 +5,17 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <div class="header-left">
-          <ion-icon name="notifications-outline" class="notification-icon" (click)="toggleNotificationsMenu()"></ion-icon>
-
+        <div >
           <div class="user-name">{{ userEmail }}</div> <!-- Mostrar el email del usuario aquí -->
-        </div>
+        </div> 
 
         <div class="background-animation"></div>
         <ion-title class="otf-font">ClassTrack</ion-title>
+        
         <ion-buttons class="boton-logout" slot="end">
+          <ion-icon name="notifications-outline" class="notification-icon" (click)="toggleNotificationsMenu()"></ion-icon>
           <ion-button class="cerrar-sesion" (click)="logOut()">
+            
             <ion-title class="logout">Cerrar sesión</ion-title>
             <ion-icon name="log-out"></ion-icon>
           </ion-button>

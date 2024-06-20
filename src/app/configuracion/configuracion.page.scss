@@ -147,6 +147,14 @@ ion-icon {
   color: white;
 }
 
+.large-icon {
+  width: 50px;  /* Ajusta el tamaño del ícono según sea necesario */
+  height: 50px;
+  margin-bottom: 10px;  /* Espacio entre el ícono y la etiqueta */
+  display: inline-block;  /* Asegura que los íconos se alineen correctamente con el texto */
+  vertical-align: middle;  /* Centra verticalmente el ícono con el texto */
+}
+
 .header-logo {
   height: 50px; /* Ajusta la altura del logo según sea necesario */
   margin-right: 10px; /* Espacio a la derecha del logo */
@@ -156,6 +164,7 @@ ion-icon {
   font-size: 24px;
   cursor: pointer;
   margin-left: 10px;
+  padding: 10px;
 }
 
 .notifications-menu {
@@ -185,7 +194,7 @@ ion-header::after {
   animation: changeBorderColor 5s linear infinite alternate;
 }
 
-@keyframes changeBorderColor {
+@keyframes changeBorderColor { 
   0% { background-color: #1078ef; } /* Azul */
   20% { background-color: #24c8ff; } /* Turquesa */
   40% { background-color: #14e4ef; } /* Blanco */

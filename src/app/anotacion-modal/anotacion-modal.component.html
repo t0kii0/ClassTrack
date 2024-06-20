@@ -1,3 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="title-container">
+      <ion-title class="otf-font">Agregar Anotación</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="closeModal()">Cerrar</ion-button>
+      </ion-buttons>
+    </div>
+  </ion-toolbar>
+</ion-header> 
+
+<ion-content>
+<img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
 <div class="form-container">
   <form class="custom-form" (ngSubmit)="submitAnotacion()">
     <div class="textBox-container">
@@ -5,7 +18,7 @@
         <textarea id="editor" rows="12" [(ngModel)]="anotacionText" name="anotacionText" 
         class="textBox-content" placeholder="Escriba anotación..." required></textarea>
       </div>
-    </div>
+    </div> 
     <div class="opciones">
       <input type="radio" name="anotacionTipo" id="positiva" [(ngModel)]="anotacionTipo" [value]="true" />
       <label for="positiva">Positiva</label>
@@ -15,6 +28,8 @@
     <div class="boton-container">
       <button type="submit" class="boton boton-submit">Guardar Anotación</button>
       <button type="button" (click)="closeModal()" class="boton boton-cancel">Cancelar</button>
-    </div>
+    </div> 
   </form>
 </div>
+</ion-content>
+
