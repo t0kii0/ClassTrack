@@ -1,13 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>informeAsistencia</ion-title>
+    <ion-title>Informes Asistencia</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">informeAsistencia</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
+
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterAlumnos()"></ion-searchbar>
+  <ion-select placeholder="Seleccionar Curso" [(ngModel)]="selectedCurso" (ionChange)="filterAlumnos()">
+    <ion-select-option value="">Todos los Cursos</ion-select-option> <!-- Opción para deseleccionar -->
+    <ion-select-option *ngFor="let curso of cursos" [value]="curso.curso">
+      {{ curso.curso }}
+    </ion-select-option>
+  </ion-select>
+  <ion-list>
+    <ion-item *ngFor="let alumno of filteredAlumnos">
+      <ion-label>
+        <h2>{{ alumno.nombre }} {{ alumno.apellido }} {{ alumno.apmaterno }}</h2>
+        <p>RUT: {{ alumno.rut }}</p>
+        <p>Curso: {{ alumno.curso?.curso || 'Sin curso' }}</p>
+      </ion-label>
+      <ion-button (click)="presentModal(alumno.rut)">Generar PDF</ion-button>
+      <ion-button (click)="verAsistencia(alumno.rut)">Ver Asistencia</ion-button> <!-- Nuevo botón -->
+    </ion-item>
+  </ion-list>
 </ion-content>

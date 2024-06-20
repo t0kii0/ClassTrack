@@ -166,8 +166,6 @@ tfoot button {
   border-radius: 15px; /* Bordes redondeados */
 }
 
-
-/* Agrega esto a tu archivo CSS o dentro de una etiqueta <style> en tu componente */
 input[type="number"] {
   -webkit-appearance: none; /* Para navegadores basados en WebKit */
   -moz-appearance: textfield; /* Para navegadores basados en Mozilla */
@@ -179,6 +177,7 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 .notification-icon {
   font-size: 24px;
   cursor: pointer;
@@ -219,4 +218,10 @@ input[type="number"]::-webkit-outer-spin-button {
   60% { background-color: #2e44e7; } /* Azul */
   80% { background-color: #3d1abc; } /* Turquesa */
   100% { background-color: #9410ec; } /* Blanco */
+}
+
+.error-message {
+  color: red;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
 }

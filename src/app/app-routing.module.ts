@@ -2,18 +2,22 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import authRoutes from './auth/features/auth-shell/auth-routing';
+import { privateGuard, publicGuard } from './services/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'auth',
+    canActivate: [publicGuard],
     children: authRoutes
   },
   {
     path: 'home',
+    canActivate: [privateGuard],
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'inicio',
+    // canActivate: [privateGuard],
     loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
   },
   {
@@ -97,6 +101,7 @@ const routes: Routes = [
   },
   {
     path: 'menu-informes',
+    canActivate: [privateGuard],
     loadChildren: () => import('./menu-informes/menu-informes.module').then( m => m.MenuInformesPageModule)
   },
   {
@@ -116,6 +121,11 @@ const routes: Routes = [
     loadChildren: () => import('./ver-anotacion/ver-anotacion.module').then( m => m.VerAnotacionPageModule)
   },
   { path: 'ver-observaciones', loadChildren: () => import('./ver-observaciones/ver-observaciones.module').then(m => m.VerObservacionesPageModule) },
+  {
+    path: 'ver-asistencia',
+    loadChildren: () => import('./ver-asistencia/ver-asistencia.module').then( m => m.VerAsistenciaPageModule)
+  },
+
   
 ];
 

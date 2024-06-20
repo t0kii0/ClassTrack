@@ -45,19 +45,21 @@
                 </td>
                 <td class="px-4 py-3 border">
                   <div class="flex items-center">
-                    <ng-container class="bg-white text-black" *ngFor="let nota of alumnoConNotas.notas; let i = index">
+                    <ng-container class="bg-white text-black" *ngFor="let notaObj of alumnoConNotas.notas; let i = index">
                       N{{ i + 1 }}:
                       <input
                         type="number"
-                        [value]="nota"
+                        [value]="notaObj.nota"
                         (input)="updateNota(alumnoConNotas, i, $event)"
                         min="10"
                         max="70"
-                        class="input-nota border-b border-gray-600"
-                      />
+                        class="input-nota border-b border-gray-600" />
+                      <span *ngIf="errorMessages[alumnoConNotas.alumno.id] && errorMessages[alumnoConNotas.alumno.id][i]" class="error-message">
+                        {{ errorMessages[alumnoConNotas.alumno.id][i] }}
+                      </span>
                     </ng-container>
                   </div>
-                </td>
+                </td>                                      
                 <td class="px-4 py-3 border">
                   <div class="flex items-center font-semibold text-sm text-black visible-text">
                     {{ alumnoConNotas.promedio }}
@@ -68,7 +70,7 @@
             <tfoot>
               <tr>
                 <td colspan="3" class="text-center">
-                  <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-500 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
+                  <button type="submit" (click)="guardarCambios()" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-500 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
                     Guardar Cambios
                   </button>
                 </td>
