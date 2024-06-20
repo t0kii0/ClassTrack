@@ -7,8 +7,8 @@
     </ion-buttons>
     <div class="title-container">
       <ion-title class="otf-font">Crear Asistente Educativo</ion-title>
-      <ion-icon name="notifications-outline" class="notification-icon" (click)="toggleNotificationsMenu()"></ion-icon>
       <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo" (click)="irAInicio()">
+      <ion-icon name="notifications-outline" class="notification-icon" (click)="toggleNotificationsMenu()"></ion-icon>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -27,7 +27,7 @@
       <ion-card-title>Ingrese los datos del nuevo asistente</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="FormularioAsistente" (ngSubmit)="agregarAsistente()">
+      <form [formGroup]="FormularioAsistente" (ngSubmit)="submit()">
         <ion-item>
           <ion-label position="floating">RUT</ion-label>
           <ion-input type="text" formControlName="rut" required></ion-input>
@@ -58,7 +58,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating">Rol</ion-label>
-          <ion-select formControlName="rol" placeholder="Selecciona un Rol">
+          <ion-select formControlName="rol" required>
             <ion-select-option *ngFor="let rol of rol" [value]="rol.rol">
               {{ rol.rol }}
             </ion-select-option>
