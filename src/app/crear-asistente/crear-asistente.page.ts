@@ -16,10 +16,7 @@ interface CSVRow {
   'Apellido Materno': string;
   'Fecha Nacimiento': string;
   'rol': string;
-  'Email': string; // Añadido Email
-  'Password': string; // Añadido Password
 }
-
 
 @Component({
   selector: 'app-crear-asistente',
@@ -39,17 +36,17 @@ export class CrearAsistentePage implements OnInit {
     private fb: FormBuilder,
     private alertController: AlertController,
     private rolService: RolService,
-    private authService: AuthService, // Importa AuthService aquí
+    private authService: AuthService, // Inyectar AuthService
   ) {
     this.FormularioAsistente = this.fb.group({
       rut: ['', Validators.required],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       apmaterno: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]], // Añadir campo email
+      password: ['', Validators.required], // Añadir campo password
       fecha_nacimiento: ['', Validators.required],
-      rol: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]], // Añadido email
-      password: ['', Validators.required], // Añadido password
+      rol: ['', Validators.required] 
     });
   }
 
@@ -75,7 +72,22 @@ export class CrearAsistentePage implements OnInit {
         console.error('Error al cargar roles: ', error);
       }
     );
-  } 
+  }
+
+  async signUp(email: string, password: string): Promise<boolean> {
+    try {
+      const authResponse = await this.authService.signUp({ email, password });
+      console.log({ authResponse });
+      if (authResponse.error) {
+        console.error('Error al registrar el usuario:', authResponse.error);
+        return false;
+      }
+      return true;
+    } catch (error) {
+      console.error('Error al registrar el usuario:', error);
+      return false;
+    }
+  }
 
   async agregarAsistente() {
     if (!this.FormularioAsistente.valid) {
@@ -83,31 +95,20 @@ export class CrearAsistentePage implements OnInit {
       return;
     }
     const formDataAsistente = this.FormularioAsistente.value;
+    // Eliminar email y password del objeto que se enviará a asistenteService
+    delete formDataAsistente.email;
+    delete formDataAsistente.password;
 
-    // Crear usuario en el sistema de autenticación
-    try {
-      const { error, data } = await this.authService.signUpAsistente({
-        email: formDataAsistente.email,
-        password: formDataAsistente.password
-      });
-
-      if (error) throw error;
-
-      // Si el usuario fue creado correctamente, guarda los demás datos en la base de datos
-      this.asistenteService.addAsistente(formDataAsistente).subscribe(
-        (result) => {
-          console.log('Se guardó con éxito:', result);
-          this.presentAlert('Éxito', 'El asistente se ha guardado correctamente.');
-        },
-        (error) => {
-          console.error('Error al guardar el asistente: ', error);
-          this.presentAlert('Error', 'El asistente ya existe.');
-        }
-      );
-    } catch (error) {
-      console.error('Error al crear usuario asistente', error);
-      this.presentAlert('Error', 'Hubo un problema al crear el usuario asistente.');
-    }
+    this.asistenteService.addAsistente(formDataAsistente).subscribe(
+      (result) => {
+        console.log('Se guardó con éxito:', result);
+        this.presentAlert('Éxito', 'El asistente se ha guardado correctamente.');
+      },
+      (error) => {
+        console.error('Error al guardar el asistente: ', error);
+        this.presentAlert('Error', 'El asistente ya existe.');
+      }
+    );
   }
 
   async presentAlert(title: string, message: string) {
@@ -140,39 +141,36 @@ export class CrearAsistentePage implements OnInit {
         apellido: asistenteData['Apellido Paterno'],
         apmaterno: asistenteData['Apellido Materno'],
         fecha_nacimiento: new Date(asistenteData['Fecha Nacimiento']),
-        rol: asistenteData['rol'],
-        email: asistenteData['Email'], // Añadido email
-        password: asistenteData['Password'] // Añadido password
+        rol: asistenteData['rol']
       };
 
       console.log('Datos formateados:', formattedData);
 
-      // Crear usuario en el sistema de autenticación
-      this.authService.signUpAsistente({
-        email: formattedData.email,
-        password: formattedData.password
-      }).then(() => {
-        // Si el usuario fue creado correctamente, guarda los demás datos en la base de datos
-        this.asistenteService.addAsistente(formattedData).subscribe(
-          (result) => {
-            console.log('Asistente guardado con éxito:', result);
-          },
-          (error) => {
-            console.error('Error al guardar el asistente:', error);
-            if (error.status === 409) {
-              this.presentAlert('Error', `El asistente con RUT ${formattedData.rut} ya existe en la base de datos.`);
-            } else {
-              console.error('Detalles del error:', error.error);
-              this.presentAlert('Error', 'Se produjo un error al guardar el asistente.');
-            }
+      this.asistenteService.addAsistente(formattedData).subscribe(
+        (result) => {
+          console.log('Asistente guardado con éxito:', result);
+        },
+        (error) => {
+          console.error('Error al guardar el asistente:', error);
+          if (error.status === 409) {
+            this.presentAlert('Error', `El asistente con RUT ${formattedData.rut} ya existe en la base de datos.`);
+          } else {
+            console.error('Detalles del error:', error.error);
+            this.presentAlert('Error', 'Se produjo un error al guardar el asistente.');
           }
-        );
-      }).catch(error => {
-        console.error('Error al crear usuario asistente', error);
-        this.presentAlert('Error', 'Hubo un problema al crear el usuario asistente.');
-      });
+        }
+      );
     }
     this.presentAlert('Éxito', 'Todos los asistentes se han guardado correctamente.');
   }
 
+  async submit() {
+    const formData = this.FormularioAsistente.value;
+    const signUpSuccess = await this.signUp(formData.email, formData.password);
+    if (signUpSuccess) {
+      this.agregarAsistente();
+    } else {
+      this.presentAlert('Error', 'No se pudo registrar el usuario.');
+    }
+  }
 }
