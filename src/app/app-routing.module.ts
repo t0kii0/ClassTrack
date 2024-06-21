@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import authRoutes from './auth/features/auth-shell/auth-routing';
 import { privateGuard, publicGuard } from './services/guards/auth.guard';
+import { ReactiveFormsModule } from '@angular/forms'; // Importar ReactiveFormsModule
+
 
 const routes: Routes = [
   {
@@ -20,6 +22,7 @@ const routes: Routes = [
     // canActivate: [privateGuard],
     loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
   },
+  
   {
     path: 'lbclases',
     loadChildren: () => import('./lbclases/lbclases.module').then( m => m.LbclasesModule)
@@ -124,6 +127,11 @@ const routes: Routes = [
     path: 'ver-asistencia',
     loadChildren: () => import('./ver-asistencia/ver-asistencia.module').then( m => m.VerAsistenciaPageModule)
   },
+  {
+    path: 'agendar-cita',
+    loadChildren: () => import('./agendar-cita/agendar-cita.module').then( m => m.AgendarCitaPageModule)
+  },
+
 
   
 ];
@@ -131,6 +139,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    ReactiveFormsModule, // Importar ReactiveFormsModule aquí
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]

@@ -46,4 +46,7 @@ export class ConfiguracionPage implements OnInit {
   irAInicio() {
     this.router.navigate(['/inicio']);
   }
+  agendarCita() {
+    this.router.navigate(['/agendar-cita']);
+  }
 }
