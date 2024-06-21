@@ -101,7 +101,7 @@ const routes: Routes = [
   },
   {
     path: 'menu-informes',
-    canActivate: [privateGuard],
+    //canActivate: [privateGuard],
     loadChildren: () => import('./menu-informes/menu-informes.module').then( m => m.MenuInformesPageModule)
   },
   {

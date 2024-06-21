@@ -20,7 +20,7 @@ export class AnotacionService {
         tipo_anotacion: tipoanotacion,
         fecha: fecha,
         motivo: motivo,
-        id: 0
+        
     };
     return this._http.post<any>(this.superbaseUrl + 'ANOTACIONES',nuevaAnotacion, { headers: this.supabaseHeaders });
   }
