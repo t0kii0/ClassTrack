@@ -15,7 +15,10 @@
           "options": {
             "allowedCommonJsDependencies": [
               "lodash"
-           ],
+           ],"scripts": [
+              "src/assets/js/smtp.js",
+              "https://smtpjs.com/v3/smtp.js"
+            ],
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",

@@ -1,11 +1,12 @@
-// lbclases.page.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { ModelAlumno } from '../modelos/userModel';
 import { UserService } from '../services/users/users.service';
 import { NotasService } from '../services/nota/nota.service';
+import { NotificacionService } from '../services/notificaciones/notificacion.service'; // Importa el servicio de notificaciones
 import { ModelNota } from '../modelos/notamodel';
+import { ModelNotificacion } from '../modelos/notificacionModel'; // Importa el modelo de notificación
 
 interface AlumnoNotas {
   alumno: ModelAlumno;
@@ -20,7 +21,7 @@ interface AlumnoNotas {
 })
 export class LbclasesPage implements OnInit {
   showNotificationsMenu = false;
-  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
+  notifications: string[] = [];
   alumnos: ModelAlumno[] = [];
   alumnosConNotas: AlumnoNotas[] = [];
   idAsignatura?: number;
@@ -31,7 +32,8 @@ export class LbclasesPage implements OnInit {
     private route: ActivatedRoute,
     private alertController: AlertController,
     private alumnosService: UserService,
-    private notasService: NotasService
+    private notasService: NotasService,
+    private notificationService: NotificacionService // Inyecta el servicio de notificaciones
   ) {}
 
   ngOnInit() {
@@ -41,6 +43,7 @@ export class LbclasesPage implements OnInit {
       this.cargarAlumnos();
     });
   }
+  
   toggleNotificationsMenu() {
     this.showNotificationsMenu = !this.showNotificationsMenu;
   }
@@ -75,6 +78,7 @@ export class LbclasesPage implements OnInit {
           (notas: ModelNota[]) => {
             alumnoConNotas.notas = notas.map(nota => ({ id: nota['id'], nota: nota.nota }));
             alumnoConNotas.promedio = this.calcularPromedio(alumnoConNotas);
+            this.verificarNotasBajas(alumnoConNotas);
           },
           error => {
             console.error('Error al cargar notas:', error);
@@ -98,6 +102,7 @@ export class LbclasesPage implements OnInit {
       alumnoConNotas.notas[index].nota = nota;
       this.errorMessages[alumnoConNotas.alumno.id][index] = '';
       this.calcularPromedio(alumnoConNotas);
+      this.verificarNotasBajas(alumnoConNotas);
     } else {
       this.errorMessages[alumnoConNotas.alumno.id][index] = 'La nota debe estar entre 10 y 70';
     }
@@ -108,6 +113,54 @@ export class LbclasesPage implements OnInit {
     const suma = notasValidas.reduce((a, b) => a + b, 0);
     alumnoConNotas.promedio = notasValidas.length > 0 ? Math.round(suma / notasValidas.length) : 0;
     return alumnoConNotas.promedio;
+  }
+
+  verificarNotasBajas(alumnoConNotas: AlumnoNotas) {
+    const notasBajas = alumnoConNotas.notas.filter(notaObj => notaObj.nota < 40).length;
+    if (notasBajas >= 3) {
+      const mensaje = `El alumno ${alumnoConNotas.alumno.nombre} tiene ${notasBajas} notas menores a 40.`;
+      this.notifications.push(mensaje);
+      this.showNotificationsMenu = true;
+
+      // Crear y enviar notificaciones para psicopedagogo y admin
+      const roles = ['psicopedagogo', 'admin'];
+      roles.forEach(role => {
+        // Supongamos que tenemos una función que obtiene el correo electrónico basado en el rol
+        const email = this.obtenerCorreoPorRol(role);
+        if (email) {
+          const notification: ModelNotificacion = {
+            
+            mensaje: mensaje,
+            rol: role,
+            email: email, // Agrega el correo del destinatario
+            fecha: new Date()
+          };
+          this.notificationService.sendNotification(notification).subscribe(
+            response => {
+              console.log('Notificación enviada:', response);
+              // Llamar al método para enviar correo
+              this.enviarCorreo(email, 'Notificación de Notas Bajas', mensaje);
+            },
+            error => {
+              console.error('Error al enviar notificación:', error);
+            }
+          );
+        }
+      });
+    }
+  }
+
+  obtenerCorreoPorRol(role: string): string | null {
+    // Implementa la lógica para obtener el correo electrónico según el rol
+    // Podría ser una llamada a otro servicio o una consulta a la base de datos
+    if (role === 'ADMIN') {
+      return 'man.conchar@duocuc.cl'; // Reemplaza con la lógica real
+    } else if (role === 'ADMIN') {
+      return 'juan.figueroacid@hotmail.com'; // Reemplaza con la lógica real
+    } else if(role === 'ADMIN'){
+      return 'angelo.sepulveda1993@gmail.com'
+    }
+    return null;
   }
 
   guardarCambios() {
@@ -127,5 +180,39 @@ export class LbclasesPage implements OnInit {
         }
       });
     });
+
+    // Activar notificación después de guardar cambios
+    const mensaje = 'Alumno tiene notas baja a 4 ';
+    const notification: ModelNotificacion = {
+      mensaje: mensaje,
+      rol: 'ADMIN', // O cualquier otro rol relevante
+      email: 'man.conchar@duocuc.cl', // Reemplaza con el correo real
+      fecha: new Date()
+    };
+    this.notificationService.sendNotification(notification).subscribe(
+      response => {
+        console.log('Notificación de guardado enviada:', response);
+        // Puedes mostrar una alerta al usuario si es necesario
+        this.alertController.create({
+          header: 'Éxito',
+          message: mensaje,
+          buttons: ['OK']
+        }).then(alert => alert.present());
+      },
+      error => {
+        console.error('Error al enviar notificación de guardado:', error);
+      }
+    );
+  }
+
+  enviarCorreo(email: string, subject: string, message: string) {
+    this.notificationService.sendEmail(email, subject, message).subscribe(
+      response => {
+        console.log('Correo enviado:', response);
+      },
+      error => {
+        console.error('Error al enviar correo:', error);
+      }
+    );
   }
 }

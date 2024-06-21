@@ -6,6 +6,8 @@ import { UserService } from '../services/users/users.service';
 import { AnotacionService } from '../services/anotacion/anotacion.service';
 import { ModelAnotacion } from '../modelos/anotacionModel';
 import { AnotacionModalComponent } from '../anotacion-modal/anotacion-modal.component';
+import { NotificacionService } from '../services/notificaciones/notificacion.service'; // Importa el servicio de notificaciones
+import { ModelNotificacion } from '../modelos/notificacionModel'; // Importa el modelo de notificación
 
 @Component({
   selector: 'app-anotacion',
@@ -17,7 +19,7 @@ export class AnotacionPage implements OnInit {
   idAsignatura?: number;
   idCurso?: number; 
   anotacionText: string = '';
-  anotacionTipo: boolean = true;
+  anotacionTipo: boolean = true; // true para 'positiva', false para 'negativa'
   showNotificationsMenu = false;
   notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
 
@@ -27,7 +29,8 @@ export class AnotacionPage implements OnInit {
     private navController: NavController,
     private alumnosService: UserService,
     private route: ActivatedRoute,
-    private anotacionService: AnotacionService
+    private anotacionService: AnotacionService,
+    private notificationService: NotificacionService // Inyecta el servicio de notificaciones
   ) { }
 
   ngOnInit() {
@@ -37,17 +40,16 @@ export class AnotacionPage implements OnInit {
       this.cargarAlumnos();
     });
   }
+  
   toggleNotificationsMenu() {
     this.showNotificationsMenu = !this.showNotificationsMenu;
   }
-
 
   goBack() {
     this.navController.pop();
   }
 
   irAInicio() {
-    // Redirige a la página de inicio
     this.navController.navigateForward('/inicio');
   }
 
@@ -86,9 +88,11 @@ export class AnotacionPage implements OnInit {
 
   submitAnotacion() {
     if (this.idAsignatura !== undefined) {
-      const fecha = new Date(); // Puedes ajustar la fecha según tus necesidades
+      const fecha = new Date();
+      const idAlumno = 'idAlumno'; // Ajustar esto según cómo obtienes el id del alumno
+
       this.anotacionService.agregarAnotacionAlumnoAsignatura(
-        'idAlumno', // Deberás ajustar esto según cómo obtienes el id del alumno
+        idAlumno,
         this.idAsignatura,
         this.anotacionTipo,
         fecha,
@@ -96,7 +100,35 @@ export class AnotacionPage implements OnInit {
       ).subscribe(
         (response: any) => {
           console.log('Anotación guardada:', response);
-          // Manejar la respuesta, por ejemplo, mostrar una notificación al usuario
+
+          // Si la anotación es negativa, envía una notificación
+          if (!this.anotacionTipo) {
+            const mensaje = `Anotación negativa registrada para el alumno con ID: ${idAlumno}.`;
+            const notification: ModelNotificacion = {
+              mensaje: mensaje,
+              rol: 'ADMIN', // Cambia esto según el rol adecuado
+              email: 'man.conchar@duocuc.cl', // Reemplaza con el correo real o según tu lógica
+              fecha: new Date()
+            };
+
+            this.notificationService.sendNotification(notification).subscribe(
+              notificationResponse => {
+                console.log('Notificación enviada:', notificationResponse);
+                // Envía un correo de notificación si es necesario
+                this.notificationService.sendEmail(notification.email, 'Notificación de Anotación Negativa', mensaje).subscribe(
+                  emailResponse => {
+                    console.log('Correo enviado:', emailResponse);
+                  },
+                  emailError => {
+                    console.error('Error al enviar correo:', emailError);
+                  }
+                );
+              },
+              notificationError => {
+                console.error('Error al enviar notificación:', notificationError);
+              }
+            );
+          }
         },
         (error: any) => {
           console.error('Error al guardar anotación:', error);
@@ -106,5 +138,4 @@ export class AnotacionPage implements OnInit {
       console.error('idAsignatura no está definido');
     }
   }
-  
 }
