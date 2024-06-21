@@ -3,6 +3,7 @@ import { UserService } from '../services/users/users.service';
 import { NotasService } from '../services/nota/nota.service';
 import { CursoService } from '../services/curso/curso.service';
 import { AsignaturaService } from '../services/asignatura/asignatura.service';
+import { PromedioService } from '../services/promedio/promedio.service'; // Importa el servicio de Promedio
 import { ModelCurso } from '../modelos/cursoModel';
 import { ModelAsignatura } from '../modelos/asignaturaModel';
 import { NavController } from '@ionic/angular';
@@ -23,11 +24,11 @@ export class NotaConfigPage implements OnInit {
   notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3'];
 
   constructor(
-    
     private userService: UserService, 
     private notasService: NotasService, 
     private cursoService: CursoService,
     private asignaturaService: AsignaturaService,
+    private promedioService: PromedioService, // Inyecta el servicio de Promedio
     private navController: NavController
   ) {}
 
@@ -35,6 +36,7 @@ export class NotaConfigPage implements OnInit {
     this.cargarCursos();
     this.cargarAsignaturas();
   }
+
   irAInicio() {
     this.navController.navigateForward('/inicio');
   }
@@ -44,6 +46,7 @@ export class NotaConfigPage implements OnInit {
       this.cursos = cursos;
     });
   }
+
   toggleNotificationsMenu() {
     this.showNotificationsMenu = !this.showNotificationsMenu;
   }
@@ -76,6 +79,22 @@ export class NotaConfigPage implements OnInit {
               console.log('Nota agregada:', response);
             });
         }
+
+        // Verifica y agrega promedio si no existe
+        this.promedioService.verificarPromedio(alumno.rut, this.selectedAsignatura!).subscribe(existe => {
+          if (!existe) {
+            this.promedioService.agregarPromedio(alumno.rut, this.selectedAsignatura!, 0).subscribe(
+              response => {
+                console.log('Promedio agregado:', response);
+              },
+              error => {
+                console.error('Error al agregar promedio:', error);
+              }
+            );
+          } else {
+            console.log(`El promedio ya existe para el alumno ${alumno.rut} en la asignatura ${this.selectedAsignatura}`);
+          }
+        });
       });
     });
   }
