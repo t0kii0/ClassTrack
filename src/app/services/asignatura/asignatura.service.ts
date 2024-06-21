@@ -24,4 +24,13 @@ obtenerTodoAsignatura(): Observable<ModelAsignatura[]> {
       })
     );
 }
+actualizarPromedioCurso(idAsignatura: number, promedioCurso: number): Observable<any> {
+  const url = `${this.superbaseUrl}ASIGNATURA?id=eq.${idAsignatura}`;
+  return this._http.patch<any>(url, { prom_curso: promedioCurso }, { headers: this.supabaseHeaders });
+}
+obtenerAsignaturasConPromedioPorCurso(cursoId: number): Observable<ModelAsignatura[]> {
+  const url = `${this.superbaseUrl}ASIGNATURA?curso=eq.${cursoId}`;
+  return this._http.get<ModelAsignatura[]>(url);
+}
+
 }

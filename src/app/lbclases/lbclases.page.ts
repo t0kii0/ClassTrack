@@ -7,6 +7,8 @@ import { NotasService } from '../services/nota/nota.service';
 import { NotificacionService } from '../services/notificaciones/notificacion.service'; // Importa el servicio de notificaciones
 import { ModelNota } from '../modelos/notamodel';
 import { ModelNotificacion } from '../modelos/notificacionModel'; // Importa el modelo de notificación
+import { PromedioService } from '../services/promedio/promedio.service';
+import { AsignaturaService } from '../services/asignatura/asignatura.service';
 
 interface AlumnoNotas {
   alumno: ModelAlumno;
@@ -33,7 +35,9 @@ export class LbclasesPage implements OnInit {
     private alertController: AlertController,
     private alumnosService: UserService,
     private notasService: NotasService,
-    private notificationService: NotificacionService // Inyecta el servicio de notificaciones
+    private notificationService: NotificacionService, // Inyecta el servicio de notificaciones
+    private promedioService: PromedioService,
+    private asignaturaService: AsignaturaService
   ) {}
 
   ngOnInit() {
@@ -109,7 +113,7 @@ export class LbclasesPage implements OnInit {
   }
 
   calcularPromedio(alumnoConNotas: AlumnoNotas) {
-    const notasValidas = alumnoConNotas.notas.map(n => n.nota).filter(nota => nota >= 10 && nota <= 70);
+    const notasValidas = alumnoConNotas.notas.map(n => n.nota).filter(nota => nota >= 10 && nota <= 70);//para calcular el promedio la funcion solo toma valores enteros entre 10 y 70
     const suma = notasValidas.reduce((a, b) => a + b, 0);
     alumnoConNotas.promedio = notasValidas.length > 0 ? Math.round(suma / notasValidas.length) : 0;
     return alumnoConNotas.promedio;
@@ -165,6 +169,7 @@ export class LbclasesPage implements OnInit {
 
   guardarCambios() {
     this.alumnosConNotas.forEach(alumnoConNotas => {
+      // Actualizar notas del alumno
       alumnoConNotas.notas.forEach(notaObj => {
         if (notaObj.nota >= 10 && notaObj.nota <= 70) {
           if (notaObj.id) {
@@ -173,13 +178,45 @@ export class LbclasesPage implements OnInit {
                 console.log(`Nota actualizada para ${alumnoConNotas.alumno.rut}: ${notaObj.nota}`);
               },
               error => {
-                console.error('Error al actualizar nota:', error);
+                console.error('Error al actualizar la nota:', error);
               }
             );
           }
         }
       });
+  
+      // Actualizar el promedio después de guardar las notas
+      this.promedioService.verificarPromedio(alumnoConNotas.alumno.rut, this.idAsignatura!).subscribe(
+        existe => {
+          if (existe) {
+            this.promedioService.actualizarPromedio(alumnoConNotas.alumno.rut, this.idAsignatura!, alumnoConNotas.promedio).subscribe(
+              response => {
+                console.log(`Promedio actualizado para ${alumnoConNotas.alumno.rut}: ${alumnoConNotas.promedio}`);
+              },
+              error => {
+                console.error('Error al actualizar el promedio:', error);
+              }
+            );
+          } else {
+            console.warn(`No se encontró un promedio para el alumno ${alumnoConNotas.alumno.rut} en la asignatura ${this.idAsignatura}`);
+          }
+        },
+        error => {
+          console.error('Error al verificar el promedio:', error);
+        }
+      );
     });
+
+    // Calcular y actualizar el promedio del curso
+  const promedioCurso = this.calcularPromedioCurso();
+  this.asignaturaService.actualizarPromedioCurso(this.idAsignatura!, promedioCurso).subscribe(
+    response => {
+      console.log(`Promedio del curso actualizado para la asignatura ${this.idAsignatura}: ${promedioCurso}`);
+    },
+    error => {
+      console.error('Error al actualizar el promedio del curso:', error);
+    }
+  );
 
     // Activar notificación después de guardar cambios
     const mensaje = 'Alumno tiene notas baja a 4 ';
@@ -203,6 +240,12 @@ export class LbclasesPage implements OnInit {
         console.error('Error al enviar notificación de guardado:', error);
       }
     );
+  }
+
+  calcularPromedioCurso(): number {
+    const promedios = this.alumnosConNotas.map(alumnoConNotas => alumnoConNotas.promedio).filter(prom => prom > 0);
+    const sumaPromedios = promedios.reduce((a, b) => a + b, 0);
+    return promedios.length > 0 ? Math.round(sumaPromedios / promedios.length) : 0;
   }
 
   enviarCorreo(email: string, subject: string, message: string) {
