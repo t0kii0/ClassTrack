@@ -48,8 +48,13 @@ ion-grid {
   }
 
   .guardar-button {
-    position:static;// Posición fija para que se mantenga en la misma posición 
+    position: center;// Posición fija para que se mantenga en la misma posición 
     
+  }
+  item-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .background-image {
@@ -89,6 +94,7 @@ ion-grid {
   
   ion-toolbar {
     --background: transparent !important; /* Evita que el ion-toolbar sobrescriba el color de fondo */
+    
   }
   .title-container {
     display: flex;
@@ -108,6 +114,7 @@ ion-grid {
     font-size: 24px;
     cursor: pointer;
     margin-left: 10px;
+    padding: 10px; 
   }
   
   .notifications-menu {

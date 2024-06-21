@@ -5,6 +5,7 @@ import { CursoService } from '../services/curso/curso.service';
 import { AsignaturaService } from '../services/asignatura/asignatura.service';
 import { ModelCurso } from '../modelos/cursoModel';
 import { ModelAsignatura } from '../modelos/asignaturaModel';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-nota-config',
@@ -18,23 +19,33 @@ export class NotaConfigPage implements OnInit {
   selectedCurso: number | null = null;
   selectedAsignatura: number | null = null;
   numeroDeNotas: number | null = null;
+  showNotificationsMenu = false;
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3'];
 
   constructor(
+    
     private userService: UserService, 
     private notasService: NotasService, 
     private cursoService: CursoService,
-    private asignaturaService: AsignaturaService
+    private asignaturaService: AsignaturaService,
+    private navController: NavController
   ) {}
 
   ngOnInit() {
     this.cargarCursos();
     this.cargarAsignaturas();
   }
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
+  }
 
   cargarCursos() {
     this.cursoService.obtenerTodoCurso().subscribe(cursos => {
       this.cursos = cursos;
     });
+  }
+  toggleNotificationsMenu() {
+    this.showNotificationsMenu = !this.showNotificationsMenu;
   }
 
   cargarAsignaturas() {

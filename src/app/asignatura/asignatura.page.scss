@@ -11,6 +11,7 @@
 }
 .otf-font2 {
   font-family: 'Exo', sans-serif;
+  color: #1078ef  ; 
 }
 .background-image {
   position: fixed; /* Fijar el fondo en la pantalla */
@@ -99,6 +100,7 @@
     font-size: 24px;
     cursor: pointer;
     margin-left: 10px;
+    padding: 10px;
   }
   
   .notifications-menu {

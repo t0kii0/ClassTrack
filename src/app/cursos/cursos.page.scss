@@ -11,6 +11,9 @@
 }
 .otf-font2 {
   font-family: 'Exo', sans-serif;
+  color: #1078ef;
+  font-weight: bolder;
+  font-size: larger;
 }
 .cursos-page {
   background-color: transparent; /* Fondo transparente para que se vea el fondo estático */
@@ -122,6 +125,7 @@ ion-icon {
   font-size: 24px;
   cursor: pointer;
   margin-left: 10px;
+  padding: 10px;
 }
 
 .notifications-menu {
