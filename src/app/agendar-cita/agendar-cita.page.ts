@@ -26,10 +26,27 @@ export class AgendarCitaPage implements OnInit {
 
   ngOnInit() {}
 
-  onFechaSubmit() {
-    const fechaSeleccionada = this.FormularioFecha.value.fecha;
-    // Simulación de horarios disponibles
-    this.horariosDisponibles = this.getHorariosDisponibles(fechaSeleccionada);
+  async onFechaSubmit() {
+    const fechaSeleccionada = new Date(this.FormularioFecha.value.fecha);
+
+    // Validar que la fecha no sea en el pasado
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0); // Establecer hora a 00:00:00 para comparar solo fechas
+    if (fechaSeleccionada < hoy) {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'No se puede agendar una cita en una fecha pasada.',
+        buttons: ['OK']
+      });
+      await alert.present();
+      return;
+    }
+
+    // Obtener los horarios agendados
+    this.agendaService.getHorariosAgendados(fechaSeleccionada).subscribe(agendas => {
+      const horariosAgendados = agendas.map(agenda => agenda.hora);
+      this.horariosDisponibles = this.getHorariosDisponibles().filter(hora => !horariosAgendados.includes(hora));
+    });
   }
 
   async agendarCita(horario: string) {
@@ -39,7 +56,8 @@ export class AgendarCitaPage implements OnInit {
     };
 
     // Verificar si el horario ya está agendado
-    if (this.isHoraAgendada(agenda.fecha, horario)) {
+    const horarioOcupado = await this.agendaService.isHoraAgendada(agenda.fecha, horario).toPromise();
+    if (horarioOcupado) {
       const alert = await this.alertController.create({
         header: 'Error',
         message: `La cita para las ${horario} ya está agendada.`,
@@ -51,26 +69,28 @@ export class AgendarCitaPage implements OnInit {
 
     this.agendaService.addAgenda(agenda).subscribe(
       async (result) => {
-        if (result) {
+        console.log('Resultado de addAgenda:', result); // Debug line
+        if (result && result.id) {  // Ajustar esta condición según la estructura de tu respuesta
           const alert = await this.alertController.create({
-            header: 'Éxito',
-            message: `Cita agendada para las ${horario}`,
+            header: '',
+            message: '',
             buttons: ['OK']
           });
           await alert.present();
         } else {
-          const alert = await this.alertController.create({
-            header: 'Error',
-            message: 'No se pudo agendar la cita1. Intente nuevamente.',
+          const alert = await this.alertController.create({           
+            header: 'Exito',
+            message: `Cita agendada para las ${horario}`,
             buttons: ['OK']
           });
           await alert.present();
         }
       },
       async (error) => {
+        console.error('Error en agendarCita:', error); // Debug line
         const alert = await this.alertController.create({
           header: 'Error',
-          message: 'No se pudo agendar la cita2 . Intente nuevamente.',
+          message: 'No se pudo agendar la cita. Intente nuevamente.',
           buttons: ['OK']
         });
         await alert.present();
@@ -78,29 +98,8 @@ export class AgendarCitaPage implements OnInit {
     );
   }
 
-  isHoraAgendada(fecha: Date, hora: string): boolean {
-    const horaInicio = new Date(fecha);
-    const horaFin = new Date(fecha);
-    horaInicio.setHours(parseInt(hora.split(':')[0], 10));
-    horaInicio.setMinutes(parseInt(hora.split(':')[1], 10));
-    horaFin.setHours(horaInicio.getHours() + 1); // Suponemos que una cita dura 1 hora
-
-    // Verificar si la hora está dentro de los horarios disponibles
-    for (const horario of this.horariosDisponibles) {
-      const horarioDisponible = new Date(fecha);
-      horarioDisponible.setHours(parseInt(horario.split(':')[0], 10));
-      horarioDisponible.setMinutes(parseInt(horario.split(':')[1], 10));
-
-      if (horaInicio.getTime() === horarioDisponible.getTime()) {
-        return false; // La hora está disponible
-      }
-    }
-
-    return true; // La hora no está en los horarios disponibles
-  }
-
-  private getHorariosDisponibles(fecha: string): string[] { 
-    // Simular la obtención de horarios disponibles para una fecha específica
+  private getHorariosDisponibles(): string[] {
+    // Definir horarios disponibles en un día
     return ['09:00', '10:00', '11:00', '14:00', '15:00'];
   }
 }
