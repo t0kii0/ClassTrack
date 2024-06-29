@@ -59,4 +59,15 @@ export class AsistenteService {
         filter((asistente): asistente is ModelDocente => asistente !== null)
       );
   }
+  obtenerAsistentePorEmail(email: string): Observable<ModelAsistente | null> {
+    const url = `${this.superbaseUrl}ASISTENTE?email=eq.${email}`;
+    return this._http.get<ModelAsistente[]>(url, { headers: this.supabaseHeaders })
+      .pipe(
+        map(asistentes => asistentes.length > 0 ? asistentes[0] : null),
+        catchError(error => {
+          console.error('Error al obtener asistente por email:', error);
+          return of(null);
+        })
+      );
+  }
 }

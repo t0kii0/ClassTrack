@@ -14,6 +14,7 @@ interface CSVRow {
   'Apellido Materno': string;
   'Fecha Nacimiento': string;
   'rol': string;
+  'email': string;
 }
 
 @Component({
@@ -41,7 +42,8 @@ export class CrearDocentePage implements OnInit {
       apellido: ['', Validators.required],
       apmaterno: ['', Validators.required],
       fecha_nacimiento: ['', Validators.required],
-      rol: ['',] // Set default value to 'DOCENTE'
+      rol: ['',], // Set default value to 'DOCENTE'
+      email:['', Validators.required]
     });
   }
 
@@ -114,8 +116,8 @@ export class CrearDocentePage implements OnInit {
         apellido: docenteData['Apellido Paterno'],
         apmaterno: docenteData['Apellido Materno'],
         fecha_nacimiento: new Date(docenteData['Fecha Nacimiento']),
-        rol: docenteData['rol']
-        
+        rol: docenteData['rol'],
+        email: docenteData['email']
       };
 
       console.log('Datos formateados:', formattedData);

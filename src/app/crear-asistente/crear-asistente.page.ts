@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsistenteService } from '../services/asistente/asistente.service'; 
+import { AsistenteService } from '../services/asistente/asistente.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { CursoService } from '../services/curso/curso.service';
@@ -16,6 +16,7 @@ interface CSVRow {
   'Apellido Materno': string;
   'Fecha Nacimiento': string;
   'rol': string;
+  'email': string; // Añadir email al CSV
 }
 
 @Component({
@@ -32,12 +33,11 @@ export class CrearAsistentePage implements OnInit {
   rol: ModelRol [] = [];
 
   constructor(private router: Router,
-    private asistenteService: AsistenteService,
-    private fb: FormBuilder,
-    private alertController: AlertController,
-    private rolService: RolService,
-    private authService: AuthService, // Inyectar AuthService
-  ) {
+              private asistenteService: AsistenteService,
+              private fb: FormBuilder,
+              private alertController: AlertController,
+              private rolService: RolService,
+              private authService: AuthService) {
     this.FormularioAsistente = this.fb.group({
       rut: ['', Validators.required],
       nombre: ['', Validators.required],
@@ -46,7 +46,7 @@ export class CrearAsistentePage implements OnInit {
       email: ['', [Validators.required, Validators.email]], // Añadir campo email
       password: ['', Validators.required], // Añadir campo password
       fecha_nacimiento: ['', Validators.required],
-      rol: ['', Validators.required] 
+      rol: ['', Validators.required]
     });
   }
 
@@ -95,8 +95,8 @@ export class CrearAsistentePage implements OnInit {
       return;
     }
     const formDataAsistente = this.FormularioAsistente.value;
-    // Eliminar email y password del objeto que se enviará a asistenteService
-    delete formDataAsistente.email;
+
+    // No eliminar email del objeto que se enviará a asistenteService
     delete formDataAsistente.password;
 
     this.asistenteService.addAsistente(formDataAsistente).subscribe(
@@ -141,8 +141,10 @@ export class CrearAsistentePage implements OnInit {
         apellido: asistenteData['Apellido Paterno'],
         apmaterno: asistenteData['Apellido Materno'],
         fecha_nacimiento: new Date(asistenteData['Fecha Nacimiento']),
-        rol: asistenteData['rol']
+        rol: asistenteData['rol'],
+        email: asistenteData['email'] // Asegúrate de incluir el email
       };
+      
 
       console.log('Datos formateados:', formattedData);
 
