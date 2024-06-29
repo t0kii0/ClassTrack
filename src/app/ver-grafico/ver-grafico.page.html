@@ -6,29 +6,30 @@
       </ion-button>
     </ion-buttons>
     <ion-title>Ver Gráfico</ion-title>
+    <ion-button slot="end" (click)="generarReporte()">Generar Reporte</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div>
-    <ion-list>
-      <ion-item *ngFor="let alumno of alumnos">
-        <ion-label>
-          <h2>{{ alumno.nombre }} {{ alumno.apellido }} {{ alumno.apmaterno }}</h2>
-          <p>RUT: {{ alumno.rut }}</p>
-          <p>Curso: {{ alumno.curso.curso }}</p>
-        </ion-label>
-        <!-- Este segundo label lo dejamos así por ahora -->
-        <ion-label>
-          <p>Total de Días: {{ totalDias }}</p>
-          <p>Días Asistidos: {{ alumno.diasAsistidos }}</p>
-          <p>Porcentaje de Asistencia: {{ alumno.porcentajeAsistencia | number:'1.2-2' }}%</p>
-        </ion-label>
-        <!-- Este segundo label lo dejamos así por ahora -->
-      </ion-item>
-    </ion-list>
-  </div>
-  <div>
-    <canvas id="grafico"></canvas>
+  <div id="contentToConvert">
+    <div>
+      <ion-list>
+        <ion-item *ngFor="let alumno of alumnos">
+          <ion-label>
+            <h2>{{ alumno.nombre }} {{ alumno.apellido }} {{ alumno.apmaterno }}</h2>
+            <p>RUT: {{ alumno.rut }}</p>
+            <p>Curso: {{ alumno.curso.curso }}</p>
+          </ion-label>
+          <ion-label>
+            <p>Total de Días: {{ totalDias }}</p>
+            <p>Días Asistidos: {{ alumno.diasAsistidos }}</p>
+            <p>Porcentaje de Asistencia: {{ alumno.porcentajeAsistencia | number:'1.0' }}%</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div>
+      <canvas id="grafico"></canvas>
+    </div>
   </div>
 </ion-content>
