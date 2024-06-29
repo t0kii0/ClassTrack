@@ -23,11 +23,12 @@ export class MenuInformesPage implements OnInit {
   anotacion() {
     this.router.navigate(['/informe-anotacion']);
     console.log("entroo");
-    
-}
-asistencia(){
-  this.router.navigate(['/informe-asistencia']);
-  console.log("entramoos");
-  
-}
+  }
+  asistencia(){
+    this.router.navigate(['/informe-asistencia']);
+    console.log("entramoos");
+  }
+  grafico(){
+    this.router.navigate(['/reporte-grafico'])
+  }
 }

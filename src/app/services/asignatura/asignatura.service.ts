@@ -30,7 +30,7 @@ actualizarPromedioCurso(idAsignatura: number, promedioCurso: number): Observable
 }
 obtenerAsignaturasConPromedioPorCurso(cursoId: number): Observable<ModelAsignatura[]> {
   const url = `${this.superbaseUrl}ASIGNATURA?curso=eq.${cursoId}`;
-  return this._http.get<ModelAsignatura[]>(url);
+  return this._http.get<ModelAsignatura[]>(url, { headers: this.supabaseHeaders });
 }
 
 }

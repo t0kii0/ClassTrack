@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 import { ModelAsistencia } from 'src/app/modelos/asistenciaModel';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -33,6 +34,36 @@ export class AsistenciaService {
         catchError(error => {
           console.error('Error al obtener asistencia:', error);
           return of([]); // Devolver un array vacío en caso de error
+        })
+      );
+  }
+
+  obtenerFechasUnicasPorCurso(idCurso: number): Observable<Date[]> {
+    const url = `${this.superbaseUrl}ASISTENCIA?select=fecha_asis&id_curso=eq.${idCurso}`;
+    return this._http.get<ModelAsistencia[]>(url, { headers: this.supabaseHeaders })
+      .pipe(
+        map(asistencias => {
+          const fechasUnicas = new Set(asistencias.map(asistencia => new Date(asistencia.fecha_asis).toDateString()));
+          return Array.from(fechasUnicas).map(fechaStr => new Date(fechaStr));
+        }),
+        catchError(error => {
+          console.error('Error al obtener fechas únicas de asistencia:', error);
+          return of([]);
+        })
+      );
+  }
+
+  obtenerDiasNoAsistidosPorAlumno(idAlumno: string): Observable<number> {
+    const url = `${this.superbaseUrl}ASISTENCIA?select=*&id_alumno=eq.${idAlumno}&asistio=is.false`;
+    return this._http.get<ModelAsistencia[]>(url, { headers: this.supabaseHeaders })
+      .pipe(
+        map(asistencias => {
+          const fechasUnicasNoAsistidas = new Set(asistencias.map(asistencia => new Date(asistencia.fecha_asis).toDateString()));
+          return fechasUnicasNoAsistidas.size;
+        }),
+        catchError(error => {
+          console.error('Error al obtener días no asistidos:', error);
+          return of(0);
         })
       );
   }

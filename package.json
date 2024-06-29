@@ -28,6 +28,7 @@
     "@capacitor/status-bar": "5.0.7",
     "@ionic/angular": "^7.8.5",
     "@supabase/supabase-js": "^2.43.1",
+    "chart.js": "^4.4.3",
     "ionicons": "^7.0.0",
     "jspdf": "^2.5.1",
     "lodash": "^4.17.21",
