@@ -21,7 +21,6 @@
       <ion-label>
         <h2>Curso: {{ curso.curso }}</h2>
       </ion-label>
-      <ion-button>generar reporte</ion-button>
       <ion-button [routerLink]="['/ver-grafico']" [queryParams]="{ cursoId: curso.id_curso }">Ver Promedios</ion-button>
     </ion-item>
   </ion-list>
