@@ -11,3 +11,8 @@ export interface ModelAlumno {
   status?: string;
   observation?: string; 
 }
+
+export interface ModelAlumnoExtendido extends ModelAlumno {
+  diasAsistidos?: number;
+  porcentajeAsistencia?: number;
+}

@@ -21,7 +21,7 @@ export class UserService {
 obtenerTodoAlumno(curso?: number): Observable<ModelAlumno[]> {
   let url = this.superbaseUrl + 'ALUMNO';
   if (curso !== undefined) {
-    url += `?curso=eq.${curso}`;
+    url += `?curso=eq.${curso}&select=*,curso:CURSO(curso)`;
   }
   return this._http.get<ModelAlumno[]>(url, { headers: this.supabaseHeaders })
     .pipe(

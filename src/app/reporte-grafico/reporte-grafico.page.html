@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/menu-informes" routerDirection="back">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button> 
+    </ion-buttons>
+    <div class="title-container">
+      <ion-title class="otf-font">Reportes</ion-title>
+      <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo">
+      <ion-icon name="notifications-outline" class="notification-icon" (click)="toggleNotificationsMenu()"></ion-icon>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
+  
+  <ion-list>
+    <ion-item *ngFor="let curso of cursos">
+      <ion-label>
+        <h2>Curso: {{ curso.curso }}</h2>
+      </ion-label>
+      <ion-button>generar reporte</ion-button>
+      <ion-button [routerLink]="['/ver-grafico']" [queryParams]="{ cursoId: curso.id_curso }">Ver Promedios</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
