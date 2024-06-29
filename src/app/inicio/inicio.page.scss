@@ -232,3 +232,16 @@ ion-header::after {
   80% { background-color: #3d1abc; } /* Turquesa */
   100% { background-color: #9410ec; } /* Blanco */
 }
+.user-info-header {
+  display: flex;  /* Cambia el layout a flex para alinear los elementos en línea */
+  align-items: center;  /* Alinea los elementos verticalmente en el centro */
+  margin-right: auto;  /* Empuja el contenido hacia la izquierda */
+  margin-left: 10px;  /* Espacio entre el botón del menú y los datos del usuario */
+  font-size: 14px;
+  color: var(--ion-color-white);  /* O el color que prefieras */
+}
+
+.user-info-header span {
+  margin: 0 10px;  /* Añade espacio a la derecha e izquierda de cada elemento */
+  white-space: nowrap;  /* Evita que el texto se divida en múltiples líneas */
+}
