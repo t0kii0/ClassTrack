@@ -67,4 +67,24 @@ export class AsistenciaService {
         })
       );
   }
+  contarInasistenciasSeguidas(idAlumno: string): Observable<number> {
+    const url = `${this.superbaseUrl}ASISTENCIA?select=fecha_asis&id_alumno=eq.${idAlumno}&asistio=is.false&order=fecha_asis.desc`;
+    return this._http.get<ModelAsistencia[]>(url, { headers: this.supabaseHeaders })
+      .pipe(
+        map(asistencias => {
+          let contador = 0;
+          for (const asistencia of asistencias) {
+            contador++;
+            if (contador === 3) {
+              return contador;
+            }
+          }
+          return contador;
+        }),
+        catchError(error => {
+          console.error('Error al contar inasistencias seguidas:', error);
+          return of(0);
+        })
+      );
+  }
 }

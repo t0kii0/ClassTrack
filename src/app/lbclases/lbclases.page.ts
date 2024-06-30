@@ -126,45 +126,25 @@ export class LbclasesPage implements OnInit {
       this.notifications.push(mensaje);
       this.showNotificationsMenu = true;
 
-      // Crear y enviar notificaciones para psicopedagogo y admin
-      const roles = ['psicopedagogo', 'admin'];
-      roles.forEach(role => {
-        // Supongamos que tenemos una función que obtiene el correo electrónico basado en el rol
-        const email = this.obtenerCorreoPorRol(role);
-        if (email) {
-          const notification: ModelNotificacion = {
-            
-            mensaje: mensaje,
-            rol: role,
-            email: email, // Agrega el correo del destinatario
-            fecha: new Date()
-          };
-          this.notificationService.sendNotification(notification).subscribe(
-            response => {
-              console.log('Notificación enviada:', response);
-              // Llamar al método para enviar correo
-              this.enviarCorreo(email, 'Notificación de Notas Bajas', mensaje);
-            },
-            error => {
-              console.error('Error al enviar notificación:', error);
-            }
-          );
-        }
+      // Crear y enviar notificaciones para PSICOPEDAGOGO y ADMIN
+      const roles = ['PSICOPEDAGOGO', 'ADMIN'];
+      roles.forEach(rol => {
+        const notification: ModelNotificacion = {
+          mensaje: mensaje,
+          rol: rol,
+          
+          fecha: new Date()
+        };
+        this.notificationService.sendNotification(notification).subscribe(
+          response => {
+            console.log(`Notificación enviada para rol ${rol}:`, response);
+          },
+          error => {
+            console.error('Error al enviar notificación:', error);
+          }
+        );
       });
     }
-  }
-
-  obtenerCorreoPorRol(role: string): string | null {
-    // Implementa la lógica para obtener el correo electrónico según el rol
-    // Podría ser una llamada a otro servicio o una consulta a la base de datos
-    if (role === 'ADMIN') {
-      return 'man.conchar@duocuc.cl'; // Reemplaza con la lógica real
-    } else if (role === 'ADMIN') {
-      return 'juan.figueroacid@hotmail.com'; // Reemplaza con la lógica real
-    } else if(role === 'ADMIN'){
-      return 'angelo.sepulveda1993@gmail.com'
-    }
-    return null;
   }
 
   guardarCambios() {
@@ -208,54 +188,45 @@ export class LbclasesPage implements OnInit {
     });
 
     // Calcular y actualizar el promedio del curso
-  const promedioCurso = this.calcularPromedioCurso();
-  this.asignaturaService.actualizarPromedioCurso(this.idAsignatura!, promedioCurso).subscribe(
-    response => {
-      console.log(`Promedio del curso actualizado para la asignatura ${this.idAsignatura}: ${promedioCurso}`);
-    },
-    error => {
-      console.error('Error al actualizar el promedio del curso:', error);
-    }
-  );
+    const promedioCurso = this.calcularPromedioCurso();
+    this.asignaturaService.actualizarPromedioCurso(this.idAsignatura!, promedioCurso).subscribe(
+      response => {
+        console.log(`Promedio del curso actualizado para la asignatura ${this.idAsignatura}: ${promedioCurso}`);
+      },
+      error => {
+        console.error('Error al actualizar el promedio del curso:', error);
+      }
+    );
 
     // Activar notificación después de guardar cambios
     const mensaje = 'Alumno tiene notas baja a 4 ';
-    const notification: ModelNotificacion = {
-      mensaje: mensaje,
-      rol: 'ADMIN', // O cualquier otro rol relevante
-      email: 'man.conchar@duocuc.cl', // Reemplaza con el correo real
-      fecha: new Date()
-    };
-    this.notificationService.sendNotification(notification).subscribe(
-      response => {
-        console.log('Notificación de guardado enviada:', response);
-        // Puedes mostrar una alerta al usuario si es necesario
-        this.alertController.create({
-          header: 'Éxito',
-          message: mensaje,
-          buttons: ['OK']
-        }).then(alert => alert.present());
-      },
-      error => {
-        console.error('Error al enviar notificación de guardado:', error);
-      }
-    );
+    const roles = ['ADMIN', 'PSICOPEDAGOGO'];
+    roles.forEach(rol => {
+      const notification: ModelNotificacion = {
+        mensaje: mensaje,
+        rol: rol,
+        fecha: new Date()
+      };
+      this.notificationService.sendNotification(notification).subscribe(
+        response => {
+          console.log(`Notificación de guardado enviada para rol ${rol}:`, response);
+          // Puedes mostrar una alerta al usuario si es necesario
+          this.alertController.create({
+            header: 'Éxito',
+            message: mensaje,
+            buttons: ['OK']
+          }).then(alert => alert.present());
+        },
+        error => {
+          console.error('Error al enviar notificación de guardado:', error);
+        }
+      );
+    });
   }
 
   calcularPromedioCurso(): number {
     const promedios = this.alumnosConNotas.map(alumnoConNotas => alumnoConNotas.promedio).filter(prom => prom > 0);
     const sumaPromedios = promedios.reduce((a, b) => a + b, 0);
     return promedios.length > 0 ? Math.round(sumaPromedios / promedios.length) : 0;
-  }
-
-  enviarCorreo(email: string, subject: string, message: string) {
-    this.notificationService.sendEmail(email, subject, message).subscribe(
-      response => {
-        console.log('Correo enviado:', response);
-      },
-      error => {
-        console.error('Error al enviar correo:', error);
-      }
-    );
   }
 }

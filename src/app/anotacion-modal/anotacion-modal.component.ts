@@ -35,33 +35,27 @@ export class AnotacionModalComponent implements OnInit {
       (response: any) => {
         console.log('Anotación guardada:', response);
 
-        // Si la anotación es negativa, envía una notificación
+        // Si la anotación es negativa, envía una notificación a ADMIN y PSICOLOGO
         if (!this.anotacionTipo) {
           const mensaje = `Anotación negativa registrada para el alumno con ID: ${this.idAlumno}.`;
-          const notification: ModelNotificacion = {
-            mensaje: mensaje,
-            rol: 'ADMIN', // Cambia esto según el rol adecuado
-            email: 'man.conchar@duocuc.cl', // Reemplaza con el correo real o según tu lógica
-            fecha: new Date()
-          };
+          const roles = ['ADMIN', 'PSICOLOGO'];
+          
+          roles.forEach(rol => {
+            const notification: ModelNotificacion = {
+              mensaje: mensaje,
+              rol: rol,
+              fecha: new Date()
+            };
 
-          this.notificationService.sendNotification(notification).subscribe(
-            notificationResponse => {
-              console.log('Notificación enviada:', notificationResponse);
-              // Envía un correo de notificación si es necesario
-              this.notificationService.sendEmail(notification.email, 'Notificación de Anotación Negativa', mensaje).subscribe(
-                emailResponse => {
-                  console.log('Correo enviado:', emailResponse);
-                },
-                emailError => {
-                  console.error('Error al enviar correo:', emailError);
-                }
-              );
-            },
-            notificationError => {
-              console.error('Error al enviar notificación:', notificationError);
-            }
-          );
+            this.notificationService.sendNotification(notification).subscribe(
+              notificationResponse => {
+                console.log(`Notificación enviada para rol ${rol}:`, notificationResponse);
+              },
+              notificationError => {
+                console.error(`Error al enviar notificación para rol ${rol}:`, notificationError);
+              }
+            );
+          });
         }
 
         this.modalController.dismiss({ data: response });

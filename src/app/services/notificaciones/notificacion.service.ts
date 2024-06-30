@@ -44,7 +44,4 @@ sendEmail(email: string, subject: string, message: string): Observable<any> {
       })
     );
 }
-
-
-
 }
