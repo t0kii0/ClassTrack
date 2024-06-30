@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/data-access/auth.service';
-import { AsistenteService } from '../services/asistente/asistente.service'; // Importa el servicio
+import { AsistenteService } from '../services/asistente/asistente.service';
+import { NotificacionService } from '../services/notificaciones/notificacion.service';
 import { ModelAsistente } from '../modelos/asistenteModel';
+import { ModelNotificacion } from '../modelos/notificacionModel';
 
 @Component({
   selector: 'app-inicio',
@@ -11,15 +13,16 @@ import { ModelAsistente } from '../modelos/asistenteModel';
 })
 export class InicioPage implements OnInit {
   showNotificationsMenu = false;
-  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3'];
+  notifications: ModelNotificacion[] = [];
   opcionSeleccionada: string = '';
   userEmail: string = '';
-  userData: ModelAsistente | null = null; // Datos adicionales del usuario
+  userData: ModelAsistente | null = null;
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private asistenteService: AsistenteService // Inyecta el servicio
+    private asistenteService: AsistenteService,
+    private notificacionService: NotificacionService
   ) { }
 
   ngOnInit() {
@@ -31,7 +34,7 @@ export class InicioPage implements OnInit {
       const session = await this.authService.session();
       if (session?.data?.session?.user?.email) {
         this.userEmail = session.data.session.user.email;
-        this.getUserData(this.userEmail); // Llama al método para obtener los datos del asistente
+        this.getUserData(this.userEmail);
       }
     } catch (error) {
       console.error('Error obteniendo la sesión del usuario:', error);
@@ -43,7 +46,8 @@ export class InicioPage implements OnInit {
       (asistente) => {
         if (asistente) {
           this.userData = asistente;
-          console.log('Datos del asistente:', this.userData); // Verifica los datos obtenidos
+          console.log('Datos del asistente:', this.userData);
+          this.getNotificationsByUserRole(this.userData.rol);
         } else {
           console.log('No se encontró un asistente con el email:', email);
         }
@@ -54,8 +58,15 @@ export class InicioPage implements OnInit {
     );
   }
 
-  irAInicio() {
-    this.router.navigate(['/inicio']);
+  getNotificationsByUserRole(role: string) {
+    this.notificacionService.getNotificationsByRole(role).subscribe(
+      (notificaciones) => {
+        this.notifications = notificaciones;
+      },
+      (error) => {
+        console.error('Error al obtener las notificaciones:', error);
+      }
+    );
   }
 
   toggleNotificationsMenu() {

@@ -29,10 +29,11 @@
     <div class="notifications-menu" [class.show]="showNotificationsMenu">
       <ion-list>
         <ion-item *ngFor="let notification of notifications">
-          {{ notification }}
+          {{ notification.mensaje }} <!-- Asegúrate de que `mensaje` sea el campo correcto -->
         </ion-item>
       </ion-list>
     </div>
+    
 
     <ion-content class="ion-padding">
       <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">

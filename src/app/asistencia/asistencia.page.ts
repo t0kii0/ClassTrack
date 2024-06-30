@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModelAlumno } from '../modelos/userModel';
 import { UserService } from '../services/users/users.service';
 import { AsistenciaService } from '../services/asistencia/asistencia.service';
+import { NotificacionService } from '../services/notificaciones/notificacion.service';
+import { ModelNotificacion } from '../modelos/notificacionModel';
 
 @Component({
   selector: 'app-asistencia',
@@ -16,12 +18,13 @@ export class AsistenciaPage implements OnInit {
   idCurso?: number;
   cambiosGuardados: boolean = true;
   showNotificationsMenu = false;
-  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3']; // Ejemplo de notificaciones
+  notifications = ['Notificación 1', 'Notificación 2', 'Notificación 3'];
 
   constructor(
     private alertController: AlertController,
     private alumnosService: UserService,
     private asistenciaService: AsistenciaService,
+    private notificationService: NotificacionService,
     private router: Router,
     private route: ActivatedRoute,
   ) {}
@@ -33,6 +36,7 @@ export class AsistenciaPage implements OnInit {
       this.cargarAlumnos();
     });
   }
+
   toggleNotificationsMenu() {
     this.showNotificationsMenu = !this.showNotificationsMenu;
   }
@@ -41,7 +45,7 @@ export class AsistenciaPage implements OnInit {
     if (this.idCurso !== undefined) {
       this.alumnosService.obtenerTodoAlumno(this.idCurso).subscribe(
         (alumnos: ModelAlumno[]) => {
-          this.alumnos = alumnos.map(alumno => ({ ...alumno, status: '1' })); // Todos marcados como "Presente" por defecto
+          this.alumnos = alumnos.map(alumno => ({ ...alumno, status: '1' })); 
           console.log(alumnos);
         },
         (error: any) => {
@@ -53,7 +57,7 @@ export class AsistenciaPage implements OnInit {
 
   markAttendance(alumno: ModelAlumno, status: string) {
     alumno.status = status;
-    if (status !== '3') { // "Justificado" es 3
+    if (status !== '3') { 
       alumno.observation = ''; 
     }
     this.cambiosGuardados = false; 
@@ -80,6 +84,7 @@ export class AsistenciaPage implements OnInit {
 
       try {
         await this.asistenciaService.agregarAsistencia(nuevaAsistencia).toPromise();
+        await this.verificarInasistencias(alumno.rut);
       } catch (error) {
         console.error('Error al guardar asistencia:', error);
         errorOccurred = true;
@@ -92,6 +97,42 @@ export class AsistenciaPage implements OnInit {
       this.mostrarMensajeExito('Asistencia guardada correctamente.');
       this.cambiosGuardados = true;
     }
+  }
+
+  async verificarInasistencias(rut: string) {
+    try {
+      const inasistenciasSeguidas = await this.asistenciaService.contarInasistenciasSeguidas(rut).toPromise();
+      
+      if ((inasistenciasSeguidas ?? 0) >= 3) {
+        const mensaje = `El alumno con RUT ${rut} ha faltado 3 días seguidos.`;
+        this.enviarNotificacionesPorRoles(mensaje, ['ADMIN', 'ASISTENTE SOCIAL']);
+      }
+    } catch (error) {
+      console.error('Error al verificar inasistencias seguidas:', error);
+    }
+  }
+
+  enviarNotificacionesPorRoles(mensaje: string, roles: string[]) {
+    for (const rol of roles) {
+      this.sendNotification(mensaje, rol);
+    }
+  }
+
+  sendNotification(mensaje: string, rol: string) {
+    const notification: ModelNotificacion = {
+      mensaje: mensaje,
+      rol: rol,
+      fecha: new Date()
+    };
+
+    this.notificationService.sendNotification(notification).subscribe(
+      notificationResponse => {
+        console.log(`Notificación enviada para rol ${rol}:`, notificationResponse);
+      },
+      notificationError => {
+        console.error(`Error al enviar notificación para rol ${rol}:`, notificationError);
+      }
+    );
   }
 
   async mostrarMensajeError(mensaje: string) {

@@ -55,30 +55,23 @@ export class ObservacionModalComponent implements OnInit {
 
   sendNotification() {
     const mensaje = `Se ha registrado una observación para el alumno con ID: ${this.idAlumno}.`;
-    const notification: ModelNotificacion = {
-      mensaje: mensaje,
-      rol: 'ADMIN', // Cambia esto según el rol adecuado o usa lógica para determinar el rol correcto
-      email: 'man.conchar@duocuc.cl', // Reemplaza con el correo real o ajusta según tu lógica
-      fecha: new Date()
-    };
+    const roles = ['ADMIN', 'PSICOLOGO'];
 
-    this.notificationService.sendNotification(notification).subscribe(
-      notificationResponse => {
-        console.log('Notificación enviada:', notificationResponse);
+    roles.forEach(rol => {
+      const notification: ModelNotificacion = {
+        mensaje: mensaje,
+        rol: rol,
+        fecha: new Date()
+      };
 
-        // Envía un correo de notificación si es necesario
-        this.notificationService.sendEmail(notification.email, 'Notificación de Observación', mensaje).subscribe(
-          emailResponse => {
-            console.log('Correo enviado:', emailResponse);
-          },
-          emailError => {
-            console.error('Error al enviar correo:', emailError);
-          }
-        );
-      },
-      notificationError => {
-        console.error('Error al enviar notificación:', notificationError);
-      }
-    );
+      this.notificationService.sendNotification(notification).subscribe(
+        notificationResponse => {
+          console.log(`Notificación enviada para rol ${rol}:`, notificationResponse);
+        },
+        notificationError => {
+          console.error(`Error al enviar notificación para rol ${rol}:`, notificationError);
+        }
+      );
+    });
   }
 }

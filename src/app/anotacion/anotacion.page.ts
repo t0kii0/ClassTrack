@@ -106,23 +106,14 @@ export class AnotacionPage implements OnInit {
             const mensaje = `Anotación negativa registrada para el alumno con ID: ${idAlumno}.`;
             const notification: ModelNotificacion = {
               mensaje: mensaje,
-              rol: 'ADMIN', // Cambia esto según el rol adecuado
-              email: 'man.conchar@duocuc.cl', // Reemplaza con el correo real o según tu lógica
+              rol: 'ADMIN', // Cambia esto según el rol adecuado          
               fecha: new Date()
             };
 
             this.notificationService.sendNotification(notification).subscribe(
               notificationResponse => {
                 console.log('Notificación enviada:', notificationResponse);
-                // Envía un correo de notificación si es necesario
-                this.notificationService.sendEmail(notification.email, 'Notificación de Anotación Negativa', mensaje).subscribe(
-                  emailResponse => {
-                    console.log('Correo enviado:', emailResponse);
-                  },
-                  emailError => {
-                    console.error('Error al enviar correo:', emailError);
-                  }
-                );
+                
               },
               notificationError => {
                 console.error('Error al enviar notificación:', notificationError);
