@@ -5,12 +5,17 @@
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Ver Gráfico</ion-title>
+    <div class="title-container">
+      <ion-title class="otf-font">Ver Graficos</ion-title>
     <ion-button slot="end" (click)="generarReporte()">Generar Reporte</ion-button>
+      <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo">
+    </div>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
   <div id="contentToConvert">
     <div>
       <ion-list>

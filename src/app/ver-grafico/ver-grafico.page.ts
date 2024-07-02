@@ -123,7 +123,7 @@ export class VerGraficoPage implements OnInit {
     const logo = new Image();
     logo.src = 'assets/logo.png'; // Asegúrate de que esta ruta es correcta
 
-    logo.onload = () => {
+    logo.onload = () => { 
       // Agregar el logo en cada página
       const addLogo = (doc: jsPDF) => {
         const pageCount = doc.getNumberOfPages();

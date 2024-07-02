@@ -99,12 +99,18 @@ export class ReportePage implements OnInit {
 
   generarPDF(alumno: ModelAlumno, notas: ModelNota[], asignaturas: ModelAsignatura[]) {
     const doc = new jsPDF();
+    const imgData = '/assets/reporte.png'; // Ruta de la imagen de fondo
+
+    // Cargar imagen de fondo
+    doc.addImage(imgData, 'JPEG',0, 0, 210, 297); // A4 tamaño en mm
+    
     doc.setFontSize(16);
     doc.text('Reporte de Notas', 10, 10);
     doc.setFontSize(12);
     doc.text(`Alumno: ${alumno.nombre} ${alumno.apellido} ${alumno.apmaterno}`, 10, 20);
     doc.text(`RUT: ${alumno.rut}`, 10, 30);
     doc.text(`Curso: ${alumno.curso}`, 10, 40);
+    
   
     let yPosition = 50;
   

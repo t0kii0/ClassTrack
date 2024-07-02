@@ -35,19 +35,20 @@ ion-toolbar {
     align-items: center; /* Alinear elementos verticalmente */
     color: white;
   }
-  ion-icon{
-    color: white;
-  }
+  
   .header-logo {
     height: 50px; /* Ajusta la altura del logo según sea necesario */
     margin-right: 10px; /* Espacio a la derecha del logo */
     
   } 
+  ion-icon{
+    color: white;
+  }
   .notification-icon {
     font-size: 24px;
     cursor: pointer;
     margin-left: 10px;
-    padding: 10px;
+    padding: 10px; 
   }
   
   .notifications-menu {

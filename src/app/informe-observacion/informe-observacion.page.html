@@ -5,7 +5,10 @@
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="otf-font">Informes Observación</ion-title>
+    <div class="title-container">
+      <ion-title class="otf-font">Informes Observación</ion-title>
+      <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo" >
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +17,7 @@
 
   <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterAlumnos()"></ion-searchbar>
   <ion-select placeholder="Seleccionar Curso" [(ngModel)]="selectedCurso" (ionChange)="filterAlumnos()">
-    <ion-select-option value="">Todos los Cursos</ion-select-option> <!-- Opción para deseleccionar -->
+    <ion-select-option value="">Todos los Cursos</ion-select-option>
     <ion-select-option *ngFor="let curso of cursos" [value]="curso.curso">
       {{ curso.curso }}
     </ion-select-option>
@@ -27,7 +30,7 @@
         <p>Curso: {{ alumno.curso?.curso || 'Sin curso' }}</p>
       </ion-label>
       <ion-button (click)="presentModal(alumno.rut)">Generar PDF</ion-button>
-      <ion-button (click)="verObservaciones(alumno.rut)">Ver Observaciones</ion-button> <!-- Nuevo botón -->
+      <ion-button (click)="verObservaciones(alumno.rut)">Ver Observaciones</ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

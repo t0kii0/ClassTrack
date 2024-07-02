@@ -1,6 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Ver Anotación</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/menu-informes" routerDirection="back">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <div class="title-container">
+      <ion-title class="otf-font">Ver Anotación</ion-title>
+      <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo">
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -11,24 +19,33 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content class="ion-padding">
-    <ion-list *ngIf="motivo.length > 0; else noAnotaciones">
-      <ion-item *ngFor="let anotacion of motivo">
-        <ion-label>
-          <h1>Anotación: {{ anotacion.tipo_anotacion ? 'Positiva' : 'Negativa' }}</h1>
-          <h2>Motivo: {{ anotacion.motivo }}</h2>
-          <p>RUT: {{ anotacion.id_alumno }}</p>
-          <p>Asignatura: {{ anotacion.nombre_asignatura }}</p>
-          <p>Fecha: {{ anotacion.fecha | date }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-    <ng-template #noAnotaciones>
-      <ion-item>
-        <ion-label>
-          <h2>No hay anotaciones disponibles</h2>
-        </ion-label>
-      </ion-item>
-    </ng-template>
+  <ion-content class="background-container">
+    <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
+    <section class="container mx-auto p-6 font-mono flex-grow">
+      <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg h-full flex flex-col">
+        <div class="w-full overflow-x-auto flex-grow">
+          <div class="table-container h-full overflow-y-auto">
+            <ion-list *ngIf="motivo.length > 0; else noAnotaciones">
+              <ion-item *ngFor="let anotacion of motivo">
+                <ion-label>
+                  <h1>Anotación: {{ anotacion.tipo_anotacion ? 'Positiva' : 'Negativa' }}</h1>
+                  <h2>Motivo: {{ anotacion.motivo }}</h2>
+                  <p>RUT: {{ anotacion.id_alumno }}</p>
+                  <p>Asignatura: {{ anotacion.nombre_asignatura }}</p>
+                  <p>Fecha: {{ anotacion.fecha | date }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+            <ng-template #noAnotaciones>
+              <ion-item>
+                <ion-label>
+                  <h2>No hay anotaciones disponibles</h2>
+                </ion-label>
+              </ion-item>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </section>
   </ion-content>
 </ion-content>

@@ -1,6 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Ver Notas</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/menu-informes" routerDirection="back">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <div class="title-container">
+      <ion-title class="otf-font">Ver Notas</ion-title>
+      <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo">
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -11,29 +19,32 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content class="ion-padding">
-    <ng-container *ngIf="getKeys(notasAgrupadas).length > 0; else noNotas">
-      <ion-list *ngFor="let asignatura of getKeys(notasAgrupadas)">
+  <ion-content class="background-container">
+    <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
+    <section class="container mx-auto p-6 font-mono flex-grow">
+      <ng-container *ngIf="getKeys(notasAgrupadas).length > 0; else noNotas">
+        <ion-list *ngFor="let asignatura of getKeys(notasAgrupadas)">
+          <ion-item>
+            <ion-label>
+              <h2>{{ asignatura }}</h2>
+              <ion-list>
+                <ion-item *ngFor="let nota of notasAgrupadas[asignatura]">
+                  <ion-label>
+                    <h3>Nota: {{ nota.nota }}</h3>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ng-container>
+      <ng-template #noNotas>
         <ion-item>
           <ion-label>
-            <h2>{{ asignatura }}</h2>
-            <ion-list>
-              <ion-item *ngFor="let nota of notasAgrupadas[asignatura]">
-                <ion-label>
-                  <h3>Nota: {{ nota.nota }}</h3>
-                </ion-label>
-              </ion-item>
-            </ion-list>
+            <h2>No hay notas disponibles</h2>
           </ion-label>
         </ion-item>
-      </ion-list>
-    </ng-container>
-    <ng-template #noNotas>
-      <ion-item>
-        <ion-label>
-          <h2>No hay notas disponibles</h2>
-        </ion-label>
-      </ion-item>
-    </ng-template>
+      </ng-template>
+    </section>
   </ion-content>
 </ion-content>

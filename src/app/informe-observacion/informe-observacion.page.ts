@@ -7,6 +7,7 @@ import { CursoService } from '../services/curso/curso.service';
 import { ObservacionService } from '../services/Observacion/observacion.service'; // Importar el servicio de observaciones
 import { ModelObservacion } from '../modelos/observacionModel'; // Importar el modelo de observaciones
 import jsPDF from 'jspdf';
+import 'jspdf-autotable'; // Importar jspdf-autotable
 
 @Component({
   selector: 'app-informe-observacion',
@@ -95,19 +96,35 @@ export class InformeObservacionPage implements OnInit {
 
   generarPDF(alumno: ModelAlumno, observaciones: ModelObservacion[]) {
     const doc = new jsPDF();
+    const imgData = '/assets/reporte.png'; // Ruta de la imagen de fondo
 
-    doc.text(`Informe de Observaciones de ${alumno.nombre} ${alumno.apellido}`, 10, 10);
+    // Cargar imagen de fondo
+    doc.addImage(imgData, 'JPEG', 0, 0, 210, 297); // A4 tamaño en mm
+    
+    doc.setFontSize(18);
+    doc.text(`Informe de Observaciones de ${alumno.nombre} ${alumno.apellido}`, 14, 22);
 
-    // Agregar observaciones
-    doc.text('Observaciones:', 10, 20);
-    observaciones.forEach((observacion, index) => {
-      doc.text(
-        `${index + 1}. ${observacion.observacion} - Autor: ${observacion.autor} - Fecha: ${observacion.fecha}`,
-        10,
-        30 + (index * 10)
-      );
+    // Información del alumno
+    doc.setFontSize(11);
+    doc.setTextColor(100);
+
+    // Tabla de observaciones
+    const observacionesData = observaciones.map((observacion, index) => [
+      `${index + 1}`,
+      observacion.observacion,
+      observacion.autor,
+      observacion.fecha
+    ]);
+
+    (doc as any).autoTable({
+      head: [['#', 'Observación', 'Autor', 'Fecha']],
+      body: observacionesData,
+      startY: 30
     });
 
+    
+
+    // Descargar el PDF
     doc.save(`informe_observacion_${alumno.rut}.pdf`);
   }
 }
