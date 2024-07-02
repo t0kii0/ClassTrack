@@ -1,10 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Observaciones del Alumno</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/menu-informes" routerDirection="back">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <div class="title-container">
+      <ion-title class="otf-font">Observaciones del Alumno</ion-title>
+      <img src="/assets/icon/Classtrack.png" class="header-logo" alt="ClassTrack Logo">
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="background-container ion-padding">
+  <img src="/assets/escuelatripulantes.jpg" class="background-image" alt="Imagen de fondo">
   <ion-list>
     <ion-item *ngFor="let observacion of observaciones">
       <ion-label>

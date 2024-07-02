@@ -1,4 +1,71 @@
-#contentToConvert {
-  background: #fff;
-  padding: 20px;
+/* Estilos reutilizados aplicados a esta página */
+
+@font-face {
+  font-family: 'Kaushan';
+  src: url('/assets/fuentes/KaushanScript-Regular.otf') format('opentype');
+}
+.otf-font {
+  font-family: 'Kaushan', sans-serif;
+}
+
+.background-image {
+  position: fixed; /* Fijar el fondo en la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/escuelatripulantes.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(10px);
+  opacity: 0.6;
+  z-index: -1; /* Colocar detrás del contenido */
+}
+
+.title-container {
+  display: flex;
+  align-items: center; /* Alinear elementos verticalmente */
+  
+  color: white;
+}
+
+.header-logo {
+  height: 50px; /* Ajusta la altura del logo según sea necesario */
+  margin-right: 10px; /* Espacio a la derecha del logo */
+}
+
+ion-header {
+  background-color: #000 !important; /* Asegúrate de usar negro sólido */
+  color: #fff !important; /* Asegúrate de que el texto sea blanco */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Mantén la sombra para profundidad */
+  position: relative; /* Asegura que el position relative está presente */
+}
+
+ion-toolbar {
+  --background: transparent !important; /* Evita que el ion-toolbar sobrescriba el color de fondo */
+}
+
+/* Animación de border-bottom */
+ion-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px; /* Grosor del border-bottom */
+  background-color: #3498db; /* Color inicial del border-bottom */
+  animation: changeBorderColor 5s linear infinite alternate;
+}
+
+@keyframes changeBorderColor {
+  0% { background-color: #1078ef; } /* Azul */
+  20% { background-color: #24c8ff; } /* Turquesa */
+  40% { background-color: #14e4ef; } /* Blanco */
+  60% { background-color: #2e44e7; } /* Azul */
+  80% { background-color: #3d1abc; } /* Turquesa */
+  100% { background-color: #9410ec; } /* Blanco */
+}
+
+ion-icon {
+  color: white;
 }
