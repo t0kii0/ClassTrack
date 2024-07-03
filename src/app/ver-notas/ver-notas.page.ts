@@ -9,6 +9,8 @@ import { ModelAsignatura } from '../modelos/asignaturaModel';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AsignaturaService } from '../services/asignatura/asignatura.service';
 import { ModelCurso } from '../modelos/cursoModel';
+import { PromedioService } from '../services/promedio/promedio.service';
+import { ModelPromedio } from '../modelos/promedioModel';
 
 @Component({
   selector: 'app-ver-notas',
@@ -19,6 +21,7 @@ export class VerNotasPage implements OnInit {
   rut: string | null = null;
   cursos: ModelCurso[] = [];
   notasAgrupadas: { [key: string]: ModelNota[] } = {};
+  promedios: { [key: string]: number } = {};
   filteredAlumnos: (ModelAlumno & { curso?: ModelCurso })[] = [];
   searchTerm: string = '';
   selectedCurso: string = '';
@@ -32,6 +35,7 @@ export class VerNotasPage implements OnInit {
     private navController: NavController,
     private notasService: NotasService,
     private asignaturaService: AsignaturaService,
+    private promedioService: PromedioService,
     private router: Router,
     private route: ActivatedRoute,
   ) {}
@@ -47,6 +51,7 @@ export class VerNotasPage implements OnInit {
       }
     });
   }
+
   irAInicio() {
     this.navController.navigateForward('/inicio');
   }
@@ -55,6 +60,7 @@ export class VerNotasPage implements OnInit {
     this.asignaturaService.obtenerTodoAsignatura().subscribe(asignaturas => {
       this.asignaturas = asignaturas;
       this.cargarNotas(rut);
+      this.cargarPromedios(rut);
     });
   }
 
@@ -66,6 +72,24 @@ export class VerNotasPage implements OnInit {
       },
       (error) => {
         console.error('Error al obtener las notas:', error);
+      }
+    );
+  }
+
+  cargarPromedios(rut: string) {
+    this.promedioService.obtenerPromedio().subscribe(
+      (promedios: ModelPromedio[]) => {
+        promedios.forEach(promedio => {
+          if (promedio.id_alumno === rut) {
+            const asignatura = this.asignaturas.find(a => a.id === promedio.id_asignatura);
+            const nombreAsignatura = asignatura ? asignatura.nombre_asignatura : 'Desconocida';
+            this.promedios[nombreAsignatura] = promedio.prom;
+          }
+        });
+        console.log('Promedios obtenidos:', this.promedios);
+      },
+      (error) => {
+        console.error('Error al obtener los promedios:', error);
       }
     );
   }

@@ -3,9 +3,11 @@ import { UserService } from '../services/users/users.service';
 import { CursoService } from '../services/curso/curso.service';
 import { NotasService } from '../services/nota/nota.service';
 import { AsignaturaService } from '../services/asignatura/asignatura.service';
+import { PromedioService } from '../services/promedio/promedio.service';
 import { ModelCurso } from '../modelos/cursoModel';
 import { ModelAlumno } from '../modelos/userModel';
 import { ModelNota } from '../modelos/notamodel';
+import { ModelPromedio } from '../modelos/promedioModel';
 import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { ModelAsignatura } from '../modelos/asignaturaModel';
 import jsPDF from 'jspdf';
@@ -32,6 +34,7 @@ export class ReportePage implements OnInit {
     private navController: NavController,
     private notasService: NotasService,
     private asignaturaService: AsignaturaService,
+    private promedioService: PromedioService,  // Agregar el servicio de promedio
     private router: Router
   ) {}
 
@@ -94,16 +97,19 @@ export class ReportePage implements OnInit {
     this.userService.obtenerAlumnoPorRut(rut).subscribe(alumno => {
       this.notasService.obtenerNotasPorAlumno(alumno.rut).subscribe((notas: ModelNota[]) => {
         this.asignaturaService.obtenerTodoAsignatura().subscribe((asignaturas: ModelAsignatura[]) => {
-          this.generarPDF(alumno, notas, asignaturas);
+          this.promedioService.obtenerPromedio().subscribe((promedios: ModelPromedio[]) => {
+            this.generarPDF(alumno, notas, asignaturas, promedios);
+          });
         });
       });
     });
   }
+
   irAInicio() {
     this.navController.navigateForward('/inicio');
   }
 
-  generarPDF(alumno: ModelAlumno, notas: ModelNota[], asignaturas: ModelAsignatura[]) {
+  generarPDF(alumno: ModelAlumno, notas: ModelNota[], asignaturas: ModelAsignatura[], promedios: ModelPromedio[]) {
     const doc = new jsPDF();
     const imgData = '/assets/reporte.png'; // Ruta de la imagen de fondo
 
@@ -132,14 +138,25 @@ export class ReportePage implements OnInit {
       notasPorAsignatura[asignaturaNombre].push(nota.nota);
     });
 
-    // Tabla de notas
+    // Obtener promedios por asignatura
+    const promediosPorAsignatura: { [key: string]: number } = {};
+    promedios.forEach(promedio => {
+      if (promedio.id_alumno === alumno.rut) {
+        const asignatura = asignaturas.find(a => a.id === promedio.id_asignatura);
+        const asignaturaNombre = asignatura ? asignatura.nombre_asignatura : 'Desconocida';
+        promediosPorAsignatura[asignaturaNombre] = promedio.prom;
+      }
+    });
+
+    // Tabla de notas con promedios
     const notasData = Object.keys(notasPorAsignatura).map(asignaturaNombre => [
       asignaturaNombre,
-      notasPorAsignatura[asignaturaNombre].join(', ')
+      notasPorAsignatura[asignaturaNombre].join(', '),
+      promediosPorAsignatura[asignaturaNombre] !== undefined ? promediosPorAsignatura[asignaturaNombre].toFixed(1) : 'No disponible'
     ]);
 
     (doc as any).autoTable({
-      head: [['Asignatura', 'Notas']],
+      head: [['Asignatura', 'Notas', 'Promedio']],
       body: notasData,
       startY: 50
     });
