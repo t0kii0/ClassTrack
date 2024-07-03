@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AnotacionService } from '../services/anotacion/anotacion.service';
 import { AsignaturaService } from '../services/asignatura/asignatura.service';
 import { ActivatedRoute } from '@angular/router';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { ModelAnotacion } from '../modelos/anotacionModel';
 import { ModelAsignatura } from '../modelos/asignaturaModel';
 
@@ -18,6 +19,7 @@ export class VerAnotacionPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private navController: NavController,
     private anotacionService: AnotacionService,
     private asignaturaService: AsignaturaService,
   ) {}
@@ -31,6 +33,9 @@ export class VerAnotacionPage implements OnInit {
         console.error('RUT no encontrado en la URL');
       }
     });
+  }
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
   }
 
   cargarAsignaturasYAnotaciones(rut: string) {

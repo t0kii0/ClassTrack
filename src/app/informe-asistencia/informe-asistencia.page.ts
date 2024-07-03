@@ -4,6 +4,7 @@ import { CursoService } from '../services/curso/curso.service';
 import { UserService } from '../services/users/users.service';
 import { AsistenciaService } from '../services/asistencia/asistencia.service';
 import { ModelAlumno } from '../modelos/userModel';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { ModelCurso } from '../modelos/cursoModel';
 import { ModelAsistencia } from '../modelos/asistenciaModel';
 import { jsPDF } from 'jspdf'; // Importar jsPDF
@@ -24,6 +25,7 @@ export class InformeAsistenciaPage implements OnInit {
 
   constructor(
     private userService: UserService,
+    private navController: NavController,
     private cursoService: CursoService,
     private asistenciaService: AsistenciaService, // Inyectar el servicio de observaciones
     private router: Router
@@ -55,6 +57,9 @@ export class InformeAsistenciaPage implements OnInit {
         console.error('Error al cargar cursos:', error);
       }
     );
+  }
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
   }
 
   filterAlumnos() {

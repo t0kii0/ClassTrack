@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ObservacionService } from '../services/Observacion/observacion.service';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-ver-observaciones',
@@ -13,6 +14,7 @@ export class VerObservacionesPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private navController: NavController,
     private observacionService: ObservacionService
   ) {}
 
@@ -25,6 +27,9 @@ export class VerObservacionesPage implements OnInit {
         console.error('RUT no encontrado en la URL');
       }
     });
+  }
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
   }
 
   cargarObservaciones(rut: string) {

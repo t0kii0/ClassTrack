@@ -6,9 +6,10 @@ import { AsignaturaService } from '../services/asignatura/asignatura.service';
 import { ModelCurso } from '../modelos/cursoModel';
 import { ModelAlumno } from '../modelos/userModel';
 import { ModelNota } from '../modelos/notamodel';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { ModelAsignatura } from '../modelos/asignaturaModel';
 import jsPDF from 'jspdf';
-import { map, filter } from 'rxjs/operators';
+import 'jspdf-autotable';
 import { Router } from '@angular/router';
 
 @Component({
@@ -28,6 +29,7 @@ export class ReportePage implements OnInit {
   constructor(
     private userService: UserService,
     private cursoService: CursoService,
+    private navController: NavController,
     private notasService: NotasService,
     private asignaturaService: AsignaturaService,
     private router: Router
@@ -37,6 +39,7 @@ export class ReportePage implements OnInit {
     this.loadAlumnos();
     this.loadCursos();
   }
+
   toggleNotificationsMenu() {
     this.showNotificationsMenu = !this.showNotificationsMenu;
   }
@@ -96,24 +99,28 @@ export class ReportePage implements OnInit {
       });
     });
   }
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
+  }
 
   generarPDF(alumno: ModelAlumno, notas: ModelNota[], asignaturas: ModelAsignatura[]) {
     const doc = new jsPDF();
     const imgData = '/assets/reporte.png'; // Ruta de la imagen de fondo
 
     // Cargar imagen de fondo
-    doc.addImage(imgData, 'JPEG',0, 0, 210, 297); // A4 tamaño en mm
-    
-    doc.setFontSize(16);
-    doc.text('Reporte de Notas', 10, 10);
-    doc.setFontSize(12);
-    doc.text(`Alumno: ${alumno.nombre} ${alumno.apellido} ${alumno.apmaterno}`, 10, 20);
-    doc.text(`RUT: ${alumno.rut}`, 10, 30);
-    doc.text(`Curso: ${alumno.curso}`, 10, 40);
-    
-  
-    let yPosition = 50;
-  
+    doc.addImage(imgData, 'JPEG', 0, 0, 210, 297); // A4 tamaño en mm
+
+    // Título del informe
+    doc.setFontSize(18);
+    doc.setTextColor(40);
+    doc.text(`Informe de Notas de ${alumno.nombre} ${alumno.apellido}`, 14, 22);
+
+    // Información del alumno
+    doc.setFontSize(11);
+    doc.setTextColor(100);
+    doc.text(`RUT: ${alumno.rut}`, 14, 32);
+    doc.text(`Curso: ${alumno.curso?.curso}`, 14, 38);
+
     // Agrupar notas por asignatura
     const notasPorAsignatura: { [key: string]: number[] } = {};
     notas.forEach(nota => {
@@ -124,20 +131,24 @@ export class ReportePage implements OnInit {
       }
       notasPorAsignatura[asignaturaNombre].push(nota.nota);
     });
-  
-    // Generar PDF con notas agrupadas
-    Object.keys(notasPorAsignatura).forEach(asignaturaNombre => {
-      const notasStr = notasPorAsignatura[asignaturaNombre].join(', ');
-      doc.text(`Asignatura: ${asignaturaNombre} - Notas: ${notasStr}`, 10, yPosition);
-      yPosition += 10;
+
+    // Tabla de notas
+    const notasData = Object.keys(notasPorAsignatura).map(asignaturaNombre => [
+      asignaturaNombre,
+      notasPorAsignatura[asignaturaNombre].join(', ')
+    ]);
+
+    (doc as any).autoTable({
+      head: [['Asignatura', 'Notas']],
+      body: notasData,
+      startY: 50
     });
-  
-    doc.save(`reporte_${alumno.rut}.pdf`);
+
+    doc.save(`reporte_notas_${alumno.rut}.pdf`);
   }
+
   vernotas(rut: string){
     console.log(rut);
     this.router.navigate(['/ver-notas', rut]);
-
-
   }
 }

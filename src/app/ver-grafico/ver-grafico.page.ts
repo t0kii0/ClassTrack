@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AsignaturaService } from '../services/asignatura/asignatura.service';
 import { UserService } from '../services/users/users.service';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { AsistenciaService } from '../services/asistencia/asistencia.service';
 import { ModelAsignatura } from '../modelos/asignaturaModel';
 import { ModelAlumnoExtendido } from '../modelos/userModel';
@@ -22,6 +23,7 @@ export class VerGraficoPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private navController: NavController,
     private asignaturaService: AsignaturaService,
     private userService: UserService,
     private asistenciaService: AsistenciaService
@@ -36,6 +38,9 @@ export class VerGraficoPage implements OnInit {
         this.cargarTotalDias();
       }
     });
+  }
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
   }
 
   cargarAsignaturas() {

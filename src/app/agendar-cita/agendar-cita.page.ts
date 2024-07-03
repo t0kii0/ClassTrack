@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { AgendaService } from '../services/agenda/agenda.service';
 import { ModelAgenda } from '../modelos/agendaModel';
 
@@ -15,6 +15,7 @@ export class AgendarCitaPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private navController: NavController,
     private alertController: AlertController,
     private agendaService: AgendaService
   ) {
@@ -25,6 +26,10 @@ export class AgendarCitaPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
+  }
 
   async onFechaSubmit() {
     const fechaSeleccionada = new Date(this.FormularioFecha.value.fecha);
@@ -41,6 +46,8 @@ export class AgendarCitaPage implements OnInit {
       await alert.present();
       return;
     }
+
+    
 
     // Obtener los horarios agendados
     this.agendaService.getHorariosAgendados(fechaSeleccionada).subscribe(agendas => {

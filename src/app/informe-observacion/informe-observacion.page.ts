@@ -4,6 +4,7 @@ import { ModelAlumno } from '../modelos/userModel';
 import { ModelCurso } from '../modelos/cursoModel';
 import { UserService } from '../services/users/users.service';
 import { CursoService } from '../services/curso/curso.service';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { ObservacionService } from '../services/Observacion/observacion.service'; // Importar el servicio de observaciones
 import { ModelObservacion } from '../modelos/observacionModel'; // Importar el modelo de observaciones
 import jsPDF from 'jspdf';
@@ -24,6 +25,7 @@ export class InformeObservacionPage implements OnInit {
 
   constructor(
     private userService: UserService,
+    private navController: NavController,
     private cursoService: CursoService,
     private observacionService: ObservacionService, // Inyectar el servicio de observaciones
     private router: Router // Inyectar el router
@@ -32,6 +34,9 @@ export class InformeObservacionPage implements OnInit {
   ngOnInit() {
     this.loadAlumnos();
     this.loadCursos();
+  }
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
   }
 
   loadAlumnos() {

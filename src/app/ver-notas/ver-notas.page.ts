@@ -3,6 +3,7 @@ import { UserService } from '../services/users/users.service';
 import { CursoService } from '../services/curso/curso.service';
 import { NotasService } from '../services/nota/nota.service';
 import { ModelAlumno } from '../modelos/userModel';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { ModelNota } from '../modelos/notamodel';
 import { ModelAsignatura } from '../modelos/asignaturaModel';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -28,6 +29,7 @@ export class VerNotasPage implements OnInit {
   constructor(
     private userService: UserService,
     private cursoService: CursoService,
+    private navController: NavController,
     private notasService: NotasService,
     private asignaturaService: AsignaturaService,
     private router: Router,
@@ -44,6 +46,9 @@ export class VerNotasPage implements OnInit {
         console.error('RUT no encontrado en la URL');
       }
     });
+  }
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
   }
 
   cargarAsignaturasYNotas(rut: string) {

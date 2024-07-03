@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 @Component({
   selector: 'app-menu-informes',
   templateUrl: './menu-informes.page.html',
@@ -7,7 +8,9 @@ import { Router } from '@angular/router';
 })
 export class MenuInformesPage implements OnInit {
   
-  constructor(private router : Router) { }
+  constructor(private router : Router,
+    private navController: NavController
+  ) { }
 
   ngOnInit() {
   }
@@ -15,6 +18,9 @@ export class MenuInformesPage implements OnInit {
   reporte() {
     this.router.navigate(['/reporte']);
     console.log("entrooo");
+  }
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
   }
   observaciones() {
     this.router.navigate(['/informe-observacion']);
