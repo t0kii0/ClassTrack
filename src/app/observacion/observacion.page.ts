@@ -3,7 +3,7 @@ import { UserService } from '../services/users/users.service';
 import { CursoService } from '../services/curso/curso.service';
 import { ModelAlumno } from '../modelos/userModel';
 import { ModelCurso } from '../modelos/cursoModel';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { ObservacionModalComponent } from '../observacion-modal/observacion-modal.component';
 
 @Component({
@@ -22,6 +22,7 @@ export class ObservacionPage implements OnInit {
 
   constructor(
     private userService: UserService,
+    private navController: NavController,
     private courseService: CursoService,
     private modalController: ModalController
   ) {}
@@ -32,6 +33,10 @@ export class ObservacionPage implements OnInit {
   }
   toggleNotificationsMenu() {
     this.showNotificationsMenu = !this.showNotificationsMenu;
+  }
+
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
   }
 
   loadAlumnos() {

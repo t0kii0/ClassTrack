@@ -193,6 +193,16 @@
     font-weight: bold;
     font-style: inherit;
   }
+  .title-container {
+    display: flex;
+    align-items: center; /* Alinear elementos verticalmente */
+    color: white;
+  }
+  .header-logo {
+    height: 50px; /* Ajusta la altura del logo según sea necesario */
+    margin-right: 10px; /* Espacio a la derecha del logo */
+    
+  }
   /* Animación de border-bottom */
   ion-header::after {
     content: '';

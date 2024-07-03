@@ -6,6 +6,7 @@ import { CursoService } from '../services/curso/curso.service';
 import { AnotacionService } from '../services/anotacion/anotacion.service';
 import { Router } from '@angular/router';
 import { ModelAnotacion } from '../modelos/anotacionModel';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable'; // Usar la tabla auto generada
 
@@ -23,6 +24,7 @@ export class InformeAnotacionPage implements OnInit {
 
   constructor(
     private userService: UserService,
+    private navController: NavController,
     private cursoService: CursoService,
     private anotacionService: AnotacionService,
     private router: Router
@@ -31,6 +33,9 @@ export class InformeAnotacionPage implements OnInit {
   ngOnInit() {
     this.loadAlumnos();
     this.loadCursos();
+  }
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
   }
 
   loadAlumnos() {

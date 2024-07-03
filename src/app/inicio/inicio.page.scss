@@ -13,7 +13,8 @@
 .otf-font2 {
   font-family: 'Exo', sans-serif;
 }
-ion-header { 
+
+ion-header {
   background-color: #000 !important; /* Asegúrate de usar negro sólido */
   color: #fff !important; /* Asegúrate de que el texto sea blanco */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Mantén la sombra para profundidad */
@@ -22,8 +23,10 @@ ion-header {
 
 ion-toolbar {
   --background: transparent !important; /* Evita que el ion-toolbar sobrescriba el color de fondo */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
 
 .header-left {
   display: flex;
@@ -31,6 +34,7 @@ ion-toolbar {
   position: absolute; /* Posicionar el contenedor a la izquierda */
   left: 10px; /* Espacio desde el borde izquierdo */
 }
+
 .header-container {
   background-color: #00000092; /* Fondo negro */
   display: flex;
@@ -40,8 +44,7 @@ ion-toolbar {
 .header-logo {
   height: 50px; /* Ajusta la altura del logo según sea necesario */
   margin-right: 10px; /* Espacio a la derecha del logo */
-  
-} 
+}
 
 ion-title {
   font-weight: bold; /* Texto en negrita */
@@ -134,31 +137,47 @@ ion-content {
   padding: 20px; /* Espaciado interno */
 }
 
+.user-info-header {
+  display: flex; /* Cambia el layout a flex para alinear los elementos en línea */
+  align-items: center; /* Alinea los elementos verticalmente en el centro */
+  margin-right: auto; /* Empuja el contenido hacia la izquierda */
+  margin-left: 10px; /* Espacio entre el botón del menú y los datos del usuario */
+  font-size: 14px;
+  color: var(--ion-color-white); /* O el color que prefieras */
+}
+
+.user-info-header span {
+  margin: 0 10px; /* Añade espacio a la derecha e izquierda de cada elemento */
+  white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
+}
+
 .custom-content {
   position: relative;
   border-radius: 15px; /* Bordes redondeados */
 }
 
 .large-icon {
-  width: 50px;  /* Ajusta el tamaño del ícono según sea necesario */
+  width: 50px; /* Ajusta el tamaño del ícono según sea necesario */
   height: 50px;
-  margin-bottom: 10px;  /* Espacio entre el ícono y la etiqueta */
-  display: inline-block;  /* Asegura que los íconos se alineen correctamente con el texto */
-  vertical-align: middle;  /* Centra verticalmente el ícono con el texto */
+  margin-bottom: 10px; /* Espacio entre el ícono y la etiqueta */
+  display: inline-block; /* Asegura que los íconos se alineen correctamente con el texto */
+  vertical-align: middle; /* Centra verticalmente el ícono con el texto */
 }
 
 .logout {
   color: white;
   font-size: small;
+}
 
+.cerrar-sesion {
+  vertical-align: middle;
 }
-.cerrar-sesion{
-  vertical-align: middle  ;
-}
+
 ion-icon {
   color: white;
   font-size: big;
 }
+
 .boton-logout {
   border-radius: 50px; /* Bordes redondeados */
 }
@@ -189,6 +208,7 @@ ion-footer ion-title {
   font-weight: bold;
   font-style: inherit;
 }
+
 .notification-icon {
   font-size: 24px;
   cursor: pointer;
@@ -232,16 +252,29 @@ ion-header::after {
   80% { background-color: #3d1abc; } /* Turquesa */
   100% { background-color: #9410ec; } /* Blanco */
 }
-.user-info-header {
-  display: flex;  /* Cambia el layout a flex para alinear los elementos en línea */
-  align-items: center;  /* Alinea los elementos verticalmente en el centro */
-  margin-right: auto;  /* Empuja el contenido hacia la izquierda */
-  margin-left: 10px;  /* Espacio entre el botón del menú y los datos del usuario */
-  font-size: 14px;
-  color: var(--ion-color-white);  /* O el color que prefieras */
-}
 
-.user-info-header span {
-  margin: 0 10px;  /* Añade espacio a la derecha e izquierda de cada elemento */
-  white-space: nowrap;  /* Evita que el texto se divida en múltiples líneas */
+/* Responsive styles */
+@media (max-width: 768px) {
+  ion-toolbar {
+    flex-direction: column;
+  }
+
+  .user-info-header {
+    justify-content: center;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  ion-title {
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .boton-logout {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
 }

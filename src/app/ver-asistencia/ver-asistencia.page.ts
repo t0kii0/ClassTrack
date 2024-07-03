@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-ver-asistencia',
@@ -12,8 +13,10 @@ export class VerAsistenciaPage implements OnInit {
   diasAsistidos: number;
   porcentajeAsistencia: number;
 
-  constructor(private router: Router) {
+  constructor(private navController: NavController,
+    private router: Router) {
     const navigation = this.router.getCurrentNavigation();
+    
     const state = navigation?.extras.state as {
       alumno: any,
       totalDias: number,
@@ -28,4 +31,8 @@ export class VerAsistenciaPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  irAInicio() {
+    this.navController.navigateForward('/inicio');
+  }
 }
