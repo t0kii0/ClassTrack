@@ -84,7 +84,10 @@ export class VerGraficoPage implements OnInit {
     this.asistenciaService.obtenerDiasNoAsistidosPorAlumno(alumno.rut).subscribe(
       diasNoAsistidos => {
         alumno.diasAsistidos = this.totalDias - diasNoAsistidos;
-        alumno.porcentajeAsistencia = ((alumno.diasAsistidos / this.totalDias) * 100) || 0; // Asignar 0 si el cálculo es NaN o undefined
+        // Opción 1: Redondear a un solo decimal
+        alumno.porcentajeAsistencia = Math.round(((alumno.diasAsistidos / this.totalDias) * 100) * 10) / 10 || 0;
+        // Opción 2: Redondear a entero
+        // alumno.porcentajeAsistencia = Math.round((alumno.diasAsistidos / this.totalDias) * 100) || 0;
       },
       error => {
         console.error('Error al obtener días no asistidos:', error);

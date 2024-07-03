@@ -28,12 +28,12 @@
           <ion-label>
             <p>Total de Días: {{ totalDias }}</p>
             <p>Días Asistidos: {{ alumno.diasAsistidos }}</p>
-            <p>Porcentaje de Asistencia: {{ alumno.porcentajeAsistencia | number:'1.0' }}%</p>
+            <p>Porcentaje de Asistencia: {{ alumno.porcentajeAsistencia | number:'1.1-1' }}%</p>
           </ion-label>
         </ion-item>
       </ion-list>
     </div>
-    <div>
+    <div class="bg-white">
       <canvas id="grafico"></canvas>
     </div>
   </div>

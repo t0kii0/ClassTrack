@@ -46,4 +46,13 @@ export class PromedioService {
         })
       );
   }
+  obtenerPromedio(): Observable<ModelPromedio[]> {
+    return this._http.get<ModelPromedio[]>(this.superbaseUrl + 'PROMEDIO', { headers: this.supabaseHeaders })
+      .pipe(
+        catchError(error => {
+          console.error('Error al obtener notas:', error);
+          return of([]); // Devolver un array vacío en caso de error
+        })
+      );
+  }
 }
