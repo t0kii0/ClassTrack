@@ -129,12 +129,14 @@
             console.log('Usuario guardado con éxito:', result);
           },
           (error) => {
-            console.error('Error al guardar el usuario:', error);
+            
+            console.error('Error al guardar el usuario:', error,formattedData.rut);
+            console.error(formattedData.rut);
             if (error.status === 409) {
-              this.presentAlert('Error', `El usuario con RUT ${formattedData.rut} ya existe en la base de datos.`);
+              //this.presentAlert('Error', `El usuario con RUT ${formattedData.rut} ya existe en la base de datos.`);
             } else {
-              console.error('Detalles del error:', error.error);
-              this.presentAlert('Error', 'Se produjo un error al guardar el usuario.');
+              console.error('Detalles del error:', error.error,formattedData.rut);
+              //this.presentAlert('Error', 'Se produjo un error al guardar el usuario.',);
             }
           }
         );
