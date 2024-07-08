@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular'; // Importa ModalController
 import { AuthService } from '../auth/data-access/auth.service';
 import { AsistenteService } from '../services/asistente/asistente.service';
 import { NotificacionService } from '../services/notificaciones/notificacion.service';
 import { ModelAsistente } from '../modelos/asistenteModel';
 import { ModelNotificacion } from '../modelos/notificacionModel';
+import { ObservacionModalComponent } from '../observacion-modal/observacion-modal.component'; // Importa el componente del modal
 
 @Component({
   selector: 'app-inicio',
@@ -22,7 +24,8 @@ export class InicioPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private asistenteService: AsistenteService,
-    private notificacionService: NotificacionService
+    private notificacionService: NotificacionService,
+    private modalController: ModalController // Inyecta ModalController
   ) { }
 
   ngOnInit() {
@@ -71,6 +74,20 @@ export class InicioPage implements OnInit {
 
   toggleNotificationsMenu() {
     this.showNotificationsMenu = !this.showNotificationsMenu;
+  }
+
+  async openObservacionModal() {
+    if (this.userData) {
+      const modal = await this.modalController.create({
+        component: ObservacionModalComponent,
+        componentProps: {
+          autor: this.userData // Pasa el usuario como autor
+        }
+      });
+      return await modal.present();
+    } else {
+      console.error('No se pudo obtener la información del autor.');
+    }
   }
 
   irACurso(opcion: string) {

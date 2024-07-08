@@ -15,11 +15,10 @@ export class ObservacionService {
 
   agregarObservacionAlumno(idAlumno: string, fecha: Date, observacion: string, autor: string): Observable<string | any> {
     const nuevaObservacion: ModelObservacion = {
-      
       id_alumno: idAlumno,
       fecha: fecha,
       observacion: observacion,
-      autor: ''
+      autor: autor
     };
     return this._http.post<any>(this.superbaseUrl + 'OBSERVACION', nuevaObservacion, { headers: this.supabaseHeaders });
   }
